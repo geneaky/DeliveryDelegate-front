@@ -1,9 +1,8 @@
 # 달대표 | DeliveryDelegate   
 
-  
-![image](https://user-images.githubusercontent.com/50348197/166195435-733b27c6-ccd1-45b6-bcf1-8388d04696db.png)
-  .
-  .
+  ![image](https://user-images.githubusercontent.com/50348197/166867074-7d0f485a-1464-44fe-b643-8e242907a013.png)
+
+
 **2022.03.02 ~ 2022.**
 
 컴퓨터소프트웨어공학과 4학년 졸업작품 `FRONTEND - ANDROID`
