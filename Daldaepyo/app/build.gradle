@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.dongyang.daltokki.daldaepyo"
-        minSdkVersion 30
+        minSdkVersion 28
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
