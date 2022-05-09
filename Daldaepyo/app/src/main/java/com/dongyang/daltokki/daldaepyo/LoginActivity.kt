@@ -9,6 +9,16 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        loadSplashScreen()
+    }
+
+    private fun loadSplashScreen(){
+        Handler().postDelayed({
+            // You can declare your desire activity here to open after finishing splash screen. Like MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 3000)
     }
 
 }

@@ -11,5 +11,6 @@
     <color name="tranceparent">#00ff0000</color>
     <color name="blue">#6c68d3</color>
     <color name="darkgray">#323232</color>
-    <color name="yellow">#f2bc19</color>
+    <color name="yellow">#ffd700</color>
+    <color name="lightYellow">#fed44d</color>
 </resources>
