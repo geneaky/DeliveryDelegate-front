@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_register"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.085"
+        android:background="@drawable/tv_rounded"
+        android:textColor="@color/darkgray"
+        android:gravity="center"
+        android:text="회원가입"
+        android:textSize="20sp"
+        android:fontFamily="@font/suncheonr"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_nickname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:text="닉네임"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtNickname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_Pnumber"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:text="전화번호"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtPnumber"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_Pnumber"
+        app:layout_constraintHeight_percent="0.07"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintVertical_bias="0.3"/>
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btnC"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/edtPnumber"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="0.3"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:text="중복확인"
+        android:textColor="@color/black"/>
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_pwd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:text="비밀번호"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtpwd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_pwd"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.4"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_pwdCheck"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.25"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="7dp"
+        android:text="비밀번호 확인"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtpwdCheck"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_pwdCheck"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintVertical_bias="0.5"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_address"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="7dp"
+        android:text="주소"
+        android:textSize="15sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtAddress"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_address"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.6"/>
+
+
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edtAddressDetail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintHorizontal_bias="0.75"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintVertical_bias="0.7"
+        android:textSize="15sp"
+        android:hint="상세주소를 입력하세요"
+        android:textColor="@color/darkgray"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.07"
+        android:fontFamily="@font/suncheonr"
+        android:text="회원가입"
+        android:textColor="@color/blue"
+        android:background="@color/tranceparent"/>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

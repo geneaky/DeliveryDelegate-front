@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dongyang.daltokki.daldaepyo">
 
+    <!-- 인터넷 연결 허용하는 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Daldaepyo">
         <activity android:name=".MainActivity"/>
+        <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
