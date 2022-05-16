@@ -8,7 +8,8 @@ data class LoginDto(
 )
 
 data class RegisterDto(
+    @SerializedName("nick_name") val nickname: String,
     @SerializedName("phone_number") val phone_number: String,
     @SerializedName("password") val password: String,
-    @SerializedName("name") val name: String
+    @SerializedName("address") val address: String
 )

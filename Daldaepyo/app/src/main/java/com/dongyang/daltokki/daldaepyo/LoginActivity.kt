@@ -1,22 +1,32 @@
 package com.dongyang.daltokki.daldaepyo
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.dongyang.daltokki.daldaepyo.databinding.ActivityMainBinding
+import com.dongyang.daltokki.daldaepyo.retrofit.LoginDto
+import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
-    val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+    val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
     val api = UserAPI.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        loadSplashScreen()
-
+//        loadSplashScreen()
 
 
         btn_login.setOnClickListener{
@@ -27,25 +37,8 @@ class LoginActivity : AppCompatActivity() {
             val user_pref = this.getPreferences(Context.MODE_PRIVATE) // Context.MODE_PRIVATE 대신 0을 써도됨
             val user_editor = user_pref.edit()
 
-            var number = binding.phone_number.text.toString()
-            var pass = binding.password.text.toString()
-
-            //            if(number.isNullOrBlank() && pass.isNullOrBlank()) { // 연락처, 비번 모두 빈칸
-            //                var dialog = AlertDialog.Builder(this@LoginActivity)
-            //                dialog.setTitle("로그인 에러")
-            //                dialog.setMessage("모두 입력해 주세요")
-            //                dialog.show()
-            //            } else if(number.isNullOrBlank()) { // 연락처만 빈칸
-            //                var dialog = AlertDialog.Builder(this@LoginActivity)
-            //                dialog.setTitle("로그인 에러")
-            //                dialog.setMessage("휴대전화를 입력해 주세요")
-            //                dialog.show()
-            //            } else if(pass.isNullOrBlank()) { // 비밀번호만 빈칸
-            //                var dialog = AlertDialog.Builder(this@LoginActivity)
-            //                dialog.setTitle("로그인 에러")
-            //                dialog.setMessage("비밀번호를 입력해 주세요")
-            //                dialog.show()
-            //            }
+            var number = binding.edtPnumber.text.toString()
+            var pass = binding.edtpwd.text.toString()
 
 
             if(number.isNullOrBlank() || pass.isNullOrBlank()) {
