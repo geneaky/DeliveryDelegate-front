@@ -1,6 +1,7 @@
 package com.dongyang.daltokki.daldaepyo
 
 import android.annotation.SuppressLint
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationBar()
     }
+
 
     private fun initNavigationBar(){
         binding.bottomNb.run{

@@ -10,10 +10,6 @@
         android:title="review"
         android:icon="@drawable/ic_edit_note"/>
 
-    <item
-        android:id="@+id/menu_search"
-        android:title="search"
-        android:icon="@drawable/ic_search"/>
 
     <item
         android:id="@+id/menu_notification"
