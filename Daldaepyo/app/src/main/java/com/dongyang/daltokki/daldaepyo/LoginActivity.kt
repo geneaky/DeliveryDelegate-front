@@ -17,6 +17,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LoginActivity : AppCompatActivity() {
 
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater)}
@@ -24,12 +25,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setContentView(R.layout.activity_login)
         setContentView(binding.root)
 //        loadSplashScreen()
 
 
-        btn_login.setOnClickListener{
+        binding.btn_login.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
 
             // 값을 저장할 땐 editor 사용. apply 적용하기..!!
@@ -44,14 +45,14 @@ class LoginActivity : AppCompatActivity() {
             if(number.isNullOrBlank() || pass.isNullOrBlank()) {
                 var dialog = AlertDialog.Builder(this@LoginActivity)
                 dialog.setTitle("로그인 에러")
-                dialog.setMessage("모두 입력해 주세요")
+                dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
                 dialog.show()
             } else {
                 val data = LoginDto(number, pass)
                 api.postLogin(data).enqueue(object: Callback<LoginDto> {
                     override fun onResponse(call: Call<LoginDto>, response: Response<LoginDto>) {
                         if(response.isSuccessful) { // 성공적으로 받아왔을 때
-                            if(response.body()!!.success) {
+//                            if(response.body()!!.success) {
                                 Log.d("log", response.toString())
                                 Log.d("log body", response.body().toString())
 
@@ -64,17 +65,19 @@ class LoginActivity : AppCompatActivity() {
                                 val intent = Intent(this@LoginActivity, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
-                            }
+//                            }
 
-                            else {
-                                var dialog = AlertDialog.Builder(this@LoginActivity)
-                                dialog.setTitle("로그인 에러")
-                                dialog.setMessage("휴대전화, 비밀번호를 확인해 주세요.")
-                                dialog.show()
-                            }
 
-                            if (!response.body().toString().isEmpty())
-                                binding.text.setText(response.body().toString())
+
+//                            if (!response.body().toString().isEmpty())
+//                                binding.text.setText(response.body().toString())
+                        }
+                        else {
+                            var dialog = AlertDialog.Builder(this@LoginActivity)
+                            dialog.setTitle("로그인 에러")
+                            dialog.setMessage("전화번호, 비밀번호를 확인해 주세요.").setPositiveButton("확인", null)
+                            dialog.show()
+                            return
                         }
 
                     }
@@ -82,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
                     override fun onFailure(call: Call<LoginDto>, t: Throwable) {
                         Log.d("log", t.message.toString())
                         Log.d("log", "fail")
-
+                        return
                     }
                 })
             }
@@ -90,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btn_register.setOnClickListener{
+        binding.btn_register.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
 
             startActivity(intent)
