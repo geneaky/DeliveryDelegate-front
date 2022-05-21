@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/edt_id"
+        android:id="@+id/edt_Pnumber"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintHeight_percent="0.06"
         app:layout_constraintWidth_percent="0.6"
         android:background="@drawable/button_rounded"
-        android:hint="   아이디를 입력하세요"
+        android:hint="   번호를 입력하세요"
         android:textSize="12dp"
         android:paddingLeft="10dp"
         android:fontFamily="@font/suncheonr"

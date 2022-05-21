@@ -18,8 +18,13 @@ interface UserAPI {
         "content-type: application/json")
     fun postLogin(@Body jsonparams: LoginDto): Call<LoginDto>
 
+    @POST("/users/register") // 이게 맞을까..?
+    @Headers("accept: application/json",
+        "content-type: application/json")
+    fun postPNumCk(@Body jsonparams: PNumCkDto): Call<PNumCkDto>
+
     companion object {
-        private const val base_url = "http://10.0.2.2:8080"
+        private const val base_url = "http://146.56.132.245:8080/"
 
         fun create(): UserAPI {
             val gson: Gson = GsonBuilder().setLenient().create()
@@ -31,6 +36,7 @@ interface UserAPI {
                 .create(UserAPI::class.java)
         }
     }
+
 
 
 }
