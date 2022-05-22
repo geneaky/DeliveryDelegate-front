@@ -26,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
     var validate = 0 // 0이면 전화번호 중복확인 안함, 1이면 중복확인 함
     override fun onCreate(saveInstanceState: Bundle?) {
         super.onCreate(saveInstanceState)
-        setContentView(R.layout.activity_register)
         setContentView(binding.root)
 
 //        // 전화번호 중복확인
@@ -77,10 +76,8 @@ class RegisterActivity : AppCompatActivity() {
             var address = binding.edtAddress.text.toString()
 
 
-            var data = RegisterDto(binding.edtPnumber.text.toString(),
-                                 binding.edtpwd.text.toString(),
-                                 binding.edtNickname.text.toString(),
-                                    binding.edtAddress.text.toString())
+
+
 //
 //            // 아이디 중복확인 체크
 //            if(validate == 0) {
@@ -91,16 +88,17 @@ class RegisterActivity : AppCompatActivity() {
 //                return@setOnClickListener
 //            }
 //
-//            // 한 칸이라도 입력하지 않았을 경우
-//            if(nickname.isNullOrBlank() || number.isNullOrBlank() || pass1.isNullOrBlank() ||
-//                    pass2.isNullOrBlank() || address.isNullOrBlank()) {
-//                var dialog = AlertDialog.Builder(this@RegisterActivity)
-//                dialog.setTitle("회원가입 에러")
-//                dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
-//                dialog.show()
-//                return@setOnClickListener
-//            }
+            // 한 칸이라도 입력하지 않았을 경우
+            if(nickname.isBlank() || number.isBlank() || pass1.isBlank() ||
+                    pass2.isBlank() || address.isBlank()) {
+                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                dialog.setTitle("회원가입 에러")
+                dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
+                dialog.show()
+                return@setOnClickListener
+            }
 
+            val data = RegisterDto(nickname, number, pass1, address)
             api.postRegister(data).enqueue(object : Callback<RegisterDto> {
                 override fun onResponse(call: Call<RegisterDto>, response: Response<RegisterDto>) {
                     Log.d("log", response.toString())
@@ -118,20 +116,19 @@ class RegisterActivity : AppCompatActivity() {
                         dialog.setMessage("휴대전화, 비밀번호를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()
                     }
-
-//                    if (!response.body().toString().isEmpty())
-//                        binding.text.setText(response.body().toString())
-
                 }
 
-                override fun onFailure(call: Call<RegisterDto>, t: Throwable) {
+                override fun onFailure(call: Call<PNumCkDto>, t: Throwable) {
                     Log.d("log", t.message.toString())
                     Log.d("log", "fail")
                     Toast.makeText(this@RegisterActivity, "회원가입에 실패했습니다", Toast.LENGTH_SHORT).show()
 
                 }
             })
+
         }
+
+
 
 
     }
