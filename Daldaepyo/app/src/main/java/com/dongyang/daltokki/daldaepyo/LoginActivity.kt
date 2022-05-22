@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setContentView(binding.root)
+<<<<<<< Updated upstream
         loadSplashScreen()
 
 
@@ -63,10 +64,21 @@ class LoginActivity : AppCompatActivity() {
 
 
             if(number.isNullOrBlank() || pass.isNullOrBlank()) {
+=======
+
+        binding.btnLogin.setOnClickListener {
+
+            var id = binding.edtPnumber.text.toString()
+            var pw = binding.edtPwd.text.toString()
+
+            // 한 칸이라도 입력하지 않았을 경우
+            if(id.isBlank() || pw.isBlank()) {
+>>>>>>> Stashed changes
                 var dialog = AlertDialog.Builder(this@LoginActivity)
                 dialog.setTitle("로그인 에러")
                 dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
                 dialog.show()
+<<<<<<< Updated upstream
             } else {
                 val data = LoginDto(number, pass)
                 api.postLogin(data).enqueue(object: Callback<LoginDto> {
@@ -116,6 +128,31 @@ class LoginActivity : AppCompatActivity() {
         binding.btn_register.setOnClickListener{
             val intent = Intent(this, RegisterActivity::class.java)
 
+=======
+                return@setOnClickListener
+            }
+
+            val data = LoginDto(id, pw)
+            api.postLogin(data).enqueue(object:Callback<LoginDto>{
+                override fun onResponse(call: Call<LoginDto>, response: Response<LoginDto>) {
+                    val result = response.body()
+                    Log.d("로그인", "${result}")
+                    Log.d("log body", response.body().toString())
+                    var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
+                override fun onFailure(call: Call<LoginDto>, t: Throwable) {
+                    Log.e("로그인", "${t.localizedMessage}")
+                }
+            })
+        }
+
+
+        binding.btnRegister.setOnClickListener{
+            var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+>>>>>>> Stashed changes
             startActivity(intent)
         }
 
