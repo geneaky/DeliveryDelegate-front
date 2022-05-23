@@ -133,7 +133,7 @@
         android:layout_marginLeft="25dp"
         android:gravity="center_vertical"
         android:paddingLeft="7dp"
-        android:text="비밀번호 확인"
+        android:text="비밀번호\n확인"
         android:textSize="15sp" />
 
     <EditText
@@ -148,52 +148,6 @@
         app:layout_constraintWidth_percent="0.6"
         app:layout_constraintVertical_bias="0.5"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/tv_address"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.6"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.2"
-        android:layout_marginLeft="25dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="7dp"
-        android:text="주소"
-        android:textSize="15sp" />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/edtAddress"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/tv_address"
-        android:backgroundTint="@color/deepgray"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintVertical_bias="0.6"/>
-
-
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/edtAddressDetail"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintHorizontal_bias="0.75"
-        android:backgroundTint="@color/deepgray"
-        app:layout_constraintVertical_bias="0.7"
-        android:textSize="15sp"
-        android:hint="상세주소를 입력하세요"
-        android:textColor="@color/darkgray"/>
 
     <Button
         android:layout_width="0dp"
@@ -203,7 +157,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_bias="0.65"
         app:layout_constraintWidth_percent="0.25"
         app:layout_constraintHeight_percent="0.07"
         android:fontFamily="@font/suncheonr"

@@ -118,7 +118,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<PNumCkDto>, t: Throwable) {
+                override fun onFailure(call: Call<RegisterDto>, t: Throwable) {
                     Log.d("log", t.message.toString())
                     Log.d("log", "fail")
                     Toast.makeText(this@RegisterActivity, "회원가입에 실패했습니다", Toast.LENGTH_SHORT).show()
