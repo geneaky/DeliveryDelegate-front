@@ -11,7 +11,8 @@ data class RegisterDto(
         @SerializedName("nickname") val nickname: String,
         @SerializedName("phone_number") val phone_number: String,
         @SerializedName("password") val password: String,
-        @SerializedName("address") val address: String
+        @SerializedName("self_posx") val self_posx: String,
+        @SerializedName("self_posy") val self_posy: String
 )
 
 data class PNumCkDto(

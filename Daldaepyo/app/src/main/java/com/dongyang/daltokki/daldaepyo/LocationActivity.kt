@@ -14,13 +14,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 
 // 관련 코드: https://gwynn.tistory.com/4
 
-class GpsActivity : AppCompatActivity() {
+class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var gpsTracker:GpsTracker
-    //    private var gpsTracker = null
+
     var REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +38,42 @@ class GpsActivity : AppCompatActivity() {
             showDialogForLocationServiceSetting()
         }
         val ShowLocationButton = findViewById<View>(R.id.btn_gps) as Button
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.map_view) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.map_view, it).commit()
+            }
+        mapFragment.getMapAsync(this)
+
+        btn_next_register.setOnClickListener {
+            var intent = Intent(this@LocationActivity, RegisterActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+    override fun onMapReady(naverMap: NaverMap) {
+//        현재 카메라보다 좀 더 줌이 필요할 때 사용하기
+//        this@LocationActivity.naverMap = naverMap
+//        var camPos = CameraPosition(LatLng(latitude, longitude), 9.0)
+//        naverMap.cameraPosition = camPos
+        // 카메라 이동
+        val ShowLocationButton = findViewById<View>(R.id.btn_NowLocation) as Button
+        // 버튼 클릭 시 좌표 수집 및 현재위치 출력
         ShowLocationButton.setOnClickListener {
-            gpsTracker = GpsTracker(this@GpsActivity)
+            // 좌표정보 가져오기
+            gpsTracker = GpsTracker(this@LocationActivity)
             val latitude : Double = gpsTracker!!.getLatitude()
             val longitude : Double  = gpsTracker!!.getLongitude()
-            Toast.makeText(this@GpsActivity, "현재위치 \n위도 $latitude\n경도 $longitude", Toast.LENGTH_LONG).show()
+            // (토스트 메시지는 테스트 끝나면 지우기)
+//            Toast.makeText(this@LocationActivity, "현재위치 \n위도 $latitude\n경도 $longitude", Toast.LENGTH_LONG).show()
+            Log.d("@@@현재위치: ", "위도 $latitude, 경도 $longitude")
+            // 카메라 이동
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
+            naverMap.moveCamera(cameraUpdate)
+            // 마커찍기
+            val marker = Marker()
+            marker.position = LatLng(latitude, longitude)
+            marker.map = naverMap
         }
     }
     /*

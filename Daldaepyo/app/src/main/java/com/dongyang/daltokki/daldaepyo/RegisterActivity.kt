@@ -73,8 +73,10 @@ class RegisterActivity : AppCompatActivity() {
             var number = binding.edtPnumber.text.toString()
             var pass1 = binding.edtpwd.text.toString()
             var pass2 = binding.edtpwdCheck.text.toString()
-            var address = binding.edtAddress.text.toString()
 
+            gpsTracker = GpsTracker(this@RegisterActivity)
+            var self_posx  = gpsTracker!!.getLongitude().toString() // 경도
+            var self_posy = gpsTracker!!.getLatitude().toString() // 위도
 
 
 
@@ -90,7 +92,7 @@ class RegisterActivity : AppCompatActivity() {
 //
             // 한 칸이라도 입력하지 않았을 경우
             if(nickname.isBlank() || number.isBlank() || pass1.isBlank() ||
-                    pass2.isBlank() || address.isBlank()) {
+                    pass2.isBlank()) {
                 var dialog = AlertDialog.Builder(this@RegisterActivity)
                 dialog.setTitle("회원가입 에러")
                 dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
@@ -98,7 +100,8 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val data = RegisterDto(nickname, number, pass1, address)
+
+            val data = RegisterDto(nickname, number, pass1, self_posx, self_posy)
             api.postRegister(data).enqueue(object : Callback<RegisterDto> {
                 override fun onResponse(call: Call<RegisterDto>, response: Response<RegisterDto>) {
                     Log.d("log", response.toString())
