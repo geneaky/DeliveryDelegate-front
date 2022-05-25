@@ -24,7 +24,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
+<<<<<<< Updated upstream
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+=======
+    lateinit var gpsTracker:GpsTracker
+    val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
+>>>>>>> Stashed changes
     val api = UserAPI.create()
     var validate = 0 // 0이면 전화번호 중복확인 안함, 1이면 중복확인 함
     override fun onCreate(saveInstanceState: Bundle?) {
@@ -67,8 +72,10 @@ class RegisterActivity : AppCompatActivity() {
 =======
             var pass1 = binding.edtpwd.text.toString()
             var pass2 = binding.edtpwdCheck.text.toString()
-            var address = binding.edtAddress.text.toString()
 
+            gpsTracker = GpsTracker(this@RegisterActivity)
+            var self_posx  = gpsTracker!!.getLongitude().toString() // 경도
+            var self_posy = gpsTracker!!.getLatitude().toString() // 위도
 
             var data = RegisterDto(binding.edtPnumber.text.toString(),
                                  binding.edtpwd.text.toString(),
@@ -86,7 +93,7 @@ class RegisterActivity : AppCompatActivity() {
 //
             // 한 칸이라도 입력하지 않았을 경우
             if(nickname.isBlank() || number.isBlank() || pass1.isBlank() ||
-                    pass2.isBlank() || address.isBlank()) {
+                    pass2.isBlank()) {
                 var dialog = AlertDialog.Builder(this@RegisterActivity)
                 dialog.setTitle("회원가입 에러")
                 dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
@@ -137,7 +144,11 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+<<<<<<< Updated upstream
             val data = RegisterDto(nickname, number, pass1, address)
+>>>>>>> Stashed changes
+=======
+            val data = RegisterDto(nickname, number, pass1, self_posx, self_posy)
 >>>>>>> Stashed changes
             api.postRegister(data).enqueue(object : Callback<RegisterDto> {
                 override fun onResponse(call: Call<RegisterDto>, response: Response<RegisterDto>) {

@@ -151,7 +151,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.btnRegister.setOnClickListener{
+<<<<<<< Updated upstream
             var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+>>>>>>> Stashed changes
+=======
+            var intent = Intent(this@LoginActivity, LocationActivity::class.java)
 >>>>>>> Stashed changes
             startActivity(intent)
         }
