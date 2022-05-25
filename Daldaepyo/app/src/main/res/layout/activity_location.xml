@@ -22,7 +22,7 @@
         android:textColor="@color/darkgray"
         android:textSize="20sp"/>
 
-    <com.google.android.gms.maps.MapView
+    <com.naver.maps.map.MapView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +30,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="1"
-        android:visibility="invisible"
         app:layout_constraintHeight_percent="0.65"
         app:layout_constraintVertical_bias="0.55"/>
 
@@ -47,7 +46,6 @@
         app:layout_constraintVertical_bias="0.97"
         android:background="@color/tranceparent"
         android:gravity="center"
-        android:visibility="invisible"
         android:text="다음"
         android:fontFamily="@font/suncheonr"
         android:textSize="20sp"
