@@ -26,6 +26,7 @@ import com.naver.maps.map.overlay.Marker
 class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var gpsTracker:GpsTracker
+    val api = UserAPI.create()
 
     var REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +46,30 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         mapFragment.getMapAsync(this)
 
-        btn_next_register.setOnClickListener {
-            var intent = Intent(this@LocationActivity, RegisterActivity::class.java)
-            startActivity(intent)
-            finish()
+        gpsTracker = GpsTracker(this@LocationActivity)
+        val latitude = gpsTracker!!.getLatitude().toString()
+        val longitude  = gpsTracker!!.getLongitude().toString()
+
+        btn_latlng.setOnClickListener {
+            val data = LatlngDto(latitude, longitude)
+            api.postLatlng(data).enqueue(object : Callback<LatlngDto> {
+                override fun onResponse(call: Call<LatlngDto>, response: Response<LatlngDto>) {
+                    Log.d("log", response.toString())
+                    Log.d("log body", response.body().toString())
+
+                    Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LocationActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }
+
+                override fun onFailure(call: Call<LatlngDto>, t: Throwable) {
+                    Log.d("log", t.message.toString())
+                    Log.d("log", "fail")
+
+                }
+            })
         }
     }
     override fun onMapReady(naverMap: NaverMap) {
@@ -61,7 +82,7 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
         // 버튼 클릭 시 좌표 수집 및 현재위치 출력
         ShowLocationButton.setOnClickListener {
             // 좌표정보 가져오기
-            gpsTracker = GpsTracker(this@LocationActivity)
+//            gpsTracker = GpsTracker(this@LocationActivity)
             val latitude : Double = gpsTracker!!.getLatitude()
             val longitude : Double  = gpsTracker!!.getLongitude()
             // (토스트 메시지는 테스트 끝나면 지우기)

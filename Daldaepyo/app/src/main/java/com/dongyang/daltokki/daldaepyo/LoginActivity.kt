@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.btnRegister.setOnClickListener{
-            var intent = Intent(this@LoginActivity, LocationActivity::class.java)
+            var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
