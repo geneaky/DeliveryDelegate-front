@@ -37,7 +37,7 @@
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/btn_next_register"
+        android:id="@+id/btn_latlng"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,7 +47,7 @@
         app:layout_constraintVertical_bias="0.97"
         android:background="@color/tranceparent"
         android:gravity="center"
-        android:text="다음"
+        android:text="동네 설정 완료"
         android:fontFamily="@font/suncheonr"
         android:textSize="20sp"
         android:textColor="@color/darkgray"/>

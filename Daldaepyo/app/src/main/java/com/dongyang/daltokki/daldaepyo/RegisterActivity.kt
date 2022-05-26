@@ -73,9 +73,6 @@ class RegisterActivity : AppCompatActivity() {
             var pass1 = binding.edtpwd.text.toString()
             var pass2 = binding.edtpwdCheck.text.toString()
 
-            gpsTracker = GpsTracker(this@RegisterActivity)
-            var self_posx  = gpsTracker!!.getLongitude().toString() // 경도
-            var self_posy = gpsTracker!!.getLatitude().toString() // 위도
 
             var data = RegisterDto(binding.edtPnumber.text.toString(),
                                  binding.edtpwd.text.toString(),
@@ -145,10 +142,14 @@ class RegisterActivity : AppCompatActivity() {
             }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             val data = RegisterDto(nickname, number, pass1, address)
 >>>>>>> Stashed changes
 =======
             val data = RegisterDto(nickname, number, pass1, self_posx, self_posy)
+>>>>>>> Stashed changes
+=======
+            val data = RegisterDto(nickname, number, pass1)
 >>>>>>> Stashed changes
             api.postRegister(data).enqueue(object : Callback<RegisterDto> {
                 override fun onResponse(call: Call<RegisterDto>, response: Response<RegisterDto>) {
