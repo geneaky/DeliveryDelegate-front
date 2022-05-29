@@ -18,10 +18,10 @@ interface UserAPI {
         "content-type: application/json")
     fun postLogin(@Body jsonparams: LoginDto): Call<LoginDto> // 로그인
 
-    @POST("/users/register") // 이게 맞을까..?
+    @POST("/users/register/existed")
     @Headers("accept: application/json",
         "content-type: application/json")
-    fun postPNumCk(@Body jsonparams: PNumCkDto): Call<PNumCkDto> // 전화번호 중복확인
+    fun postPNumCk(@Body jsonparams: PNumCkDto): Call<PNumCkResponseDto> // 전화번호 중복확인
 
     @POST("/users/register")
     @Headers("accept: application/json",
@@ -57,7 +57,7 @@ interface UserAPI {
             @Throws(IOException::class)
             override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("(header key", "(header Value)")
+                    .addHeader("token", "(header Value)")
                     .build()
                 proceed(newRequest)
             }

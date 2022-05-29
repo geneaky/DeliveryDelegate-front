@@ -22,6 +22,10 @@ data class PNumCkDto( // 전화번호 중복확인
         @SerializedName("phone_number") val phone_number: String
 )
 
+data class PNumCkResponseDto( // 전화번호 중복확인 응답
+        @SerializedName("message") val message: String
+)
+
 data class SearchResponseDto ( // 장소 검색
       @SerializedName("result") val result :  List<LocationInfoResponseDto>
 )

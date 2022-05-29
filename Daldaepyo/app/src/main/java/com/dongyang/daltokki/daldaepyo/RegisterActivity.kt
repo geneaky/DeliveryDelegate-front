@@ -28,44 +28,52 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(saveInstanceState)
         setContentView(binding.root)
 
-//        // 전화번호 중복확인
-//        binding.btnC.setOnClickListener {
-//            var number = binding.edtPnumber.text.toString()
-//            if(validate == 1) { // 중복확인 검증 완료
-//                return@setOnClickListener
-//            }
-//            if(number.isNullOrBlank()) {
-//                var dialog = AlertDialog.Builder(this@RegisterActivity)
-//                dialog.setTitle("회원가입 에러")
-//                dialog.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null)
-//                dialog.show()
-//                return@setOnClickListener
-//            }
-//            var data = PNumCkDto(number)
-//            api.postPNumCk(data).enqueue(object : Callback<PNumCkDto> {
-//                override fun onResponse(call: Call<PNumCkDto>, response: Response<PNumCkDto>) {
-//                    var dialog = AlertDialog.Builder(this@RegisterActivity)
-//                    dialog.setTitle("전화번호 중복확인 완료")
-//                    dialog.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null)
-//                    dialog.show()
-//                    edtPnumber.setEnabled(false)
-//                    validate = 1
-//                    btnC.setBackgroundColor(Color.LTGRAY)
-//
-//                }
-//
-//                override fun onFailure(call: Call<PNumCkDto>, t: Throwable) {
-//                    var dialog = AlertDialog.Builder(this@RegisterActivity)
-//                    Log.d("회원가입", "${t.localizedMessage}")
-//                    dialog.setTitle("전화번호 중복확인 에러")
-//                    dialog.setMessage("이미 존재하는 전화번호입니다.").setPositiveButton("확인", null)
-//                    dialog.show()
-//                    validate = 0
-//                }
-//            })
-//
-//        }
-//
+
+        // 전화번호 중복확인
+        binding.btnC.setOnClickListener {
+            var number = binding.edtPnumber.text.toString()
+            if(validate == 1) { // 중복확인 검증 완료
+                return@setOnClickListener
+            }
+            if(number.isNullOrBlank()) {
+                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                dialog.setTitle("회원가입 에러")
+                dialog.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null)
+                dialog.show()
+                return@setOnClickListener
+            }
+            var data = PNumCkDto(number)
+            api.postPNumCk(data).enqueue(object : Callback<PNumCkResponseDto> {
+                override fun onResponse(call: Call<PNumCkResponseDto>, response: Response<PNumCkResponseDto>) {
+                    val result = response.body().toString()
+                    Log.d("회원가입", "" + result)
+                    Log.d("log body", response.body().toString())
+
+                    if (result == "PNumCkResponseDto(message=existed)") {
+                        var dialog = AlertDialog.Builder(this@RegisterActivity)
+                        dialog.setTitle("전화번호 중복확인 에러")
+                        dialog.setMessage("이미 존재하는 전화번호입니다.").setPositiveButton("확인", null)
+                        dialog.show()
+                        validate = 0
+                    }
+                    if (result == "PNumCkResponseDto(message=not existed)") {
+                        var dialog = AlertDialog.Builder(this@RegisterActivity)
+                        dialog.setTitle("전화번호 중복확인 완료")
+                        dialog.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null)
+                        dialog.show()
+                        edtPnumber.setEnabled(false)
+                        validate = 1
+                        btnC.setBackgroundColor(Color.LTGRAY)
+                    }
+                }
+
+                override fun onFailure(call: Call<PNumCkResponseDto>, t: Throwable) {
+                    Log.d("회원가입", "${t.localizedMessage}")
+                }
+            })
+
+        }
+
 
         binding.btnRegister.setOnClickListener {
 
@@ -75,18 +83,15 @@ class RegisterActivity : AppCompatActivity() {
             var pass2 = binding.edtpwdCheck.text.toString()
 
 
+            // 아이디 중복확인 체크
+            if(validate == 0) {
+                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                dialog.setTitle("회원가입 에러")
+                dialog.setMessage("중복된 전화번호가 있는지 확인하세요.").setPositiveButton("확인", null)
+                dialog.show()
+                return@setOnClickListener
+            }
 
-
-//
-//            // 아이디 중복확인 체크
-//            if(validate == 0) {
-//                var dialog = AlertDialog.Builder(this@RegisterActivity)
-//                dialog.setTitle("회원가입 에러")
-//                dialog.setMessage("중복된 전화번호가 있는지 확인하세요.").setPositiveButton("확인", null)
-//                dialog.show()
-//                return@setOnClickListener
-//            }
-//
             // 한 칸이라도 입력하지 않았을 경우
             if(nickname.isBlank() || number.isBlank() || pass1.isBlank() ||
                     pass2.isBlank()) {
@@ -96,7 +101,6 @@ class RegisterActivity : AppCompatActivity() {
                 dialog.show()
                 return@setOnClickListener
             }
-
 
             val data = RegisterDto(nickname, number, pass1)
             api.postRegister(data).enqueue(object : Callback<RegisterDto> {
@@ -113,7 +117,7 @@ class RegisterActivity : AppCompatActivity() {
                     } else { // 비밀번호가 동일하지 않음
                         var dialog = AlertDialog.Builder(this@RegisterActivity)
                         dialog.setTitle("회원가입 에러")
-                        dialog.setMessage("휴대전화, 비밀번호를 확인해 주세요.").setPositiveButton("확인", null)
+                        dialog.setMessage("비밀번호를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()
                     }
                 }
