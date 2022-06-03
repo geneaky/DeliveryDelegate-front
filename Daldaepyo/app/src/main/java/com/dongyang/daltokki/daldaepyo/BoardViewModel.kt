@@ -4,7 +4,7 @@ import android.provider.ContactsContract
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {}
+class BoardViewModel : ViewModel() {}
 
 /*{
     private val daldaepyoRepository = DaldaepyoRepository()
