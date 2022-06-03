@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lightYellow"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.1"
+        android:text="대표 정하기"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+
+
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/nick_1st"
+        android:text="첫번째 사람"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.25"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="@drawable/nick_rounded"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/nick_2nd"
+        android:text="두번째 사람"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.4"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="@drawable/nick_rounded"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/nick_3rd"
+        android:text="세번째 사람"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.55"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="@drawable/nick_rounded"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/nick_4th"
+        android:text="네번째 사람"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.7"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:background="@drawable/nick_rounded"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.87"
+        android:background="@color/tranceparent"
+        android:textColor="@color/blue"
+        android:fontFamily="@font/suncheonr"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="시작하기"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

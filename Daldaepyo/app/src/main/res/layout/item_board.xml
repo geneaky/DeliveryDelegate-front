@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,33 +8,46 @@
     android:paddingRight="16dp"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <FrameLayout
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_board_title"
+        android:textColor="@color/darkgray"
+        android:textSize="17sp"
+        android:fontFamily="@font/suncheonr"
+        android:textStyle="bold"
+        android:text="제목"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_board_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="게시글"
             android:fontFamily="@font/suncheonr"
+            android:textColor="@color/deepgray"
             android:paddingRight="8dp"
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_board_date"
             android:layout_width="wrap_content"
             android:fontFamily="@font/suncheonr"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="2022-03-02" />
 
-    </FrameLayout>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:background="@color/darkgray"
         android:layout_marginTop="20dp"/>
 
-</FrameLayout>
+</LinearLayout>
