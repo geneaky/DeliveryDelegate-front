@@ -28,4 +28,10 @@ data class PNumCkResponseDto( // 전화번호 중복확인 응답
 
 data class SearchResponseDto ( // 장소 검색
       @SerializedName("result") val result :  List<LocationInfoResponseDto>
+data class ReviewDto(
+        @SerializedName("review_id") val review_id: Int,
+        @SerializedName("user_id") val user_id : Int,
+        @SerializedName("store_id") val store_id : Int,
+        @SerializedName("content") val content : String
+
 )

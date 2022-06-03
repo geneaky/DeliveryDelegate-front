@@ -35,6 +35,8 @@ interface UserAPI {
         @Query("name") name : String ): Call<SearchResponseDto> // 음식점 검색
 
 
+    @GET("/store/:id/reviews")
+    fun Review () : Call<ReviewDto>
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"
 
