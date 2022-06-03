@@ -20,24 +20,25 @@ import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+import kotlinx.android.synthetic.main.activity_location.*
 
 // 관련 코드: https://gwynn.tistory.com/4
 
-class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
+class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var gpsTracker:GpsTracker
 
     var REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_gps)
+        setContentView(R.layout.activity_location)
 
         if (checkLocationServicesStatus()) {
             checkRunTimePermission()
         } else {
             showDialogForLocationServiceSetting()
         }
-        val ShowLocationButton = findViewById<View>(R.id.btn_gps) as Button
+        val ShowLocationButton = findViewById<View>(R.id.btn_NowLocation) as Button
         val fm = supportFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_view) as MapFragment?
             ?: MapFragment.newInstance().also {
@@ -103,10 +104,10 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-                    Toast.makeText(this@GpsActivity, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LocationActivity, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show()
                     finish()
                 } else {
-                    Toast.makeText(this@GpsActivity, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LocationActivity, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -116,9 +117,9 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
-        val hasFineLocationPermission = ContextCompat.checkSelfPermission(this@GpsActivity,
+        val hasFineLocationPermission = ContextCompat.checkSelfPermission(this@LocationActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
-        val hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this@GpsActivity,
+        val hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this@LocationActivity,
                 Manifest.permission.ACCESS_COARSE_LOCATION)
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
@@ -131,17 +132,17 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
             // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this@GpsActivity, REQUIRED_PERMISSIONS[0])) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this@LocationActivity, REQUIRED_PERMISSIONS[0])) {
 
                 // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Toast.makeText(this@GpsActivity, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LocationActivity, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show()
                 // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(this@GpsActivity, REQUIRED_PERMISSIONS,
+                ActivityCompat.requestPermissions(this@LocationActivity, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE)
             } else {
                 // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
                 // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(this@GpsActivity, REQUIRED_PERMISSIONS,
+                ActivityCompat.requestPermissions(this@LocationActivity, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE)
             }
         }
@@ -149,7 +150,7 @@ class GpsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     //여기부터는 GPS 활성화를 위한 메소드들
     private fun showDialogForLocationServiceSetting() {
-        val builder = AlertDialog.Builder(this@GpsActivity)
+        val builder = AlertDialog.Builder(this@LocationActivity)
         builder.setTitle("위치 서비스 비활성화")
         builder.setMessage("""
     앱을 사용하기 위해서는 위치 서비스가 필요합니다.

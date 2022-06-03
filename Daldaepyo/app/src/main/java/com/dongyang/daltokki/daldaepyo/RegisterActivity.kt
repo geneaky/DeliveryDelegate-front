@@ -74,7 +74,7 @@ class RegisterActivity : AppCompatActivity() {
             var pass1 = binding.edtpwd.text.toString()
             var pass2 = binding.edtpwdCheck.text.toString()
 
-            gpsTracker = GpsTracker(this@RegisterActivity)
+            val gpsTracker = GpsTracker(this@RegisterActivity)
             var self_posx  = gpsTracker!!.getLongitude().toString() // 경도
             var self_posy = gpsTracker!!.getLatitude().toString() // 위도
 

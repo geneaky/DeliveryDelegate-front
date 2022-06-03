@@ -23,6 +23,8 @@ interface UserAPI {
         "content-type: application/json")
     fun postPNumCk(@Body jsonparams: PNumCkDto): Call<PNumCkDto>
 
+    @GET("/store/:id/reviews")
+    fun Review () : Call<ReviewDto>
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"
 

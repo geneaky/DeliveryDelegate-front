@@ -18,3 +18,11 @@ data class RegisterDto(
 data class PNumCkDto(
         @SerializedName("phone_number") val phone_number: String
 )
+
+data class ReviewDto(
+        @SerializedName("review_id") val review_id: Int,
+        @SerializedName("user_id") val user_id : Int,
+        @SerializedName("store_id") val store_id : Int,
+        @SerializedName("content") val content : String
+
+)
