@@ -19,7 +19,8 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".GpsActivity" />
+        <activity android:name=".LocationActivity" />
+        <activity android:name=".SearchBoardActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

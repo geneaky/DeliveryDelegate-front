@@ -1,5 +1,6 @@
 package com.dongyang.daltokki.daldaepyo.retrofit
 
+import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -16,7 +17,7 @@ interface UserAPI {
     @POST("/users/login")
     @Headers("accept: application/json",
         "content-type: application/json")
-    fun postLogin(@Body jsonparams: LoginDto): Call<LoginDto> // 로그인
+    fun postLogin(@Body jsonparams: LoginDto): Call<LoginInfoResponseDto> // 로그인
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -36,6 +37,13 @@ interface UserAPI {
     @GET("/map/search/place")
     fun getSearch(@Header("token") token: String,
             @Query("name") name : String ): Call<SearchResponseDto> // 음식점 검색
+
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+
+    @GET("/store/:id/reviews")
+    fun Review () : Call<ReviewDto>
 
 >>>>>>> Stashed changes
     companion object {
