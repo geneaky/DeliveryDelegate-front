@@ -19,14 +19,22 @@ class SearchActivity:AppCompatActivity() {
 
         btn_searchBoard1.setOnClickListener {
 
+            val pref = getSharedPreferences("pref", 0)
+            val tok = pref.getString("token", "").toString()
             var name = edt_search.text.toString()
 
-            api.getSearch(name).enqueue(object: Callback<SearchResponseDto> {
+            api.getSearch(tok, name).enqueue(object: Callback<SearchResponseDto> {
                 override fun onResponse(call: Call<SearchResponseDto>,
                     response: Response<SearchResponseDto>) {
                     val result = response.body()
+
+                    var xmap = response?.body()?.result?.get(0)?.mapx
+                    var ymap = response?.body()?.result?.get(0)?.mapy
+
                     Log.d("검색", "${result}")
                     Log.d("log body", response.body().toString())
+                    Log.d("mapx", xmap.toString())
+                    Log.d("mapy", ymap.toString())
 //                    var intent = Intent(this@SearchBoardActivity, SearchReviewActivity::class.java)
 //                    startActivity(intent)
 //                    finish()
