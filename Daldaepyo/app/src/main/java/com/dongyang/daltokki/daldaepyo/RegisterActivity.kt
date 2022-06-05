@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityMainBinding
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityRegisterBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.PNumCkDto
+import com.dongyang.daltokki.daldaepyo.retrofit.PNumCkResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.RegisterDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import kotlinx.android.synthetic.main.activity_login.*
