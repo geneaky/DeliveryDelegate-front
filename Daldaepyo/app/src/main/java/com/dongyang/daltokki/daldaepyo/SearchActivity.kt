@@ -1,6 +1,14 @@
 package com.dongyang.daltokki.daldaepyo
 
+import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
+import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
+import kotlinx.android.synthetic.main.activity_search_board.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchActivity:AppCompatActivity() {
 

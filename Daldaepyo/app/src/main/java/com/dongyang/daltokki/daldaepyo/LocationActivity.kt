@@ -14,12 +14,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.dongyang.daltokki.daldaepyo.retrofit.LatlngDto
+import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
+<<<<<<< Updated upstream
+=======
+import kotlinx.android.synthetic.main.activity_location.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+>>>>>>> Stashed changes
 
 // 관련 코드: https://gwynn.tistory.com/4
 
