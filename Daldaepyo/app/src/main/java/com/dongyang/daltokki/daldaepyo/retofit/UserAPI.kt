@@ -1,5 +1,6 @@
 package com.dongyang.daltokki.daldaepyo.retrofit
 
+import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Call
@@ -16,7 +17,7 @@ interface UserAPI {
     @POST("/users/login")
     @Headers("accept: application/json",
         "content-type: application/json")
-    fun postLogin(@Body jsonparams: LoginDto): Call<LoginDto> // 로그인
+    fun postLogin(@Body jsonparams: LoginDto): Call<LoginInfoResponseDto> // 로그인
 
     @POST("/users/register/existed")
     @Headers("accept: application/json",
@@ -34,6 +35,8 @@ interface UserAPI {
 
     @GET("/store/:id/reviews")
     fun Review () : Call<ReviewDto>
+
+
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"
 

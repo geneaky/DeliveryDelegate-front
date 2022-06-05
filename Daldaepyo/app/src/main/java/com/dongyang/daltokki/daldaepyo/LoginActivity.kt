@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 }
 
-                override fun onFailure(call: Call<LoginDto>, t: Throwable) {
+                override fun onFailure(call: Call<LoginInfoResponseDto>, t: Throwable) {
                     Log.e("로그인", "${t.localizedMessage}")
                 }
             })

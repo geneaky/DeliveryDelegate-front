@@ -44,7 +44,6 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             showDialogForLocationServiceSetting()
         }
-        val ShowLocationButton = findViewById<View>(R.id.btn_NowLocation) as Button
         val fm = supportFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_view) as MapFragment?
             ?: MapFragment.newInstance().also {
@@ -62,7 +61,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             val tok = pref.getString("token", "").toString()
 
             val data = LatlngDto(latitude, longitude)
-            api.postLatlng(data).enqueue(object : Callback<LatlngDto> {
+            api.postLatlng(tok, data).enqueue(object : Callback<LatlngDto> {
                 override fun onResponse(call: Call<LatlngDto>, response: Response<LatlngDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())
