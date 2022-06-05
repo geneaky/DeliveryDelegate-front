@@ -57,6 +57,10 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val longitude  = gpsTracker!!.getLongitude().toString()
 
         btn_latlng.setOnClickListener {
+
+            val pref = getSharedPreferences("pref", 0)
+            val tok = pref.getString("token", "").toString()
+
             val data = LatlngDto(latitude, longitude)
             api.postLatlng(data).enqueue(object : Callback<LatlngDto> {
                 override fun onResponse(call: Call<LatlngDto>, response: Response<LatlngDto>) {
@@ -74,6 +78,11 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     Log.d("log", t.message.toString())
                     Log.d("log", "fail")
 
+                    // Response로 받아오는 게 없어서 오류가 뜸
+                    Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LocationActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             })
         }

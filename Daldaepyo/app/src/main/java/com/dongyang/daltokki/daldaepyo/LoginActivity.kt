@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityLoginBinding
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityMainBinding
+import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.LoginDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import kotlinx.android.synthetic.main.activity_login.*
@@ -28,6 +29,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val pref = getSharedPreferences("pref", 0)
+        val savedId = pref.getString("id", "").toString()
+        Log.d(TAG, savedId)
+        val tok = pref.getString("token", "")
+        Log.d("getString@@@@@@@@@", "" + tok)
+
         binding.btnLogin.setOnClickListener {
 
             var id = binding.edtPnumber.text.toString()
@@ -43,11 +50,24 @@ class LoginActivity : AppCompatActivity() {
             }
 
             val data = LoginDto(id, pw)
-            api.postLogin(data).enqueue(object:Callback<LoginDto>{
-                override fun onResponse(call: Call<LoginDto>, response: Response<LoginDto>) {
+            api.postLogin(data).enqueue(object:Callback<LoginInfoResponseDto>{
+                override fun onResponse(call: Call<LoginInfoResponseDto>, response: Response<LoginInfoResponseDto>) {
                     val result = response.body()
                     Log.d("로그인", "${result}")
                     Log.d("log body", response.body().toString())
+
+                    val token_result = response?.body()?.token?.token.toString()
+                    Log.d("token_result@@@", "" + token_result)
+
+                    val edit = pref.edit() // 수정모드
+                    edit.apply()
+                    edit.putString("id", id)
+                    edit.putString("token", token_result)
+                    edit.commit()
+
+                    val tok = pref.getString("token", "")
+                    Log.d("getString@@@@@@@@@", "" + tok)
+
                     var intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
