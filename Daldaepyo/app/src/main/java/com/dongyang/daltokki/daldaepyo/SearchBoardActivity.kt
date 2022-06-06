@@ -29,8 +29,8 @@ class SearchBoardActivity:AppCompatActivity() {
                     response: Response<SearchResponseDto>) {
                     val result = response.body()
 
-                    var xmap = response?.body()?.result?.get(0)?.mapx?.toDouble()!!
-                    var ymap = response?.body()?.result?.get(0)?.mapy?.toDouble()!!
+                    val xmap = response?.body()?.result?.get(0)?.mapx?.toDouble()!!
+                    val ymap = response?.body()?.result?.get(0)?.mapy?.toDouble()!!
 
                     val tm128 = Tm128(xmap, ymap) // 좌표는 Double 형태로 넣어주어야 함
                     val latLng = tm128.toLatLng() // LatLng{latitude = , lngitude= } 형태

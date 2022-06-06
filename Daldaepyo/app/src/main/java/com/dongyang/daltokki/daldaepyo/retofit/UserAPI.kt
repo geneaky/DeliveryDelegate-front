@@ -3,6 +3,7 @@ package com.dongyang.daltokki.daldaepyo.retrofit
 import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
