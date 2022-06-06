@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dongyang.daltokki.daldaepyo.OcrActivity">
+
+    <ImageView
+        android:id="@+id/img_Preview"
+        android:layout_width="420dp"
+        android:layout_height="429dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="69dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btn_Camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카메라"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="653dp" />
+
+    <Button
+        android:id="@+id/btn_Gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="갤러리"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="653dp" />
+
+    <Button
+        android:id="@+id/btn_Ocr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서버로 전송"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="653dp" />
+
+</LinearLayout>

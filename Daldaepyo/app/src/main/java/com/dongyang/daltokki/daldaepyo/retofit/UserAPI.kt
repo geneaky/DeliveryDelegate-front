@@ -39,8 +39,17 @@ interface UserAPI {
             @Query("name") name : String ): Call<SearchResponseDto> // 음식점 검색
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
+=======
+    @Multipart
+    @POST("/review/reciept")
+    fun postImage(@Header("token") token: String,
+                  @Part file: MultipartBody.Part): Call<ImageResponseDto>
+
+
+>>>>>>> Stashed changes
 
     @GET("/store/:id/reviews")
     fun Review () : Call<ReviewDto>

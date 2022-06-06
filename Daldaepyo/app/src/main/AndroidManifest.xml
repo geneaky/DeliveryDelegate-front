@@ -9,6 +9,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 대략적인 위치 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 정확한 위치 -->
 
+    <!-- 저장소의 데이터 저장 및 확인(갤러리) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 카메라 허용 퍼미션 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +27,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".LocationActivity" />
         <activity android:name=".SearchBoardActivity"/>
+        <activity android:name=".OcrActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

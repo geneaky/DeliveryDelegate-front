@@ -18,7 +18,12 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
+<<<<<<< Updated upstream
     val binding by lazy {ActivityMainBinding.inflate(layoutInflater)}
+=======
+    val TAG = "로그으으으@@@@@"
+    val binding by lazy { ActivityLoginBinding.inflate(layoutInflater)}
+>>>>>>> Stashed changes
     val api = UserAPI.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,21 +151,30 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("로그인", "${result}")
                     Log.d("log body", response.body().toString())
 
-                    val token_result = response?.body()?.token?.token.toString()
-                    Log.d("token_result@@@", "" + token_result)
+                    if(response.body() == null) {
+                        var dialog = AlertDialog.Builder(this@LoginActivity)
+                        dialog.setTitle("로그인 에러")
+                        dialog.setMessage("로그인 정보를 확인해 주세요.").setPositiveButton("확인", null)
+                        dialog.show()
+                        return
+                    } else {
+                        val token_result = response?.body()?.token?.token.toString()
+                        Log.d("token_result@@@", "" + token_result)
 
-                    val edit = pref.edit() // 수정모드
-                    edit.apply()
-                    edit.putString("id", id)
-                    edit.putString("token", token_result)
-                    edit.commit()
+                        val edit = pref.edit() // 수정모드
+                        edit.apply()
+                        edit.putString("id", id)
+                        edit.putString("token", token_result)
+                        edit.commit()
 
-                    val tok = pref.getString("token", "")
-                    Log.d("getString@@@@@@@@@", "" + tok)
+                        val tok = pref.getString("token", "")
+                        Log.d("getString@@@@@@@@@", "" + tok)
 
-                    var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+
+                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
 
                 override fun onFailure(call: Call<LoginInfoResponseDto>, t: Throwable) {
