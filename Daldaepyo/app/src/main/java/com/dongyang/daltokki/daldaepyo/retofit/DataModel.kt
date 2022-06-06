@@ -32,6 +32,14 @@ data class SearchResponseDto ( // 장소 검색
       @SerializedName("result") val result :  List<LocationInfoResponseDto>
 )
 
+data class ImageResponseDto (
+        @SerializedName("fileInfo") val fileInfo : ImageInfoResponseDto
+)
+data class ImageInfoResponseDto (
+        @SerializedName("fieldname") val fieldname : String,
+        @SerializedName("originalname") val originalname : String
+)
+
 data class ReviewDto(
         @SerializedName("review_id") val review_id: Int,
         @SerializedName("user_id") val user_id : Int,

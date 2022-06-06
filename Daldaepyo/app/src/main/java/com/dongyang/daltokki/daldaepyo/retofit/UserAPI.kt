@@ -32,6 +32,12 @@ interface UserAPI {
     fun getSearch(@Header("token") token: String,
             @Query("name") name : String ): Call<SearchResponseDto> // 음식점 검색
 
+    @Multipart
+    @POST("/review/reciept")
+    fun postImage(@Header("token") token: String,
+                  @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
+
+
 
     @GET("/store/:id/reviews")
     fun Review () : Call<ReviewDto>

@@ -31,10 +31,19 @@ class SearchBoardActivity:AppCompatActivity() {
                     var xmap = response?.body()?.result?.get(0)?.mapx
                     var ymap = response?.body()?.result?.get(0)?.mapy
 
+                    val tm128 = Tm128(xmap, ymap) // 좌표는 Double 형태로 넣어주어야 함
+                    val latLng = tm128.toLatLng() // LatLng{latitude = , lngitude= } 형태
+
+                    val lat = latLng.latitude // 위도만 빼주기
+                    val lng = latLng.longitude // 경도만 빼주기
+
                     Log.d("검색", "${result}")
                     Log.d("log body", response.body().toString())
                     Log.d("mapx", xmap.toString())
                     Log.d("mapy", ymap.toString())
+                    Log.d("map", "latLng" + latLng)
+                    Log.d("lat", " " + lat)
+                    Log.d("lat", " " + lng)
 //                    var intent = Intent(this@SearchBoardActivity, SearchReviewActivity::class.java)
 //                    startActivity(intent)
 //                    finish()
