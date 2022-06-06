@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
+import com.naver.maps.geometry.Tm128
 import kotlinx.android.synthetic.main.activity_search_board.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,8 +29,8 @@ class SearchBoardActivity:AppCompatActivity() {
                     response: Response<SearchResponseDto>) {
                     val result = response.body()
 
-                    var xmap = response?.body()?.result?.get(0)?.mapx
-                    var ymap = response?.body()?.result?.get(0)?.mapy
+                    var xmap = response?.body()?.result?.get(0)?.mapx?.toDouble()!!
+                    var ymap = response?.body()?.result?.get(0)?.mapy?.toDouble()!!
 
                     val tm128 = Tm128(xmap, ymap) // 좌표는 Double 형태로 넣어주어야 함
                     val latLng = tm128.toLatLng() // LatLng{latitude = , lngitude= } 형태
