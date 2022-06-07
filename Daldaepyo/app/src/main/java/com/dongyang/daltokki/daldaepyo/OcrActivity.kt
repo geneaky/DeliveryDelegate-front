@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityOcrBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ImageResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -68,12 +69,22 @@ class OcrActivity: PermissionActivity() {
                 override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())
+                    val result = response.body().toString()
 
-                    Toast.makeText(this@OcrActivity, "서버 전송 완료", Toast.LENGTH_SHORT).show()
-                    // 리뷰 작성하는 페이지로 전환
-                    val intent = Intent(this@OcrActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if (result == "ImageResponseDto(message=Reciept Verified)") {
+                        Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
+                        // 리뷰 작성하는 페이지로 전환
+                        val intent = Intent(this@OcrActivity, SearchReviewActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    if (result == "ImageResponseDto(message=Reciept recognition failure)") {
+                        var dialog = AlertDialog.Builder(this@OcrActivity)
+                        dialog.setTitle("영수증 인증 에러")
+                        dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
+                        dialog.show()
+                        return
+                    }
 
                 }
 
