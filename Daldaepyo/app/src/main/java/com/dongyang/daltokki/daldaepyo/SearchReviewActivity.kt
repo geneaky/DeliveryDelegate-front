@@ -5,13 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-<<<<<<< Updated upstream
-import com.dongyang.daltokki.daldaepyo.retrofit.StoreRegisterDto
-import com.dongyang.daltokki.daldaepyo.retrofit.StoreRegisterResponseDto
-import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
-=======
 import com.dongyang.daltokki.daldaepyo.retrofit.*
->>>>>>> Stashed changes
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
@@ -48,31 +42,13 @@ class SearchReviewActivity : AppCompatActivity(), OnMapReadyCallback {
         tv_store.setText(store_name) // 가게 이름 보여주기
         tv_store_address.setText(store_address) // 가게 주소 보여주기
 
-<<<<<<< Updated upstream
-        btn_store_regist.setOnClickListener {
-=======
         btn_go_ocr.setOnClickListener {
->>>>>>> Stashed changes
+
 
             val pref = getSharedPreferences("pref", 0)
             val tok = pref.getString("token", "").toString()
             val data = StoreRegisterDto(store_name, store_posx, store_posy, store_address)
 
-<<<<<<< Updated upstream
-            api.postStore(tok, data).enqueue(object : Callback<StoreRegisterResponseDto> {
-                override fun onResponse(call: Call<StoreRegisterResponseDto>, response: Response<StoreRegisterResponseDto>) {
-                    Log.d("log", response.toString())
-                    Log.d("log body", response.body().toString())
-
-                    Toast.makeText(this@SearchReviewActivity, "음식점 등록이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@SearchReviewActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-
-                }
-
-                override fun onFailure(call: Call<StoreRegisterResponseDto>, t: Throwable) {
-=======
                         /*
                             리뷰쓰기 버튼을 누르면
                            1. store find로 있는지 확인
@@ -129,7 +105,6 @@ class SearchReviewActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 override fun onFailure(call: Call<StoreFindResponseDto>, t: Throwable) {
->>>>>>> Stashed changes
                     Log.d("log", t.message.toString())
                     Log.d("log", "fail")
 
@@ -139,26 +114,8 @@ class SearchReviewActivity : AppCompatActivity(), OnMapReadyCallback {
 //                    startActivity(intent)
 //                    finish()
                 }
-<<<<<<< Updated upstream
             })
         }
-
-        btn_go_ocr.setOnClickListener {
-            var intent = Intent(this@SearchReviewActivity, OcrActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-
-=======
-
-            })
-
-
-
-        }
-
->>>>>>> Stashed changes
     }
 
     override fun onMapReady(naverMap: NaverMap) {

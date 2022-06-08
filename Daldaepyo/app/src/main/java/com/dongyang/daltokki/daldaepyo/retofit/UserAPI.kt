@@ -4,6 +4,7 @@ import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,16 +48,8 @@ interface UserAPI {
     @Multipart
     @POST("/review/reciept")
     fun postImage(@Header("token") token: String,
-<<<<<<< Updated upstream
-                  @Part store_id: String,
-=======
                   @Part store_id: RequestBody,
->>>>>>> Stashed changes
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
-
-    @POST("/users/town")
-    fun postStore(@Header("token") token: String,
-                  @Body jsonparams: StoreRegisterDto): Call<StoreRegisterResponseDto> // 음식점 등록
 
 
 
