@@ -82,4 +82,20 @@
         android:fontFamily="@font/suncheonr"/>
 
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_go_ocr"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="0.3"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:text="영수증 인증"
+        android:textColor="@color/black"
+        tools:ignore="MissingConstraints" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
