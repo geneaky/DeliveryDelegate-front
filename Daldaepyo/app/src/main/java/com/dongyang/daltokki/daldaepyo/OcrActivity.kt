@@ -64,7 +64,9 @@ class OcrActivity: PermissionActivity() {
             Log.d("oncreate", "requestFile " + requestFile)
             Log.d("oncreate", "body " + file)
             val storePref = getSharedPreferences("store", 0)
-            val store_id = storePref.getString("title", "").toString()
+            val bef_store_id = storePref.getString("store_id", "").toString()
+            val store_id = RequestBody.create(MediaType.parse("multipart/form-data"), bef_store_id)
+            Log.d("store_id", "" + store_id)
 
 
             api.postImage(tok, store_id, data).enqueue(object : Callback<ImageResponseDto> {
