@@ -33,10 +33,25 @@ interface UserAPI {
     fun getSearch(@Header("token") token: String,
             @Query("name") name : String ): Call<SearchResponseDto> // 음식점 검색
 
+    @POST("/store/register")
+    fun postStore(@Header("token") token: String,
+                  @Body jsonparams: StoreRegisterDto): Call<StoreRegisterResponseDto> // 음식점 등록
+
+    @GET("/store/")
+    fun postStoreFind(@Header("token") token: String,
+                      @Query("store_name") store_name: String,
+                      @Query("store_posx") store_posx: String,
+                      @Query("store_posy") store_posy: String
+    ): Call<StoreFindResponseDto> // 음식점 등록 전 찾기
+
     @Multipart
     @POST("/review/reciept")
     fun postImage(@Header("token") token: String,
+<<<<<<< Updated upstream
                   @Part store_id: String,
+=======
+                  @Part store_id: RequestBody,
+>>>>>>> Stashed changes
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
 
     @POST("/users/town")

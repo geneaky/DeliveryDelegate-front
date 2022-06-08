@@ -38,12 +38,26 @@ data class ImageResponseDto ( // 영수증 인증(OCR)
 data class StoreRegisterDto ( // 음식점 등록
         @SerializedName("store_name") val store_name : String,
         @SerializedName("store_posx") val store_posx : String,
+<<<<<<< Updated upstream
         @SerializedName("store_posy") val store_posy : String
 )
 
 data class StoreRegisterResponseDto ( // 음식점 등록 완료 후 응답
         @SerializedName("store_id") val store_id: String,
         @SerializedName("message") val message: String
+=======
+        @SerializedName("store_posy") val store_posy : String,
+        @SerializedName("store_address") val store_address : String
+)
+
+data class StoreRegisterResponseDto ( // 음식점 등록 완료 후 응답
+        @SerializedName("store_id") val store_id: String
+)
+
+data class StoreFindResponseDto ( // 데이터베이스에서 음식점 찾기
+        @SerializedName("store_id") val store_id : String,
+        @SerializedName("message") val message : String
+>>>>>>> Stashed changes
 )
 
 data class ReviewDto(
