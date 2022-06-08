@@ -36,7 +36,12 @@ interface UserAPI {
     @Multipart
     @POST("/review/reciept")
     fun postImage(@Header("token") token: String,
+                  @Part store_id: String,
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
+
+    @POST("/users/town")
+    fun postStore(@Header("token") token: String,
+                  @Body jsonparams: StoreRegisterDto): Call<StoreRegisterResponseDto> // 음식점 등록
 
 
 

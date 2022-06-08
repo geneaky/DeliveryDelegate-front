@@ -63,9 +63,11 @@ class OcrActivity: PermissionActivity() {
             val data = MultipartBody.Part.createFormData("file", file.name, requestFile)
             Log.d("oncreate", "requestFile " + requestFile)
             Log.d("oncreate", "body " + file)
+            val storePref = getSharedPreferences("store", 0)
+            val store_id = storePref.getString("title", "").toString()
 
 
-            api.postImage(tok, data).enqueue(object : Callback<ImageResponseDto> {
+            api.postImage(tok, store_id, data).enqueue(object : Callback<ImageResponseDto> {
                 override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())

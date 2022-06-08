@@ -60,7 +60,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             val pref = getSharedPreferences("pref", 0)
             val tok = pref.getString("token", "").toString()
 
-            val data = LatlngDto(latitude, longitude)
+            val data = LatlngDto(longitude, latitude) // x: 경도, y: 위도
             api.postLatlng(tok, data).enqueue(object : Callback<LatlngDto> {
                 override fun onResponse(call: Call<LatlngDto>, response: Response<LatlngDto>) {
                     Log.d("log", response.toString())

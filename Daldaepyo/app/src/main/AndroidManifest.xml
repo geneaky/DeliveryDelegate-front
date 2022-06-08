@@ -29,6 +29,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".LocationActivity" />
         <activity android:name=".SearchBoardActivity"/>
+        <activity android:name=".SearchReviewActivity" />
         <activity android:name=".OcrActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
