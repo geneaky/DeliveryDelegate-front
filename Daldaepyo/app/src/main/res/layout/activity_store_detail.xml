@@ -95,8 +95,8 @@
         android:background="@color/tranceparent"
         android:gravity="center"
         android:text="영수증 인증"
-        android:textColor="@color/black"
-        tools:ignore="MissingConstraints" />
+        android:textColor="@color/black"/>
+<!--        tools:ignore="MissingConstraints" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
