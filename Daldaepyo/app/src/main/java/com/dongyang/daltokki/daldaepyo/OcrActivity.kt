@@ -78,7 +78,7 @@ class OcrActivity: PermissionActivity() {
                     if (result == "ImageResponseDto(message=Reciept Verified)") {
                         Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
                         // 리뷰 작성하는 페이지로 전환
-                        val intent = Intent(this@OcrActivity, SearchReviewActivity::class.java)
+                        val intent = Intent(this@OcrActivity, StoreDetailActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
