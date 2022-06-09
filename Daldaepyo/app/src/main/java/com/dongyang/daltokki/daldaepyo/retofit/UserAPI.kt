@@ -3,8 +3,6 @@ package com.dongyang.daltokki.daldaepyo.retrofit
 import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,11 +43,9 @@ interface UserAPI {
                       @Query("store_posy") store_posy: String
     ): Call<StoreFindResponseDto> // 음식점 등록 전 찾기
 
-    @Multipart
     @POST("/review/reciept")
     fun postImage(@Header("token") token: String,
-                  @Part store_id: RequestBody,
-                  @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
+                  @Body jsonparams: ImageDto): Call<ImageResponseDto> // 이미지 전송
 
 
 

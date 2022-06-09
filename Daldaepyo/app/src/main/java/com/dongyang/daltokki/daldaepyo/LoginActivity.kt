@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityLoginBinding
-import com.dongyang.daltokki.daldaepyo.databinding.ActivityMainBinding
 import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.LoginDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
