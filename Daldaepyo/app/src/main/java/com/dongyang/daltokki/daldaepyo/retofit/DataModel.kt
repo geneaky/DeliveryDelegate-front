@@ -2,6 +2,7 @@ package com.dongyang.daltokki.daldaepyo.retrofit
 
 import com.dongyang.daltokki.daldaepyo.retofit.LocationInfoResponseDto
 import com.google.gson.annotations.SerializedName
+import java.io.File
 
 data class LoginDto( // 로그인
         @SerializedName("phone_number") val phone_number: String,
@@ -31,10 +32,6 @@ data class SearchResponseDto ( // 장소 검색
       @SerializedName("result") val result :  List<LocationInfoResponseDto>
 )
 
-data class ImageResponseDto ( // 영수증 인증(OCR)
-        @SerializedName("message") val message : String
-)
-
 data class StoreRegisterDto ( // 음식점 등록
         @SerializedName("store_name") val store_name : String,
         @SerializedName("store_posx") val store_posx : String,
@@ -48,6 +45,15 @@ data class StoreRegisterResponseDto ( // 음식점 등록 완료 후 응답
 
 data class StoreFindResponseDto ( // 데이터베이스에서 음식점 찾기
         @SerializedName("store_id") val store_id : String,
+        @SerializedName("message") val message : String
+)
+
+data class ImageDto ( // 영수증 인증(OCR)
+        @SerializedName("store_id") val store_id: String,
+        @SerializedName("file") val file: File
+)
+
+data class ImageResponseDto ( // 영수증 인증(OCR)
         @SerializedName("message") val message : String
 )
 

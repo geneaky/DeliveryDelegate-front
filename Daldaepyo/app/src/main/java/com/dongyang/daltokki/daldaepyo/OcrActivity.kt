@@ -2,7 +2,6 @@ package com.dongyang.daltokki.daldaepyo
 
 import android.Manifest
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Bitmap
@@ -15,11 +14,9 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityOcrBinding
+import com.dongyang.daltokki.daldaepyo.retrofit.ImageDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ImageResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,30 +56,24 @@ class OcrActivity: PermissionActivity() {
 
             Log.d("!!!!절대경로!!!!", "Camera/Gallery " + image)
             val file = File(image)
-            val requestFile = RequestBody.create(MediaType.parse("image/png"), file) // Mime 타입
-            val data = MultipartBody.Part.createFormData("file", file.name, requestFile)
-            Log.d("oncreate", "requestFile " + requestFile)
-            Log.d("oncreate", "body " + file)
             val storePref = getSharedPreferences("store", 0)
-            val bef_store_id = storePref.getString("store_id", "").toString()
-            val store_id = RequestBody.create(MediaType.parse("multipart/form-data"), bef_store_id)
-            Log.d("store_id", "" + store_id)
+            val store_id = storePref.getString("store_id", "").toString()
 
-
-            api.postImage(tok, store_id, data).enqueue(object : Callback<ImageResponseDto> {
+            val data = ImageDto(store_id, file)
+            api.postImage(tok, data).enqueue(object : Callback<ImageResponseDto> {
                 override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())
-                    val result = response.body().toString()
+                    val result = response.body()?.message.toString()
 
-                    if (result == "ImageResponseDto(message=Reciept Verified)") {
+                    if (result == "Reciept Verified") {
                         Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
                         // 리뷰 작성하는 페이지로 전환
                         val intent = Intent(this@OcrActivity, StoreDetailActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
-                    if (result == "ImageResponseDto(message=Reciept recognition failure)") {
+                    if (result == "Reciept recognition failure") {
                         var dialog = AlertDialog.Builder(this@OcrActivity)
                         dialog.setTitle("영수증 인증 에러")
                         dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)

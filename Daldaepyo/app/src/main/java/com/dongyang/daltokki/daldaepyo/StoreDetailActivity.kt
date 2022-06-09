@@ -61,10 +61,10 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             api.postStoreFind(tok, store_name, store_posx, store_posy).enqueue(object : Callback<StoreFindResponseDto> {
                 override fun onResponse(call: Call<StoreFindResponseDto>, response: Response<StoreFindResponseDto>) {
                     Log.d("log", response.toString())
-                    Log.d("log body", response.body().toString())
+                    Log.d("log body", response.code().toString())
+                    val code = response.code()
 
-                    val message = response?.body()?.message.toString()
-                    if(message == "store existed") {
+                    if(code == 200) {
                         val store_id = response?.body()?.store_id.toString()
                         val edit = storePref.edit() // 수정모드
                         edit.apply()
@@ -76,7 +76,7 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         startActivity(intent)
                         finish()
                     }
-                    if(message == "store not existed") {
+                    if(code == 404) {
                         api.postStore(tok, data).enqueue(object : Callback<StoreRegisterResponseDto> {
                             override fun onResponse(call: Call<StoreRegisterResponseDto>, response: Response<StoreRegisterResponseDto>) {
                                 Log.d("log", response.toString())
@@ -108,12 +108,6 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                 override fun onFailure(call: Call<StoreFindResponseDto>, t: Throwable) {
                     Log.d("log", t.message.toString())
                     Log.d("log", "fail")
-
-                    // Response로 받아오는 게 없어서 오류가 뜸
-//                    Toast.makeText(this@SearchReviewActivity, "동네 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(this@SearchReviewActivity, OcrActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
                 }
             })
         }
@@ -129,8 +123,6 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 //            gpsTracker = GpsTracker(this@LocationActivity)
         val latitude : Double = storePref.getString("lat", "")!!.toDouble()
         val longitude : Double  = storePref.getString("lng", "")!!.toDouble()
-        // (토스트 메시지는 테스트 끝나면 지우기)
-//            Toast.makeText(this@LocationActivity, "현재위치 \n위도 $latitude\n경도 $longitude", Toast.LENGTH_LONG).show()
         Log.d("@@@현재위치: ", "위도 $latitude, 경도 $longitude")
         // 카메라 이동
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
