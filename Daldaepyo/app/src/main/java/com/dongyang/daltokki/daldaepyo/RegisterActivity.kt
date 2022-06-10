@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if(number.isNullOrBlank()) {
-                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                 dialog.setTitle("회원가입 에러")
                 dialog.setMessage("전화번호를 입력하세요.").setPositiveButton("확인", null)
                 dialog.show()
@@ -51,14 +51,14 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("log body", response.body().toString())
 
                     if (result == "PNumCkResponseDto(message=existed)") {
-                        var dialog = AlertDialog.Builder(this@RegisterActivity)
+                        var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                         dialog.setTitle("전화번호 중복확인 에러")
                         dialog.setMessage("이미 존재하는 전화번호입니다.").setPositiveButton("확인", null)
                         dialog.show()
                         validate = 0
                     }
                     if (result == "PNumCkResponseDto(message=not existed)") {
-                        var dialog = AlertDialog.Builder(this@RegisterActivity)
+                        var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                         dialog.setTitle("전화번호 중복확인 완료")
                         dialog.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null)
                         dialog.show()
@@ -86,7 +86,7 @@ class RegisterActivity : AppCompatActivity() {
 
             // 아이디 중복확인 체크
             if(validate == 0) {
-                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                 dialog.setTitle("회원가입 에러")
                 dialog.setMessage("중복된 전화번호가 있는지 확인하세요.").setPositiveButton("확인", null)
                 dialog.show()
@@ -96,7 +96,7 @@ class RegisterActivity : AppCompatActivity() {
             // 한 칸이라도 입력하지 않았을 경우
             if(nickname.isBlank() || number.isBlank() || pass1.isBlank() ||
                     pass2.isBlank()) {
-                var dialog = AlertDialog.Builder(this@RegisterActivity)
+                var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                 dialog.setTitle("회원가입 에러")
                 dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
                 dialog.show()
@@ -116,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()  // 회원가입등록 창 닫음
                     } else { // 비밀번호가 동일하지 않음
-                        var dialog = AlertDialog.Builder(this@RegisterActivity)
+                        var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                         dialog.setTitle("회원가입 에러")
                         dialog.setMessage("비밀번호를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()

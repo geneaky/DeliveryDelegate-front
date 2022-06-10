@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
             // 한 칸이라도 입력하지 않았을 경우
             if(id.isBlank() || pw.isBlank()) {
-                var dialog = AlertDialog.Builder(this@LoginActivity)
+                var dialog = AlertDialog.Builder(this@LoginActivity, R.style.MyDialogTheme)
                 dialog.setTitle("로그인 에러")
                 dialog.setMessage("모두 입력해 주세요").setPositiveButton("확인", null)
                 dialog.show()
@@ -58,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("log body", response.body().toString())
 
                     if(response.body() == null) {
-                        var dialog = AlertDialog.Builder(this@LoginActivity)
+                        var dialog = AlertDialog.Builder(this@LoginActivity, R.style.MyDialogTheme)
                         dialog.setTitle("로그인 에러")
                         dialog.setMessage("로그인 정보를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()
