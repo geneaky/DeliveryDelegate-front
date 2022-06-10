@@ -73,13 +73,8 @@ class OcrActivity: PermissionActivity() {
                         startActivity(intent)
                         finish()
                     }
-<<<<<<< Updated upstream
-                    if (result == "Reciept recognition failure") {
-                        var dialog = AlertDialog.Builder(this@OcrActivity)
-=======
                     if (result == "ImageResponseDto(message=Reciept recognition failure)") {
                         var dialog = AlertDialog.Builder(this@OcrActivity, R.style.MyDialogTheme)
->>>>>>> Stashed changes
                         dialog.setTitle("영수증 인증 에러")
                         dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
                         dialog.show()
