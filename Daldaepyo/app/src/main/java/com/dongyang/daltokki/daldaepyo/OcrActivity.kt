@@ -61,33 +61,6 @@ class OcrActivity: PermissionActivity() {
             val requestFile = RequestBody.create(MediaType.parse("image/png"), file) // Mime 타입
             val data = MultipartBody.Part.createFormData("file", file.name, requestFile)
             val storePref = getSharedPreferences("store", 0)
-<<<<<<< Updated upstream
-            val store_id = storePref.getString("store_id", "").toString()
-
-            val data = ImageDto(store_id, file)
-            api.postImage(tok, data).enqueue(object : Callback<ImageResponseDto> {
-                override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
-                    Log.d("log", response.toString())
-                    Log.d("log body", response.body().toString())
-                    val result = response.body()?.message.toString()
-
-                    if (result == "Reciept Verified") {
-                        Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
-                        // 리뷰 작성하는 페이지로 전환
-                        val intent = Intent(this@OcrActivity, StoreDetailActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                    if (result == "ImageResponseDto(message=Reciept recognition failure)") {
-                        var dialog = AlertDialog.Builder(this@OcrActivity, R.style.MyDialogTheme)
-                        dialog.setTitle("영수증 인증 에러")
-                        dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
-                        dialog.show()
-                        return
-                    }
-
-                }
-=======
             val store_id = storePref.getString("store_id", "")?.toInt()
 
             if (store_id != null) {
@@ -116,7 +89,6 @@ class OcrActivity: PermissionActivity() {
 //                            return
 //                        }
                     }
->>>>>>> Stashed changes
 
                     override fun onFailure(call: Call<ImageResponseDto>, t: Throwable) {
                         // Response로 받아오는 게 없어서 오류가 뜸
