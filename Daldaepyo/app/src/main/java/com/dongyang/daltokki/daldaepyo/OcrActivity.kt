@@ -74,6 +74,11 @@ class OcrActivity: PermissionActivity() {
                         // 우선 toast로 받아오기(추후 변경 예정)
                         Toast.makeText(this@OcrActivity, result, Toast.LENGTH_LONG).show()
 
+//                        binding.btnOcr.setOnClickListener {
+//                            var intent = Intent(this@OcrActivity, WriteReviewActivity::class.java )
+//                            startActivity(intent)
+//                        }
+
 //                        if (result == "Reciept Verified") {
 //                            Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
 //                            // 리뷰 작성하는 페이지로 전환
@@ -189,6 +194,8 @@ class OcrActivity: PermissionActivity() {
                         // 절대 경로
                         image = absolutelyPath(uri)
                         Log.d("!!!!절대경로!!!!", "Camera " + image)
+
+
                     }
                 }
                 REQ_GALLERY -> {
@@ -197,6 +204,7 @@ class OcrActivity: PermissionActivity() {
                         // 절대 경로
                         image = absolutelyPath(uri)
                         Log.d("!!!!절대경로!!!!", "Gallery " + image)
+
                     }
                 }
             }

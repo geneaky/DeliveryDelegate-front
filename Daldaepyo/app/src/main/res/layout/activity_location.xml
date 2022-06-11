@@ -31,8 +31,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent="0.65"
-        app:layout_constraintVertical_bias="0.55"/>
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintVertical_bias="0.5"/>
 
     <Button
         android:layout_width="0dp"
@@ -42,15 +42,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintWidth_percent="0.5"
         app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintVertical_bias="0.97"
+        app:layout_constraintVertical_bias="0.9"
         android:background="@color/tranceparent"
         android:gravity="center"
         android:text="동네 설정 완료"
         android:fontFamily="@font/suncheonr"
         android:textSize="20sp"
-        android:textColor="@color/darkgray"/>
+        android:textStyle="bold"
+        android:textColor="@color/blue"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
