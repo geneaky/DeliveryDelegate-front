@@ -48,11 +48,6 @@ data class StoreFindResponseDto ( // 데이터베이스에서 음식점 찾기
         @SerializedName("message") val message : String
 )
 
-data class ImageDto ( // 영수증 인증(OCR)
-        @SerializedName("store_id") val store_id: String,
-        @SerializedName("file") val file: File
-)
-
 data class ImageResponseDto ( // 영수증 인증(OCR)
         @SerializedName("message") val message : String
 )

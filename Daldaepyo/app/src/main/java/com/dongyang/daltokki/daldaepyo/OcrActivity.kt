@@ -14,9 +14,11 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityOcrBinding
-import com.dongyang.daltokki.daldaepyo.retrofit.ImageDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ImageResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,7 +58,10 @@ class OcrActivity: PermissionActivity() {
 
             Log.d("!!!!절대경로!!!!", "Camera/Gallery " + image)
             val file = File(image)
+            val requestFile = RequestBody.create(MediaType.parse("image/png"), file) // Mime 타입
+            val data = MultipartBody.Part.createFormData("file", file.name, requestFile)
             val storePref = getSharedPreferences("store", 0)
+<<<<<<< Updated upstream
             val store_id = storePref.getString("store_id", "").toString()
 
             val data = ImageDto(store_id, file)
@@ -82,14 +87,45 @@ class OcrActivity: PermissionActivity() {
                     }
 
                 }
+=======
+            val store_id = storePref.getString("store_id", "")?.toInt()
 
-                override fun onFailure(call: Call<ImageResponseDto>, t: Throwable) {
-                    // Response로 받아오는 게 없어서 오류가 뜸
-                    Log.d("log", t.message.toString())
-                    Log.d("log", "fail")
-                    Log.e("error", "" + t)
-                }
-            })
+            if (store_id != null) {
+                api.postImage(tok, store_id, data).enqueue(object : Callback<ImageResponseDto> {
+                    override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
+                        Log.d("log", response.toString())
+                        Log.d("log body", response.body()?.message.toString())
+                        val result = response.body()?.message.toString()
+                        Log.d("result", result)
+
+                        // 우선 toast로 받아오기(추후 변경 예정)
+                        Toast.makeText(this@OcrActivity, result, Toast.LENGTH_LONG).show()
+
+//                        if (result == "Reciept Verified") {
+//                            Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
+//                            // 리뷰 작성하는 페이지로 전환
+//                            val intent = Intent(this@OcrActivity, StoreDetailActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                        }
+//                        if (result == "Reciept recognition failure") {
+//                            var dialog = AlertDialog.Builder(this@OcrActivity)
+//                            dialog.setTitle("영수증 인증 에러")
+//                            dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
+//                            dialog.show()
+//                            return
+//                        }
+                    }
+>>>>>>> Stashed changes
+
+                    override fun onFailure(call: Call<ImageResponseDto>, t: Throwable) {
+                        // Response로 받아오는 게 없어서 오류가 뜸
+                        Log.d("log", t.message.toString())
+                        Log.d("log", "fail")
+                        Log.e("error", "" + t)
+                    }
+                })
+            }
         }
 
     }
