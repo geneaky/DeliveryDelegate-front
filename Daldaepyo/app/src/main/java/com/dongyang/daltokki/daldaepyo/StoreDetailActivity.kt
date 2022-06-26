@@ -81,19 +81,24 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                             override fun onResponse(call: Call<StoreRegisterResponseDto>, response: Response<StoreRegisterResponseDto>) {
                                 Log.d("log", response.toString())
                                 Log.d("log body", response.body().toString())
-
+                                val code = response.code()
                                 val store_id = response?.body()?.store_id.toString()
 
-                                val edit = storePref.edit() // 수정모드
-                                edit.apply()
-                                edit.putString("store_id", store_id)
-                                edit.commit()
+                                if(code == 200) {
+                                    val edit = storePref.edit() // 수정모드
+                                    edit.apply()
+                                    edit.putString("store_id", store_id)
+                                    edit.commit()
 
-                                Toast.makeText(this@StoreDetailActivity, "음식점 등록이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                                Toast.makeText(this@StoreDetailActivity, "영수증 인증이 필요합니다", Toast.LENGTH_SHORT).show()
-                                var intent = Intent(this@StoreDetailActivity, OcrActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                                    Toast.makeText(this@StoreDetailActivity, "음식점 등록이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@StoreDetailActivity, "영수증 인증이 필요합니다", Toast.LENGTH_SHORT).show()
+                                    var intent = Intent(this@StoreDetailActivity, OcrActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                }
+                                if(code == 500) {
+                                    Toast.makeText(this@StoreDetailActivity, "음식점 등록에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                                }
                             }
 
                             override fun onFailure(call: Call<StoreRegisterResponseDto>, t: Throwable) {
@@ -102,6 +107,9 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
                             }
                         })
+                    }
+                    if(code == 500) {
+                        Toast.makeText(this@StoreDetailActivity, "음식점 찾기에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
