@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
@@ -39,6 +40,11 @@ class SearchReviewActivity :AppCompatActivity() {
                                         response: Response<SearchResponseDto>) {
 
                     val result_size = response.body()?.result?.size
+                    val code = response.code()
+
+                    if(code == 500) {
+                        Toast.makeText(this@SearchReviewActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                    }
 
                     val list = mutableListOf<BoardItem>()
 

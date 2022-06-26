@@ -56,14 +56,15 @@ class LoginActivity : AppCompatActivity() {
                     val result = response.body()
                     Log.d("로그인", "${result}")
                     Log.d("log body", response.body().toString())
+                    val code = response.code()
 
-                    if(response.body() == null) {
+                    if(code == 400) { // UnAuthorized User Request
                         var dialog = AlertDialog.Builder(this@LoginActivity, R.style.MyDialogTheme)
                         dialog.setTitle("로그인 에러")
                         dialog.setMessage("로그인 정보를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()
                         return
-                    } else {
+                    } else if(code == 200) { // success
                         val token_result = response?.body()?.token?.token.toString()
                         Log.d("token_result@@@", "" + token_result)
 
