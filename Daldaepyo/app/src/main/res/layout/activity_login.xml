@@ -35,6 +35,8 @@
         android:textSize="12dp"
         android:paddingLeft="10dp"
         android:fontFamily="@font/suncheonr"
+        android:singleLine = "true"
+        android:lines = "1"
 
         />
 
@@ -55,6 +57,9 @@
         android:paddingLeft="10dp"
         android:textSize="12dp"
         android:fontFamily="@font/suncheonr"
+        android:inputType="textPassword"
+        android:singleLine = "true"
+        android:lines = "1"
         />
 
     <Button
