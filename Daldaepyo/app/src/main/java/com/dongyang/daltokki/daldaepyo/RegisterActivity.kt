@@ -108,13 +108,17 @@ class RegisterActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<RegisterDto>, response: Response<RegisterDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())
-
+                    val code = response.code()
 
                     if(pass1.equals(pass2)) { // 회원가입 성공(비밀번호가 동일함)
-                        Toast.makeText(this@RegisterActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()  // 회원가입등록 창 닫음
+                        if(code == 200) {
+                            Toast.makeText(this@RegisterActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()  // 회원가입등록 창 닫음
+                        } else if(code == 500) {
+                            Toast.makeText(this@RegisterActivity, "회원가입에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                        }
                     } else { // 비밀번호가 동일하지 않음
                         var dialog = AlertDialog.Builder(this@RegisterActivity, R.style.MyDialogTheme)
                         dialog.setTitle("회원가입 에러")

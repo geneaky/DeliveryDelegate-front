@@ -65,11 +65,16 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 override fun onResponse(call: Call<LatlngDto>, response: Response<LatlngDto>) {
                     Log.d("log", response.toString())
                     Log.d("log body", response.body().toString())
+                    val code = response.code()
 
-                    Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LocationActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if(code == 200) {
+                        Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@LocationActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else if(code == 500) {
+                        Toast.makeText(this@LocationActivity, "동네 설정에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                    }
 
                 }
 
