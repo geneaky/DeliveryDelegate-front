@@ -1,17 +1,18 @@
-package com.dongyang.daltokki.daldaepyo
+package com.dongyang.daltokki.daldaepyo.Board
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.dongyang.daltokki.daldaepyo.R
 
-class NotifFragment: Fragment() {
+class BoardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_notification, container, false)
+        return inflater.inflate(R.layout.fragment_board, container, false)
     }
 }

@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo
+package com.dongyang.daltokki.daldaepyo.Board
 
 import android.provider.ContactsContract
 import androidx.lifecycle.LiveData

@@ -1,13 +1,13 @@
 package com.dongyang.daltokki.daldaepyo
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.dongyang.daltokki.daldaepyo.Board.BoardFragment
+import com.dongyang.daltokki.daldaepyo.Notification.NotifFragment
+import com.dongyang.daltokki.daldaepyo.User.UserFragment
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityMainBinding
 
 @SuppressLint("StaticFieldLeak")

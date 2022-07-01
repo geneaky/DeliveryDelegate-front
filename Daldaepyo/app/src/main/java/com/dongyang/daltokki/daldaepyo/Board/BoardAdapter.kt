@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo
+package com.dongyang.daltokki.daldaepyo.Board
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import retrofit2.Callback
