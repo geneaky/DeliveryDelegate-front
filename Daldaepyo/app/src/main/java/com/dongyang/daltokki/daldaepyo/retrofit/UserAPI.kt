@@ -57,6 +57,11 @@ interface UserAPI {
     fun postCreateGame(@Header("token") token: String,
                  @Body jsonparams: GameDto): Call<GameResponseDto> // 게임방 생성
 
+    //@Multipart
+    @POST("/review/post")
+    fun postWriteReview(@Header("token") token: String,
+                        @Body jsonparams:WriteReviewDto
+    ):Call<WriteReviewDto>
 
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"

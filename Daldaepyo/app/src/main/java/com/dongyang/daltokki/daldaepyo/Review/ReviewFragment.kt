@@ -12,6 +12,7 @@ import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.dongyang.daltokki.daldaepyo.Review.Store.WriteReviewActivity
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityLoginBinding
 import com.dongyang.daltokki.daldaepyo.databinding.FragmentReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
@@ -45,6 +46,17 @@ class ReviewFragment : Fragment() {
             try {
                 // TODO Auto-generated method stub
                 val i = Intent(this@ReviewFragment.getActivity(), SearchReviewActivity::class.java)
+                startActivity(i)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        btn_review_write.setOnClickListener {
+            try {
+                // TODO Auto-generated method stub
+                val i = Intent(this@ReviewFragment.getActivity(), WriteReviewActivity::class.java)
                 startActivity(i)
 
             } catch (e: Exception) {

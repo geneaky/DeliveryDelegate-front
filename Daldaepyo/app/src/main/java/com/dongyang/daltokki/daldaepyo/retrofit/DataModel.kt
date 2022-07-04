@@ -70,3 +70,8 @@ data class GameResponseDto(
         @SerializedName("message") val message: String
 )
 
+data class WriteReviewDto(
+        @SerializedName("store_id") val store_id : Int,
+        @SerializedName("body") var body : String
+)
+

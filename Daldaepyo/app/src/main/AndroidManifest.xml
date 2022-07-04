@@ -30,6 +30,7 @@
         <activity android:name=".LocationActivity" />
         <activity android:name=".SearchReviewActivity" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".StoreDetailActivity"/>
+        <activity android:name=".Review.Store.WriteReviewActivity"/>
         <activity android:name=".OcrActivity" />
         <activity android:name=".LandmarkDetailActivity" />
         <activity android:name=".GameActivity" />

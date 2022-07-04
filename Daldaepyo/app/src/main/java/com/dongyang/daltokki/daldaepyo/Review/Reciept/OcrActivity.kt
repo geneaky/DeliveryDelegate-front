@@ -13,6 +13,7 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import com.dongyang.daltokki.daldaepyo.Review.Store.WriteReviewActivity
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityOcrBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ImageResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -73,6 +74,17 @@ class OcrActivity: PermissionActivity() {
 
                         // 우선 toast로 받아오기(추후 변경 예정)
                         Toast.makeText(this@OcrActivity, result, Toast.LENGTH_LONG).show()
+
+                        binding.btnOcr.setOnClickListener {
+                            try {
+                                // TODO Auto-generated method stub
+                                val i = Intent(this@OcrActivity, WriteReviewActivity::class.java)
+                                startActivity(i)
+
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
 
 //                        binding.btnOcr.setOnClickListener {
 //                            var intent = Intent(this@OcrActivity, WriteReviewActivity::class.java )
