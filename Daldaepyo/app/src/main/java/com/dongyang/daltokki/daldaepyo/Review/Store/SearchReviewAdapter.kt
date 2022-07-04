@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Board
+package com.dongyang.daltokki.daldaepyo.Review.Store
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import retrofit2.Callback
 
-class BoardAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<BoardItem>): BaseAdapter() {
+class SearchReviewAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<BoardItem>): BaseAdapter() {
 
     override fun getCount(): Int {
         return List.size

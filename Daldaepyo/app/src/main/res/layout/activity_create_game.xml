@@ -9,19 +9,37 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:id="@+id/tv_game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.1"
+        android:text="게임방 생성"
+        android:textColor="@color/darkgray"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:id="@+id/tv_game_type"
         android:text="게임타입"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
-        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/suncheonr"
         android:paddingLeft="7dp"
         android:gravity="center_vertical"
         android:textSize="15sp"
-        android:textColor="@color/black" />
+        android:textColor="@color/darkgray" />
 
     <EditText
         android:layout_width="0dp"
@@ -35,7 +53,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintVertical_bias="0.2"/>
+        app:layout_constraintVertical_bias="0.3"/>
 
     <TextView
         android:layout_width="0dp"
@@ -45,14 +63,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
-        android:layout_marginLeft="25dp"
         android:paddingLeft="7dp"
         android:gravity="center_vertical"
         android:textSize="15sp"
-        android:textColor="@color/black" />
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray" />
 
     <EditText
         android:layout_width="0dp"
@@ -66,7 +86,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintVertical_bias="0.4"/>
 
     <TextView
         android:layout_width="0dp"
@@ -76,14 +96,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
-        android:layout_marginLeft="25dp"
         android:paddingLeft="7dp"
+        android:fontFamily="@font/suncheonr"
         android:gravity="center_vertical"
         android:textSize="15sp"
-        android:textColor="@color/black" />
+        android:textColor="@color/darkgray" />
 
     <EditText
         android:layout_width="0dp"
@@ -98,7 +120,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintVertical_bias="0.4"/>
+        app:layout_constraintVertical_bias="0.5"/>
 
     <Button
         android:layout_width="0dp"
@@ -106,13 +128,16 @@
         android:id="@+id/btn_landmark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintVertical_bias="0.65"
         android:background="@color/tranceparent"
         android:gravity="center"
+        android:fontFamily="@font/suncheonr"
         android:text="랜드마크 설정하기"
-        android:textColor="@color/black"
+        android:textColor="@color/blue"
         tools:ignore="MissingConstraints" />
 
 

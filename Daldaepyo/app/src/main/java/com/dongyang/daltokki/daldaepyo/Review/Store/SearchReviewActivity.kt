@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Board.BoardAdapter
+import com.dongyang.daltokki.daldaepyo.Review.Store.SearchReviewAdapter
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -57,7 +57,7 @@ class SearchReviewActivity :AppCompatActivity() {
 
                     }
                     // 리스트뷰에 넣어주기(보여주기)
-                    val adapter = BoardAdapter(this, list)
+                    val adapter = SearchReviewAdapter(this, list)
                     store_list_view.adapter = adapter
 
                     store_list_view.onItemClickListener = object: OnItemClickListener {
