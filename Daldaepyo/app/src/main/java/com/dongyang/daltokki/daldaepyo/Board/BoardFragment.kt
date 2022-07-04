@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.dongyang.daltokki.daldaepyo.GameActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.SearchReviewActivity
+import kotlinx.android.synthetic.main.fragment_board.*
 import kotlinx.android.synthetic.main.fragment_review.*
 
 class BoardFragment : Fragment() {
@@ -24,7 +25,7 @@ class BoardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        btn_searchReview.setOnClickListener {
+        btn_create_game.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
                 val i = Intent(this@BoardFragment.getActivity(), GameActivity::class.java)
