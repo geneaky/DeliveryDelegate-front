@@ -28,7 +28,6 @@
         <activity android:name=".RegisterActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".LoginActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".LocationActivity" />
-        <activity android:name=".Board.SearchBoardActivity"/>
         <activity android:name=".SearchReviewActivity" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".StoreDetailActivity"/>
         <activity android:name=".OcrActivity" />
