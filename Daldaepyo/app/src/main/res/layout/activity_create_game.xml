@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_game_type"
+        android:text="게임"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_game_type"
+        android:singleLine = "true"
+        android:lines = "1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_game_type"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.2"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_game_name"
+        android:text="방 이름"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_game_name"
+        android:singleLine = "true"
+        android:lines = "1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_game_name"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_polulation"
+        android:text="인원수"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_population"
+        android:singleLine = "true"
+        android:lines = "1"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_polulation"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.4"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_landmark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="0.5"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:text="랜드마크 설정하기"
+        android:textColor="@color/black"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
