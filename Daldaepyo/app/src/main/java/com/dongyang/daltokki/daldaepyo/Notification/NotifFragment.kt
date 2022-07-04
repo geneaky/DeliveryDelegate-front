@@ -14,5 +14,6 @@ class NotifFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_notification, container, false)
+        //알림프래그먼트
     }
 }
