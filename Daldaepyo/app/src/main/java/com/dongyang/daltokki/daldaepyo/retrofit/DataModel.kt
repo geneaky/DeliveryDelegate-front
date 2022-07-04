@@ -2,7 +2,6 @@ package com.dongyang.daltokki.daldaepyo.retrofit
 
 import com.dongyang.daltokki.daldaepyo.retofit.LocationInfoResponseDto
 import com.google.gson.annotations.SerializedName
-import java.io.File
 
 data class LoginDto( // 로그인
         @SerializedName("phone_number") val phone_number: String,
@@ -58,3 +57,16 @@ data class ReviewDto(
         @SerializedName("store_id") val store_id : Int,
         @SerializedName("content") val content : String
 )
+
+data class GameDto(
+        @SerializedName("game_type") val game_type: String,
+        @SerializedName("game_name") val game_name: String,
+        @SerializedName("population") val population: Int,
+        @SerializedName("landmark_posx") val landmark_posx: String,
+        @SerializedName("landmark_posy") val landmark_posy: String
+)
+data class GameResponseDto(
+        @SerializedName("name") val name: String,
+        @SerializedName("message") val message: String
+)
+

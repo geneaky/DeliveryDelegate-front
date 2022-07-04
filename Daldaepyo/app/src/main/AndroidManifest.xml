@@ -32,6 +32,9 @@
         <activity android:name=".SearchReviewActivity" android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".StoreDetailActivity"/>
         <activity android:name=".OcrActivity" />
+        <activity android:name=".LandmarkDetailActivity" />
+        <activity android:name=".GameActivity" />
+        <activity android:name=".LandmarkActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

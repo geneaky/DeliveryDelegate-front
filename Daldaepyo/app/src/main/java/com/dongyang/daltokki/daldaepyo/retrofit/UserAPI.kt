@@ -50,10 +50,12 @@ interface UserAPI {
                   @Part("store_id") store_id: Int,
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
 
-
-
     @GET("/store/:id/reviews")
     fun Review () : Call<ReviewDto>
+
+    @POST("/game/register")
+    fun postCreateGame(@Header("token") token: String,
+                 @Body jsonparams: GameDto): Call<GameResponseDto> // 게임방 생성
 
 
     companion object {
