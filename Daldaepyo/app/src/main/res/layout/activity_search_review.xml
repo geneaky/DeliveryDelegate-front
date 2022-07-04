@@ -8,6 +8,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/edt_search_review"
+        android:singleLine = "true"
+        android:lines = "1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Review.Store
+package com.dongyang.daltokki.daldaepyo
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
