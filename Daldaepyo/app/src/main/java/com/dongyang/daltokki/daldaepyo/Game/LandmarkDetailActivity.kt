@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Game
+package com.dongyang.daltokki.daldaepyo
 
 import android.Manifest
 import android.app.AlertDialog
@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.dongyang.daltokki.daldaepyo.MainActivity
+import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.GameDto
 import com.dongyang.daltokki.daldaepyo.retrofit.GameResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
