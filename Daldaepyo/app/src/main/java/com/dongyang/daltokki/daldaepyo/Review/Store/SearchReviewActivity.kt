@@ -66,7 +66,7 @@ class SearchReviewActivity :AppCompatActivity() {
 
                             val before_title = response?.body()?.result?.get(position)?.title.toString()
                             val title = isPalindrome(before_title)
-                            val address = response?.body()?.result?.get(position)?.address.toString()
+                            val address = response?.body()?.result?.get(position)?.roadAddress.toString()
                             val xmap = response?.body()?.result?.get(position)?.mapx?.toDouble()!!
                             val ymap = response?.body()?.result?.get(position)?.mapy?.toDouble()!!
 
