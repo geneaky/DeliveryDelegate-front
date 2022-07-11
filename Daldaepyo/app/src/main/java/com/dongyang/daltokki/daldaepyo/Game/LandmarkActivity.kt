@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.LandmarkDetailActivity
-import com.dongyang.daltokki.daldaepyo.Review.Store.SearchReviewAdapter
+import com.dongyang.daltokki.daldaepyo.SearchReviewAdapter
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI

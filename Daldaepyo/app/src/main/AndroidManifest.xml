@@ -34,7 +34,7 @@
         <activity android:name=".OcrActivity" />
         <activity android:name=".LandmarkDetailActivity" />
         <activity android:name=".CreateGameActivity" />
-        <activity android:name=".Game.GameActivity" />
+        <activity android:name=".GameActivity" />
         <activity android:name=".LandmarkActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

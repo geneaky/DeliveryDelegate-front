@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dongyang.daltokki.daldaepyo.GameActivity
+import com.dongyang.daltokki.daldaepyo.CreateGameActivity
 import com.dongyang.daltokki.daldaepyo.R
-import com.dongyang.daltokki.daldaepyo.SearchReviewActivity
 import kotlinx.android.synthetic.main.fragment_board.*
 import kotlinx.android.synthetic.main.fragment_review.*
 
@@ -28,7 +27,7 @@ class BoardFragment : Fragment() {
         btn_create_game.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
-                val i = Intent(this@BoardFragment.getActivity(), GameActivity::class.java)
+                val i = Intent(this@BoardFragment.getActivity(), CreateGameActivity::class.java)
                 startActivity(i)
 
             } catch (e: Exception) {

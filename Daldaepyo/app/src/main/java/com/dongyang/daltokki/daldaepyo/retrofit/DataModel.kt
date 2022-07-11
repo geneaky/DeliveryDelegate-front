@@ -76,3 +76,9 @@ data class WriteReviewDto(
         @SerializedName("body") var body : String
 )
 
+data class OrderDto( // 소켓 접속 시 필요한 order
+        @SerializedName("store_name") val store_name: String,
+        @SerializedName("mapx") val mapx: String,
+        @SerializedName("mapy") val mapy: String,
+        @SerializedName("detail") val detail: String
+)
