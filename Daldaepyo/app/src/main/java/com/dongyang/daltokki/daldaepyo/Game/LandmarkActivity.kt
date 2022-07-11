@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.Board.BoardAdapter
 import com.dongyang.daltokki.daldaepyo.LandmarkDetailActivity
+<<<<<<< Updated upstream
+=======
+import com.dongyang.daltokki.daldaepyo.SearchReviewAdapter
+>>>>>>> Stashed changes
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI

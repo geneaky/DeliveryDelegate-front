@@ -1,8 +1,9 @@
-package com.dongyang.daltokki.daldaepyo.Game
+package com.dongyang.daltokki.daldaepyo
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.OrderDto
 import io.socket.client.Socket
@@ -57,7 +58,10 @@ class GameActivity : AppCompatActivity() {
         // 대표자가 랜드마크에 도착한 경우
 
 
+    }
 
-
+    // 서버로부터 전달받은 Socket.EVENT_CONNECT 이벤트 처리
+    private val onConnect = Emitter.Listener {
+        // your code...
     }
 }

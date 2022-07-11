@@ -8,6 +8,10 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+<<<<<<< Updated upstream
+=======
+import com.dongyang.daltokki.daldaepyo.SearchReviewAdapter
+>>>>>>> Stashed changes
 import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
