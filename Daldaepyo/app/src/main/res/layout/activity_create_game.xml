@@ -100,6 +100,40 @@
         app:layout_constraintWidth_percent="0.65"
         app:layout_constraintVertical_bias="0.4"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_game_main_text"
+        android:text="줄글(다시 생각)"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:paddingLeft="7dp"
+        android:fontFamily="@font/suncheonr"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/darkgray" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_game_main_text"
+        android:singleLine = "true"
+        android:lines = "1"
+        android:maxLength="60"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_polulation"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.6"/>
+
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -113,6 +147,24 @@
         android:gravity="center"
         android:text="랜드마크 설정하기"
         android:textColor="@color/black"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintVertical_bias="0.9"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:fontFamily="@font/suncheonr"
+        android:text="게임 소켓"
+        android:textColor="@color/blue"
         tools:ignore="MissingConstraints" />
 
 

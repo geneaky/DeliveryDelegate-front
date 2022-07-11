@@ -59,12 +59,13 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             val Gamepref = getSharedPreferences("Gamepref", 0)
             var gametype = Gamepref.getString("Gametype", "").toString()
             var gamename = Gamepref.getString("Gamename", "").toString()
+            var gametext = Gamepref.getString("Gametext", "").toString()
             var population = Gamepref.getString("Population", "").toString().toInt()
             var landmark_posx = Gamepref.getString("lng", "").toString()
             var landmark_posy = Gamepref.getString("lat", "").toString()
 
 
-            val data = GameDto(gametype, gamename, population, landmark_posx, landmark_posy) // x: 경도, y: 위도
+            val data = GameDto(gametype, gamename, gametext, population, landmark_posx, landmark_posy) // x: 경도, y: 위도
             api.postCreateGame(tok, data).enqueue(object : Callback<GameResponseDto> {
                 override fun onResponse(call: Call<GameResponseDto>, response: Response<GameResponseDto>) {
                     Log.d("log", response.toString())
@@ -79,7 +80,7 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         edit.commit()
 
                         Toast.makeText(this@LandmarkDetailActivity, "게임방 생성이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LandmarkDetailActivity, MainActivity::class.java)
+                        val intent = Intent(this@LandmarkDetailActivity, CreateGameActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {

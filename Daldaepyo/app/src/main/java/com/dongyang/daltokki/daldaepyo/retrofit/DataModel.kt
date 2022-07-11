@@ -58,14 +58,15 @@ data class ReviewDto(
         @SerializedName("content") val content : String
 )
 
-data class GameDto(
+data class GameDto( // 게임 생성
         @SerializedName("game_type") val game_type: String,
         @SerializedName("game_name") val game_name: String,
+        @SerializedName("game_main_text") val game_main_text: String,
         @SerializedName("population") val population: Int,
         @SerializedName("landmark_posx") val landmark_posx: String,
         @SerializedName("landmark_posy") val landmark_posy: String
 )
-data class GameResponseDto(
+data class GameResponseDto( // 게임 생성 응답
         @SerializedName("name") val name: String,
         @SerializedName("message") val message: String
 )
