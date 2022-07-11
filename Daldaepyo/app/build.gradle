@@ -60,10 +60,14 @@ dependencies {
     //로그를 남기기 위한 라이브러리
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.naver.maps:map-sdk:3.12.0'
+<<<<<<< Updated upstream
     implementation ('io.socket:socket.io-client:2.0.0') {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     } // 소켓
+=======
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+>>>>>>> Stashed changes
 
     def lifecycle_version = "2.4.0"
     // ViewModel
