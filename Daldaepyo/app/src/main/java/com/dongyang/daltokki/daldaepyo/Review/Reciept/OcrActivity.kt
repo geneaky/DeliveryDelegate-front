@@ -67,44 +67,51 @@ class OcrActivity: PermissionActivity() {
             if (store_id != null) {
                 api.postImage(tok, store_id, data).enqueue(object : Callback<ImageResponseDto> {
                     override fun onResponse(call: Call<ImageResponseDto>, response: Response<ImageResponseDto>) {
-                        Log.d("log", response.toString())
-                        Log.d("log body", response.body()?.message.toString())
-                        val result = response.body()?.message.toString()
-                        Log.d("result", result)
+                        
+                        val code = response.code()
+                        if(code == 200) {
+                            Log.d("log", response.toString())
+                            Log.d("log body", response.body()?.message.toString())
+                            val result_success = response.body()?.message.toString()
 
-                        // 우선 toast로 받아오기(추후 변경 예정)
-                        Toast.makeText(this@OcrActivity, result, Toast.LENGTH_LONG).show()
+                            if (result_success == "Reciept Verified") {
+                                try {
+                                    Toast.makeText(this@OcrActivity, "영수증 인증이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                                    // TODO Auto-generated method stub
+                                    val i = Intent(this@OcrActivity, WriteReviewActivity::class.java)
+                                    startActivity(i)
 
-                        binding.btnOcr.setOnClickListener {
-                            try {
-                                // TODO Auto-generated method stub
-                                val i = Intent(this@OcrActivity, WriteReviewActivity::class.java)
-                                startActivity(i)
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                            if (result_success == "Receipt verification failed") {
+                                var dialog = AlertDialog.Builder(this@OcrActivity)
+                                dialog.setTitle("영수증 인증 에러")
+                                dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
 
-                            } catch (e: Exception) {
-                                e.printStackTrace()
+                        }
+                        if(code == 500) {
+                            val result_fail = response.errorBody().toString()
+                            Log.d("log body", result_fail)
+                            if(result_fail == "undefined image file(no req.file)") {
+                                var dialog = AlertDialog.Builder(this@OcrActivity)
+                                dialog.setTitle("이미지 에러")
+                                dialog.setMessage("영수증을 첨부해 주세요.").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+                            if(result_fail == "can't find store") {
+                                var dialog = AlertDialog.Builder(this@OcrActivity)
+                                dialog.setTitle("가게 정보 오류")
+                                dialog.setMessage("가게 정보가 일치하지 않습니다. 관리자에게 문의해주세요.").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
                             }
                         }
-
-//                        binding.btnOcr.setOnClickListener {
-//                            var intent = Intent(this@OcrActivity, WriteReviewActivity::class.java )
-//                            startActivity(intent)
-//                        }
-
-//                        if (result == "Reciept Verified") {
-//                            Toast.makeText(this@OcrActivity, "영수증 인증을 완료했습니다.", Toast.LENGTH_SHORT).show()
-//                            // 리뷰 작성하는 페이지로 전환
-//                            val intent = Intent(this@OcrActivity, StoreDetailActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
-//                        }
-//                        if (result == "Reciept recognition failure") {
-//                            var dialog = AlertDialog.Builder(this@OcrActivity)
-//                            dialog.setTitle("영수증 인증 에러")
-//                            dialog.setMessage("영수증을 확인해 주세요").setPositiveButton("확인", null)
-//                            dialog.show()
-//                            return
-//                        }
                     }
 
                     override fun onFailure(call: Call<ImageResponseDto>, t: Throwable) {
@@ -114,6 +121,8 @@ class OcrActivity: PermissionActivity() {
                         Log.e("error", "" + t)
                     }
                 })
+            } else {
+                Log.d("ERRRRR", "가게 등록이 안된다 에러다 에러러")
             }
         }
 
