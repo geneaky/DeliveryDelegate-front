@@ -57,23 +57,15 @@ interface UserAPI {
     fun postCreateGame(@Header("token") token: String,
                  @Body jsonparams: GameDto): Call<GameResponseDto> // 게임방 생성
 
-<<<<<<< Updated upstream
-    //@Multipart
-    @POST("/review/post")
-    fun postWriteReview(@Header("token") token: String,
-                        @Body jsonparams:WriteReviewDto
-    ):Call<WriteReviewDto>
-=======
+
     @Multipart
     @POST("/review/post")
-    fun postWriteReview(@Header("token") token: String,
-                        @Query ("storeid")storeid: Int,
-                        @Query ("body") body: String,
-                        @Part file: MultipartBody.Part)
-                          : Call<WriteReviewDto> //리뷰 작성
+    fun postWriteReview(
+            @Header("token") token: String,
+            @Part("storeid") storeid : Int,
+            @Body jsonparams: WriteReviewDto,
+            @Part file: MultipartBody.Part): Call<WriteReviewDto> // 리뷰 작성
 
-
->>>>>>> Stashed changes
 
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"

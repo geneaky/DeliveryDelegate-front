@@ -72,8 +72,6 @@ data class GameResponseDto( // 게임 생성 응답
 )
 
 data class WriteReviewDto(
-<<<<<<< Updated upstream
-        @SerializedName("store_id") val store_id : Int,
         @SerializedName("body") var body : String
 )
 
@@ -83,7 +81,3 @@ data class OrderDto( // 소켓 접속 시 필요한 order
         @SerializedName("mapy") val mapy: String,
         @SerializedName("detail") val detail: String
 )
-=======
-        @SerializedName("body") val body: String //리뷰작성
-)
->>>>>>> Stashed changes
