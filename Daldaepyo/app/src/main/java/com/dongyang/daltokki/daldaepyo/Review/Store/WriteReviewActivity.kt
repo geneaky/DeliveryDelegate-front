@@ -1,33 +1,34 @@
 package com.dongyang.daltokki.daldaepyo.Review.Store
 
-import android.provider.MediaStore
-import android.text.TextUtils.isEmpty
+import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
+import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-
-import okhttp3.MediaType
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.dongyang.daltokki.daldaepyo.PermissionActivity
+import com.dongyang.daltokki.daldaepyo.R
+import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
+import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
+import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Objects.isNull
+import retrofit2.http.Multipart
 
-class WriteReviewActivity : PermissionActivity() {
-
-    val TAG = "리뷰로그@@@@@"
-    val binding by lazy { ActivityWriteReviewBinding.inflate(layoutInflater)}
+class WriteReviewActivity : AppCompatActivity() {
     val api = UserAPI.create()
+
     lateinit var image : String
 
-    val PERM_STORAGE = 10
-    val REQ_GALLERY = 11
 
-    val TAG = "리뷰쓰기@@@@"
-    val binding by lazy { ActivityWriteReviewBinding.inflate(layoutInflater)}
+    val binding by lazy {ActivityWriteReviewBinding.inflate(layoutInflater)}
+
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        setContentView(binding.root)
+        super.onCreate(savedInstanceState)
 
         binding.btnSendReview.setOnClickListener {
 //            val pref = getSharedPreferences("pref", 0)
@@ -51,8 +52,6 @@ class WriteReviewActivity : PermissionActivity() {
                 return@setOnClickListener
             }
 
-//            val reviewBody = WriteReviewDto(review)
-
             api.postWriteReview(tok,storeid,review,data).enqueue(object: Callback<WriteReviewDto> {
                 override fun onResponse(
                         call: Call<WriteReviewDto>,
@@ -70,11 +69,6 @@ class WriteReviewActivity : PermissionActivity() {
 
 
         }
-
-
-
     }
-
-
 
 }
