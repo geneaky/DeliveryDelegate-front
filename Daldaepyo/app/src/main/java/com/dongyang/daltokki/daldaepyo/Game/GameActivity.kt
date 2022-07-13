@@ -3,15 +3,13 @@ package com.dongyang.daltokki.daldaepyo
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
 import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
-import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.OrderDto
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
-import kotlinx.android.synthetic.main.activity_game.*
 import org.json.JSONException
-import org.json.JSONObject
-import java.net.URISyntaxException
 
 
 // socket.io 참조1: https://velog.io/@tera_geniel/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9Ckotlin%EC%99%80-nodejs-socket.io%EB%A1%9C-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0
