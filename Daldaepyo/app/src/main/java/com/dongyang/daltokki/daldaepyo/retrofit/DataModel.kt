@@ -70,3 +70,6 @@ data class GameResponseDto(
         @SerializedName("message") val message: String
 )
 
+data class WriteReviewDto(
+        @SerializedName("body") val body : String
+)
