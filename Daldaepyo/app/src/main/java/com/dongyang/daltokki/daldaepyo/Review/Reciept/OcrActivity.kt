@@ -35,7 +35,7 @@ import java.text.SimpleDateFormat
 class OcrActivity: PermissionActivity() {
     val api = UserAPI.create()
 
-    lateinit var image : String
+    var image = "1234"
 
     val PERM_STORAGE = 9
     val PERM_CAMERA = 10
@@ -97,13 +97,6 @@ class OcrActivity: PermissionActivity() {
                         if(code == 500) {
                             val result_fail = response.errorBody().toString()
                             Log.d("log body", result_fail)
-                            if(result_fail == "undefined image file(no req.file)") {
-                                var dialog = AlertDialog.Builder(this@OcrActivity)
-                                dialog.setTitle("이미지 에러")
-                                dialog.setMessage("영수증을 첨부해 주세요.").setPositiveButton("확인", null)
-                                dialog.show()
-                                return
-                            }
                             if(result_fail == "can't find store") {
                                 var dialog = AlertDialog.Builder(this@OcrActivity)
                                 dialog.setTitle("가게 정보 오류")
@@ -115,10 +108,16 @@ class OcrActivity: PermissionActivity() {
                     }
 
                     override fun onFailure(call: Call<ImageResponseDto>, t: Throwable) {
-                        // Response로 받아오는 게 없어서 오류가 뜸
-                        Log.d("log", t.message.toString())
+                        val result = t.message.toString()
+                        Log.d("log", result)
                         Log.d("log", "fail")
                         Log.e("error", "" + t)
+
+                        var dialog = AlertDialog.Builder(this@OcrActivity)
+                        dialog.setTitle("이미지 에러")
+                        dialog.setMessage("영수증을 첨부해 주세요.").setPositiveButton("확인", null)
+                        dialog.show()
+                        return
                     }
                 })
             } else {
