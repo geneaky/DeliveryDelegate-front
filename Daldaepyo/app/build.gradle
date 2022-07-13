@@ -63,7 +63,12 @@ dependencies {
     implementation ('io.socket:socket.io-client:2.0.0') {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
+<<<<<<< Updated upstream
     } // 소켓
+=======
+    } // socket.io
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3") // ObjectMapper(GameActivity.kt)
+>>>>>>> Stashed changes
 
     def lifecycle_version = "2.4.0"
     // ViewModel

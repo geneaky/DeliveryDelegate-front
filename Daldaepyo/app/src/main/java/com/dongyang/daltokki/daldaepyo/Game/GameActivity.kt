@@ -21,12 +21,6 @@ import java.net.URISyntaxException
 class GameActivity : AppCompatActivity() {
 
     lateinit var mSocket: Socket
-//    private lateinit var client: OkHttpClient
-//    private lateinit var jsonObject: JSONObject
-//    companion object {
-//        private const val base_uurl = "ws://146.56.132.245:8080"
-//    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,27 +35,32 @@ class GameActivity : AppCompatActivity() {
         val population = Gamepref.getString("Population", "")?.toInt()!!
         val data = OrderDto("subway", mapx, mapy, "주문번호")
 
+        mSocket = SocketApplication.get()
+        val connect = mSocket.connect() // 소켓 연결
+
+        val objectmapper = ObjectMapper()
         try {
-            mSocket = SocketApplication.get()
-            mSocket.connect() // 소켓 연결
-        } catch (e: URISyntaxException) {
-            Log.d("Errr", e.toString())
+            // 게임 방장 생성 후 참가
+            val message = Message()
+            message.room_name = room_name
+            connect.emit("attendMaster", objectmapper.writeValueAsString(message))
+        } catch (e: JSONException) {
+            e.printStackTrace()
         }
 
 
-        btn_ggg.setOnClickListener{
-            mSocket.emit("attend", "hello") // 서버 측에 이벤트 송신
-        }
-
-        mSocket.on("get message", onConnect) // 서버 측의 메시지를 받음
-        // 인원 초과, 게임결과(대표자 닉네임), 대표자가 탈주한 경우
-        // 대표자가 랜드마크에 도착한 경우
-
-
+        // 게임 방장 생성 후 참가
+        connect.on("attend", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+        })
     }
 
-    // 서버로부터 전달받은 Socket.EVENT_CONNECT 이벤트 처리
-    private val onConnect = Emitter.Listener {
-        // your code...
+    // 소켓 연결 해제
+    override fun onDestroy() {
+        super.onDestroy()
+        mSocket.emit("game_end")
+        mSocket.disconnect()
+//        mSocket.off("EVENT_NAME", '리스너 익명구현 객체')
     }
+
 }
