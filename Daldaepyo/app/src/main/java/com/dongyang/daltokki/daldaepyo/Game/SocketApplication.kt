@@ -11,7 +11,7 @@ class SocketApplication {
         fun get(): Socket {
             try {
                 // [uri]부분은 "http://X.X.X.X:3000" 꼴로 넣어주는 게 좋다.
-                socket = IO.socket("http://146.56.132.245:8080")
+                socket = IO.socket("http://146.56.132.245:8080/games")
             } catch (e: URISyntaxException) {
                 e.printStackTrace()
             }
