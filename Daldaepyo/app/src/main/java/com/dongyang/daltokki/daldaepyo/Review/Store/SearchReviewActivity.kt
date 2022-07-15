@@ -9,7 +9,7 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.SearchReviewAdapter
-import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
+import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.naver.maps.geometry.Tm128
@@ -47,13 +47,13 @@ class SearchReviewActivity :AppCompatActivity() {
                         Toast.makeText(this@SearchReviewActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
 
-                    val list = mutableListOf<BoardItem>()
+                    val list = mutableListOf<SearchStoreItem>()
 
                     for(i in 0 until result_size!!) {
 
                         val before_title = response?.body()?.result?.get(i)?.title.toString()
                         val title = isPalindrome(before_title)
-                        list.add(BoardItem(title));
+                        list.add(SearchStoreItem(title));
 
                     }
                     // 리스트뷰에 넣어주기(보여주기)

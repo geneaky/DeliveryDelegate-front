@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.dongyang.daltokki.daldaepyo.R
-import com.dongyang.daltokki.daldaepyo.retofit.BoardItem
+import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import retrofit2.Callback
 
-class LandmarkAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<BoardItem>): BaseAdapter() {
+class LandmarkAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<SearchStoreItem>): BaseAdapter() {
 
     override fun getCount(): Int {
         return List.size
