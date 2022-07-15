@@ -21,7 +21,7 @@ import retrofit2.Response
 
 // 리스트뷰: https://philosopher-chan.tistory.com/1009
 
-class SearchReviewActivity :AppCompatActivity() {
+class SearchStoreActivity :AppCompatActivity() {
 
     val api = UserAPI.create()
 
@@ -44,7 +44,7 @@ class SearchReviewActivity :AppCompatActivity() {
                     val code = response.code()
 
                     if(code == 500) {
-                        Toast.makeText(this@SearchReviewActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@SearchStoreActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
 
                     val list = mutableListOf<SearchStoreItem>()
@@ -57,7 +57,7 @@ class SearchReviewActivity :AppCompatActivity() {
 
                     }
                     // 리스트뷰에 넣어주기(보여주기)
-                    val adapter = SearchReviewAdapter(this, list)
+                    val adapter = SearchStoreAdapter(this, list)
                     store_list_view.adapter = adapter
 
                     store_list_view.onItemClickListener = object: OnItemClickListener {
@@ -89,7 +89,7 @@ class SearchReviewActivity :AppCompatActivity() {
                             Log.d("title@@", "" + lat)
                             Log.d("title@@", "" + lng)
 
-                            var intent = Intent(this@SearchReviewActivity, StoreDetailActivity::class.java)
+                            var intent = Intent(this@SearchStoreActivity, StoreDetailActivity::class.java)
                             startActivity(intent)
                             finish()
 

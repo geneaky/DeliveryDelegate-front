@@ -11,7 +11,7 @@ import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import retrofit2.Callback
 
-class SearchReviewAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<SearchStoreItem>): BaseAdapter() {
+class SearchStoreAdapter(val context: Callback<SearchResponseDto>, val List: MutableList<SearchStoreItem>): BaseAdapter() {
 
     override fun getCount(): Int {
         return List.size
