@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.LandmarkDetailActivity
-import com.dongyang.daltokki.daldaepyo.SearchReviewAdapter
+import com.dongyang.daltokki.daldaepyo.SearchStoreAdapter
 import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -56,7 +56,7 @@ class LandmarkActivity : AppCompatActivity() {
 
                     }
                     // 리스트뷰에 넣어주기(보여주기)
-                    val adapter = SearchReviewAdapter(this, list)
+                    val adapter = SearchStoreAdapter(this, list)
                     store_list_view.adapter = adapter
 
                     store_list_view.onItemClickListener = object: AdapterView.OnItemClickListener {

@@ -1,5 +1,5 @@
 package com.dongyang.daltokki.daldaepyo.Review.Store
 
-data class BoardItem (
+data class SearchStoreItem (
     val title: String
 )

@@ -45,7 +45,7 @@ class ReviewFragment : Fragment() {
         btn_searchReview.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), SearchReviewActivity::class.java)
+                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
                 startActivity(i)
 
             } catch (e: Exception) {
