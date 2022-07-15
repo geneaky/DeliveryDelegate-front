@@ -91,7 +91,6 @@ class SearchStoreActivity :AppCompatActivity() {
 
                             var intent = Intent(this@SearchStoreActivity, StoreDetailActivity::class.java)
                             startActivity(intent)
-                            finish()
 
                         }
 

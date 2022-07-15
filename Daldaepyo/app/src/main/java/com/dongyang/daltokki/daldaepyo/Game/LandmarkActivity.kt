@@ -90,7 +90,6 @@ class LandmarkActivity : AppCompatActivity() {
 
                             var intent = Intent(this@LandmarkActivity, LandmarkDetailActivity::class.java)
                             startActivity(intent)
-                            finish()
 
                         }
 

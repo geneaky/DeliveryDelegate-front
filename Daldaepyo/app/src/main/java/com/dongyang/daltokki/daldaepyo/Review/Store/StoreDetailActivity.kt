@@ -74,7 +74,6 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         Toast.makeText(this@StoreDetailActivity, "영수증 인증이 필요합니다.", Toast.LENGTH_SHORT).show()
                         var intent = Intent(this@StoreDetailActivity, OcrActivity::class.java)
                         startActivity(intent)
-                        finish()
                     }
                     if(code == 404) {
                         api.postStore(tok, data).enqueue(object : Callback<StoreRegisterResponseDto> {
@@ -94,7 +93,6 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                                     Toast.makeText(this@StoreDetailActivity, "영수증 인증이 필요합니다", Toast.LENGTH_SHORT).show()
                                     var intent = Intent(this@StoreDetailActivity, OcrActivity::class.java)
                                     startActivity(intent)
-                                    finish()
                                 }
                                 if(code == 500) {
                                     Toast.makeText(this@StoreDetailActivity, "음식점 등록에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
