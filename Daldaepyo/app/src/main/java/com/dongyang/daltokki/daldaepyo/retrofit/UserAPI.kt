@@ -63,8 +63,14 @@ interface UserAPI {
     fun postWriteReview(
             @Header ("token") token: String,
             @Part ("storeid") storeid : Int,
-            @Part jsonparams: WriteReviewDto,
+            @Part ("body") body: String,
             @Part file: MultipartBody.Part
+    ): Call<WriteReviewDto> // 리뷰 작성
+
+    @POST("/review/post")
+    fun postWriteReviewNo(
+        @Header ("token") token: String,
+        @Body jsonparams: WriteReviewDto
     ): Call<WriteReviewDto> // 리뷰 작성
 
 

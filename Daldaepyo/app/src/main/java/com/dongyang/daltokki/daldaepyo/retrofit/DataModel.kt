@@ -72,6 +72,7 @@ data class GameResponseDto( // 게임 생성 응답
 )
 
 data class WriteReviewDto(
+        @SerializedName ("store_id") var store_id: Int,
         @SerializedName("body") var body : String
 )
 

@@ -34,8 +34,7 @@ class WriteReviewActivity : PermissionActivity() {
     val TAG = "리뷰로그@@@@@"
     val api = UserAPI.create()
 
-    lateinit var image : String
-
+    var image =""
     val PERM_STORAGE = 9
     val PERM_CAMERA = 10
 
@@ -50,54 +49,92 @@ class WriteReviewActivity : PermissionActivity() {
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
 
+        requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERM_STORAGE)
+
+
         binding.btnSendReview.setOnClickListener {
-//            val pref = getSharedPreferences("pref", 0)
-//            val tok = pref.getString("token", "").toString()
 
 //            val storePref = getSharedPreferences("store", 0)
 //            val storeid = storePref.getString("storeid", "")!!.toInt()
 
+            if(image==""){
 
-            val tok : String = "2"
-            val storeid = 3
+                val pref = getSharedPreferences("pref", 0)
+                val tok = pref.getString("token", "").toString()
 
-            var review = binding.edtReview.text.toString()
-            val body = WriteReviewDto(review)
-
-            val file = File(image)
-            val requestFile = RequestBody.create(MediaType.parse("image/png"), file) // Mime 타입
-            val data = MultipartBody.Part.createFormData("file", file.name, null)
-
-            requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERM_STORAGE)
-
-            if(review.isBlank()){
-                var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
-                dialog.setMessage("리뷰를 써주세요").setPositiveButton("확인", null)
-                dialog.show()
-                return@setOnClickListener
-            }
-
-//            val data = MultipartBody.Part.createFormData("file", "file", requestFile)
+                var store_id : Int = 3
+                var body = binding.edtReview.text.toString()
 
 
-            api.postWriteReview(tok,storeid,body,data).enqueue(object:Callback<WriteReviewDto> {
-                override fun onResponse(
+                val data = WriteReviewDto(store_id, body)
+
+                if(body.isBlank()){
+                    var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
+                    dialog.setMessage("리뷰를 써주세요").setPositiveButton("확인", null)
+                    dialog.show()
+                    return@setOnClickListener
+                }
+
+                api.postWriteReviewNo(tok,data).enqueue(object:Callback<WriteReviewDto> {
+                    override fun onResponse(
                         call: Call<WriteReviewDto>,
                         response: Response<WriteReviewDto>
-                ) {
-                    Log.d("log", response.toString())
-                    Log.d("log body", response.body().toString())
+                    ) {
+                        Log.d("log", response.toString())
+                        Log.d("log body", response.body().toString())
 
 //            val reviewBody = WriteReviewDto(review)
 
+                    }
+                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                        Log.d("실패", t.message.toString())
+                    }
+                })
+//
+            } else{
+
+                val pref = getSharedPreferences("pref", 0)
+                val tok = pref.getString("token", "").toString()
+
+                var store_id : Int = 3
+                var body = binding.edtReview.text.toString()
+
+                val file = File(image)
+                val requestFile = RequestBody.create(MediaType.parse("image/png"), file) // Mime 타입
+                val data = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+
+                if(body.isBlank()){
+                    var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
+                    dialog.setMessage("리뷰를 써주세요").setPositiveButton("확인", null)
+                    dialog.show()
+                    return@setOnClickListener
                 }
-                override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
-                    Log.d("실패", t.message.toString())
-                }
-            })
+
+                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewDto> {
+                    override fun onResponse(
+                        call: Call<WriteReviewDto>,
+                        response: Response<WriteReviewDto>
+                    ) {
+                        Log.d("log", response.toString())
+                        Log.d("log body", response.body().toString())
+
+//            val reviewBody = WriteReviewDto(review)
+
+                    }
+                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                        Log.d("실패", t.message.toString())
+                    }
+                })
+
+            }
+
+
 
         }
     }
+
+
 
     fun initViews() {
         // 5. 갤러리 버튼이 클릭 되면 갤러리를 연다
