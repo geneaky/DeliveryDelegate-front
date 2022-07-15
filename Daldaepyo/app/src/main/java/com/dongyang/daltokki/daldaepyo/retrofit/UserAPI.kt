@@ -61,10 +61,11 @@ interface UserAPI {
     @Multipart
     @POST("/review/post")
     fun postWriteReview(
-            @Header("token") token: String,
-            @Part("storeid") storeid : Int,
-            @Body jsonparams: WriteReviewDto,
-            @Part file: MultipartBody.Part): Call<WriteReviewDto> // 리뷰 작성
+            @Header ("token") token: String,
+            @Part ("storeid") storeid : Int,
+            @Part jsonparams: WriteReviewDto,
+            @Part file: MultipartBody.Part
+    ): Call<WriteReviewDto> // 리뷰 작성
 
 
     companion object {
