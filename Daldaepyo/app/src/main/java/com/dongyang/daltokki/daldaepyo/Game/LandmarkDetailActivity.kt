@@ -61,11 +61,12 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             var gamename = Gamepref.getString("Gamename", "").toString()
             var gametext = Gamepref.getString("Gametext", "").toString()
             var population = Gamepref.getString("Population", "").toString().toInt()
+            var landmark_name = Gamepref.getString("title", "").toString()
             var landmark_posx = Gamepref.getString("lng", "").toString()
             var landmark_posy = Gamepref.getString("lat", "").toString()
 
 
-            val data = GameDto(gametype, gamename, gametext, population, landmark_posx, landmark_posy) // x: 경도, y: 위도
+            val data = GameDto(gametype, gamename, gametext, population, landmark_name, landmark_posx, landmark_posy) // x: 경도, y: 위도
             api.postCreateGame(tok, data).enqueue(object : Callback<GameResponseDto> {
                 override fun onResponse(call: Call<GameResponseDto>, response: Response<GameResponseDto>) {
                     Log.d("log", response.toString())
