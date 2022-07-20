@@ -81,7 +81,7 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         edit.commit()
 
                         Toast.makeText(this@LandmarkDetailActivity, "게임방 생성이 완료되었습니다", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LandmarkDetailActivity, CreateGameActivity::class.java)
+                        val intent = Intent(this@LandmarkDetailActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
