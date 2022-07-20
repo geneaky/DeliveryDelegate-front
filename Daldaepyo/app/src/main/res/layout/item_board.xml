@@ -6,8 +6,7 @@
     android:paddingTop="20dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,6 +18,50 @@
         android:textStyle="bold"
         android:text="제목"
         android:layout_marginBottom="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참가가능인원 : "
+            android:fontFamily="@font/suncheonr"
+            android:textColor="@color/deepgray"
+            android:paddingRight="8dp" />
+        <TextView
+            android:id="@+id/tv_board_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:fontFamily="@font/suncheonr"
+            android:textColor="@color/deepgray"
+            android:paddingRight="8dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배달 장소 : "
+            android:fontFamily="@font/suncheonr"
+            android:textColor="@color/deepgray"
+            android:paddingRight="8dp" />
+        <TextView
+            android:id="@+id/tv_board_landmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동양미래대학교"
+            android:fontFamily="@font/suncheonr"
+            android:textColor="@color/deepgray"
+            android:paddingRight="8dp" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
