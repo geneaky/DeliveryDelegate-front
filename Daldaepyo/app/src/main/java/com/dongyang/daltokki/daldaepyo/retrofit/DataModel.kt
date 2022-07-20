@@ -72,6 +72,10 @@ data class GameResponseDto( // 게임 생성 응답
         @SerializedName("message") val message: String
 )
 
+data class FindGameResponseDto( // 게임방 검색
+        @SerializedName("games") val games : List<GameRoomInfoResponseDto>
+)
+
 data class WriteReviewDto(
         @SerializedName("body") var body : String
 )
