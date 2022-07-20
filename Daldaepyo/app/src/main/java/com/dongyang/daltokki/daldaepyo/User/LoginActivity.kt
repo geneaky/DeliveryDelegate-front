@@ -36,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
         val tok = pref.getString("token", "")
         Log.d("getString@@@@@@@@@", "" + tok)
 
+        if(savedId.isNotEmpty()) {
+            var intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         binding.btnLogin.setOnClickListener {
 
             var id = binding.edtPnumber.text.toString()
