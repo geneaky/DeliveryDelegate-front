@@ -63,6 +63,7 @@ data class GameDto( // 게임 생성
         @SerializedName("game_name") val game_name: String,
         @SerializedName("game_main_text") val game_main_text: String,
         @SerializedName("population") val population: Int,
+        @SerializedName("landmark_name") val landmark_name: String,
         @SerializedName("landmark_posx") val landmark_posx: String,
         @SerializedName("landmark_posy") val landmark_posy: String
 )
