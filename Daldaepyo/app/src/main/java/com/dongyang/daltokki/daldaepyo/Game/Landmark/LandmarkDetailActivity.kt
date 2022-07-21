@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo
+package com.dongyang.daltokki.daldaepyo.Game.Landmark
 
 import android.Manifest
 import android.app.AlertDialog

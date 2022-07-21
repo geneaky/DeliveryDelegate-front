@@ -3,7 +3,7 @@ package com.dongyang.daltokki.daldaepyo
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.R
+import com.dongyang.daltokki.daldaepyo.Game.Landmark.LandmarkActivity
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import kotlinx.android.synthetic.main.activity_create_game.*
 

@@ -32,10 +32,10 @@
         <activity android:name=".StoreDetailActivity"/>
         <activity android:name=".Review.Store.WriteReviewActivity"/>
         <activity android:name=".OcrActivity" />
-        <activity android:name=".LandmarkDetailActivity" />
+        <activity android:name=".Game.Landmark.LandmarkDetailActivity" />
         <activity android:name=".CreateGameActivity" />
         <activity android:name=".GameActivity" />
-        <activity android:name=".LandmarkActivity" />
+        <activity android:name=".Game.Landmark.LandmarkActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
