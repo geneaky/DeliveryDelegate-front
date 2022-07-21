@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.R
-import com.dongyang.daltokki.daldaepyo.LandmarkDetailActivity
 import com.dongyang.daltokki.daldaepyo.SearchStoreAdapter
 import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
