@@ -55,7 +55,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:itemIconSize="30dp"
+        android:id="@+id/rv_review"
         app:layout_constraintTop_toBottomOf="@+id/tv_dong"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

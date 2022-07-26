@@ -52,10 +52,13 @@ data class ImageResponseDto ( // 영수증 인증(OCR)
 )
 
 data class ReviewDto(
-        @SerializedName("review_id") val review_id: Int,
-        @SerializedName("user_id") val user_id : Int,
-        @SerializedName("store_id") val store_id : Int,
-        @SerializedName("content") val content : String
+        @SerializedName("user_name") val user_name: String,
+        @SerializedName("store_name") val store_name: String,
+        @SerializedName("content") val content: String
+)
+
+data class ReviewCountDto(
+        @SerializedName("reviews") val reviews: List<ReviewDto>
 )
 
 data class GameDto( // 게임 생성

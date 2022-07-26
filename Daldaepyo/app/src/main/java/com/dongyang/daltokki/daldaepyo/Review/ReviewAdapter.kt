@@ -4,6 +4,7 @@ import android.accounts.AccountManager.get
 import android.content.Context
 import android.graphics.ColorSpace.get
 import android.media.CamcorderProfile.get
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewConfiguration.get
@@ -11,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewTreeLifecycleOwner.get
 import androidx.recyclerview.widget.RecyclerView
+import com.dongyang.daltokki.daldaepyo.Board.BoardAdapter
+import com.dongyang.daltokki.daldaepyo.Review.ReviewItem
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
 import com.google.gson.reflect.TypeToken.get
 import okio.Utf8.size
@@ -20,37 +23,40 @@ import kotlin.coroutines.EmptyCoroutineContext.get
 
 
 class ReviewAdapter(
-        private val reviewList: List<ReviewDto>?,
-        val context: Context?
-) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>()
+        private val ReviewList: ArrayList<ReviewItem>,
+        val context: Context
+) : RecyclerView.Adapter<ReviewAdapter.ItemViewHolder>()
 {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var storeName: TextView = itemView.findViewById(R.id.tv_reiview_store)
-        var writer: TextView = itemView.findViewById(R.id.tv_review_writer)
-        var content: TextView = itemView.findViewById(R.id.tv_review_content)
+    inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private var store: TextView = itemView.findViewById(R.id.tv_review_store)
+        private var writer: TextView = itemView.findViewById(R.id.tv_review_writer)
+        private var content: TextView = itemView.findViewById(R.id.tv_review_content)
+
+        fun bind(reviewItem: ReviewItem, context: Context){
+            store.text = reviewItem.store
+            writer.text = reviewItem.writer
+            content.text = reviewItem.content
+        }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_review, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ItemViewHolder {
+        return ItemViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_review, parent, false)
+        )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: ReviewDto = reviewList!!.get(position)
-        holder.storeName.setText(reviewList?.get(position)?.review_id)
-        holder.writer.setText(reviewList?.get(position)?.user_id)
-        holder.content.setText(reviewList?.get(position)?.content)
+    override fun onBindViewHolder(holder: ReviewAdapter.ItemViewHolder, position: Int) {
+        holder.bind(ReviewList[position], context)
+        Log.d("리뷰_리사이클러뷰", "fff")
 
     }
 
     override fun getItemCount(): Int {
-        var size: Int = 0
-        if (reviewList != null) {
-            size = reviewList.size
-        }
-        return size
+        return ReviewList.size
     }
 
 }

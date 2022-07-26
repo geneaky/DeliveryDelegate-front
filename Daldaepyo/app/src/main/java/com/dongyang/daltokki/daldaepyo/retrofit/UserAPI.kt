@@ -51,7 +51,7 @@ interface UserAPI {
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
 
     @GET("/store/:id/reviews")
-    fun Review () : Call<ReviewDto>
+    fun getReview (@Header("token") token: String): Call<ReviewCountDto>
 
     @POST("/game/register")
     fun postCreateGame(@Header("token") token: String,

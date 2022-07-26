@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_reiview_store"
+        android:id="@+id/tv_review_store"
         android:text="식당이름"
         android:textColor="@color/darkgray"
         android:fontFamily="@font/suncheonr"
