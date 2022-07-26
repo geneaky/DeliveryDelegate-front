@@ -48,6 +48,8 @@ data class StoreFindResponseDto ( // 데이터베이스에서 음식점 찾기
 )
 
 data class ImageResponseDto ( // 영수증 인증(OCR)
+        @SerializedName("store_id") val store_id : Int,
+        @SerializedName("body") val body : String,
         @SerializedName("message") val message : String
 )
 
@@ -72,9 +74,14 @@ data class GameResponseDto( // 게임 생성 응답
         @SerializedName("message") val message: String
 )
 
+data class WriteReviewImageDto(
+        @SerializedName ("store_id") val store_id : Int,
+        @SerializedName("body") val body : String
+)
+
 data class WriteReviewDto(
-        @SerializedName ("store_id") var store_id: Int,
-        @SerializedName("body") var body : String
+        @SerializedName ("store_id") val store_id : Int,
+        @SerializedName("body") val body : String
 )
 
 data class OrderDto( // 소켓 접속 시 필요한 order

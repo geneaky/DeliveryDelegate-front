@@ -9,6 +9,7 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
+import android.text.TextUtils.isEmpty
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +19,7 @@ import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
+import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -28,18 +30,20 @@ import retrofit2.http.Multipart
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Objects.isNull
+import kotlin.reflect.typeOf
 
 class WriteReviewActivity : PermissionActivity() {
 
     val TAG = "리뷰로그@@@@@"
     val api = UserAPI.create()
 
-    var image =""
+    var image : String = ""
     val PERM_STORAGE = 9
     val PERM_CAMERA = 10
 
     val REQ_GALLERY = 12
 
+    var img = false
 
 
 
@@ -57,13 +61,14 @@ class WriteReviewActivity : PermissionActivity() {
 //            val storePref = getSharedPreferences("store", 0)
 //            val storeid = storePref.getString("storeid", "")!!.toInt()
 
-            if(image==""){
+            if(img == false){
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
+                var store_id : Int = 1
                 var body = binding.edtReview.text.toString()
+
 
 
                 val data = WriteReviewDto(store_id, body)
@@ -74,6 +79,7 @@ class WriteReviewActivity : PermissionActivity() {
                     dialog.show()
                     return@setOnClickListener
                 }
+
 
                 api.postWriteReviewNo(tok,data).enqueue(object:Callback<WriteReviewDto> {
                     override fun onResponse(
@@ -96,7 +102,7 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
+                var store_id : Int = 1
                 var body = binding.edtReview.text.toString()
 
                 val file = File(image)
@@ -111,10 +117,10 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewDto> {
+                api.postWriteReview(tok,store_id, body,data).enqueue(object:Callback<WriteReviewImageDto> {
                     override fun onResponse(
-                        call: Call<WriteReviewDto>,
-                        response: Response<WriteReviewDto>
+                        call: Call<WriteReviewImageDto>,
+                        response: Response<WriteReviewImageDto>
                     ) {
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
@@ -122,7 +128,7 @@ class WriteReviewActivity : PermissionActivity() {
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                    override fun onFailure(call: Call<WriteReviewImageDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })
@@ -140,6 +146,7 @@ class WriteReviewActivity : PermissionActivity() {
         // 5. 갤러리 버튼이 클릭 되면 갤러리를 연다
         binding.btnLoadImage.setOnClickListener {
             openGallery()
+            img = true
         }
     }
 
