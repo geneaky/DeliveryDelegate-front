@@ -65,7 +65,14 @@ data class GameDto( // 게임 생성
         @SerializedName("population") val population: Int,
         @SerializedName("landmark_name") val landmark_name: String,
         @SerializedName("landmark_posx") val landmark_posx: String,
-        @SerializedName("landmark_posy") val landmark_posy: String
+        @SerializedName("landmark_posy") val landmark_posy: String,
+        @SerializedName("order") val order: OrderDto
+)
+data class OrderDto( // 음식 주문 정보
+        @SerializedName("store_name") val store_name: String,
+        @SerializedName("mapx") val mapx: String,
+        @SerializedName("mapy") val mapy: String,
+        @SerializedName("detail") val detail: String
 )
 data class GameResponseDto( // 게임 생성 응답
         @SerializedName("name") val name: String,
@@ -80,9 +87,3 @@ data class WriteReviewDto(
         @SerializedName("body") var body : String
 )
 
-data class OrderDto( // 소켓 접속 시 필요한 order
-        @SerializedName("store_name") val store_name: String,
-        @SerializedName("mapx") val mapx: String,
-        @SerializedName("mapy") val mapy: String,
-        @SerializedName("detail") val detail: String
-)

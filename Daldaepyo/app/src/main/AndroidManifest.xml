@@ -36,6 +36,9 @@
         <activity android:name=".CreateGameActivity" />
         <activity android:name=".GameActivity" />
         <activity android:name=".Game.Landmark.LandmarkActivity" />
+        <activity android:name=".Game.OrderActivity" />
+        <activity android:name=".Game.OrderDetailActivity" />
+        <activity android:name=".Game.OrderDetailWriteActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

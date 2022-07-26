@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ffe66b"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.1"
+        android:background="@drawable/textview_rounded"
+        android:text="주문정보 입력"
+        android:textColor="@color/darkgray"
+        android:textSize="30sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_store_name"
+        android:text="가게명"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:fontFamily="@font/suncheonr"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/darkgray" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_store_name"
+        android:text="가게이름"
+        android:singleLine = "true"
+        android:lines = "1"
+        android:enabled="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_store_name"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintVertical_bias="0.32"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_detail"
+        android:text="추가 정보"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.42"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/darkgray" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_detail"
+        android:singleLine = "true"
+        android:lines = "1"
+        android:hint="예시) 주문번호는 123번입니다. 안전한 배달 부탁드려요 :)"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_detail"
+        android:backgroundTint="@color/deepgray"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintVertical_bias="0.42"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_create_game"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.9"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:text="게임 생성하기"
+        android:fontFamily="@font/suncheonr"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/blue"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
