@@ -3,7 +3,8 @@ package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Game.CreateGame.LandmarkActivity
+import com.dongyang.daltokki.daldaepyo.GameActivity
+import com.dongyang.daltokki.daldaepyo.R
 import kotlinx.android.synthetic.main.activity_create_game.*
 
 
@@ -29,11 +30,6 @@ class CreateGameActivity : AppCompatActivity() {
             edit.commit()
 
             val intent = Intent(this@CreateGameActivity, LandmarkActivity::class.java)
-            startActivity(intent)
-        }
-
-        btn_game.setOnClickListener {
-            val intent = Intent(this@CreateGameActivity, GameActivity::class.java)
             startActivity(intent)
         }
     }
