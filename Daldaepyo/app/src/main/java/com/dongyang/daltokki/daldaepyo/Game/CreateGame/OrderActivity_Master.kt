@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Game.Landmark
+package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.R
-import com.dongyang.daltokki.daldaepyo.SearchStoreAdapter
 import com.dongyang.daltokki.daldaepyo.Review.Store.SearchStoreItem
+import com.dongyang.daltokki.daldaepyo.SearchStoreAdapter
 import com.dongyang.daltokki.daldaepyo.retrofit.SearchResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.naver.maps.geometry.Tm128
@@ -18,8 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LandmarkActivity : AppCompatActivity() {
-
+class OrderActivity_Master : AppCompatActivity() {
     val api = UserAPI.create()
 
     override fun onCreate(saveInstanceState: Bundle?) {
@@ -28,7 +27,7 @@ class LandmarkActivity : AppCompatActivity() {
 
         btn_searchBoard1.setOnClickListener {
 
-            val GamePref = getSharedPreferences("Gamepref", 0) // 음식점 정보
+            val OrderPref = getSharedPreferences("Orderpref", 0) // Order 정보
             val pref = getSharedPreferences("pref", 0)
             val tok = pref.getString("token", "").toString()
             var name = edt_search_board.text.toString()
@@ -42,7 +41,7 @@ class LandmarkActivity : AppCompatActivity() {
                     val code = response.code()
 
                     if(code == 500) {
-                        Toast.makeText(this@LandmarkActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@OrderActivity_Master, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
 
                     val list = mutableListOf<SearchStoreItem>()
@@ -74,7 +73,7 @@ class LandmarkActivity : AppCompatActivity() {
                             val lat = latLng.latitude.toString() // 위도만 빼주기
                             val lng = latLng.longitude.toString() // 경도만 빼주기
 
-                            var edit = GamePref.edit() // 수정모드
+                            var edit = OrderPref.edit() // 수정모드
                             edit.apply()
                             edit.putString("title", title)
                             edit.putString("address", address)
@@ -87,7 +86,7 @@ class LandmarkActivity : AppCompatActivity() {
                             Log.d("title@@", "" + lat)
                             Log.d("title@@", "" + lng)
 
-                            var intent = Intent(this@LandmarkActivity, LandmarkDetailActivity::class.java)
+                            var intent = Intent(this@OrderActivity_Master, OrderDetailActivity_Master::class.java)
                             startActivity(intent)
 
                         }
@@ -110,5 +109,4 @@ class LandmarkActivity : AppCompatActivity() {
         val result = regex2.replace(result1, "")
         return result
     }
-
 }
