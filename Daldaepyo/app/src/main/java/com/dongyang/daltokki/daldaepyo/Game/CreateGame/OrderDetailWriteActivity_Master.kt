@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Game.Landmark.LandmarkActivity
-import com.dongyang.daltokki.daldaepyo.GameActivity
 import com.dongyang.daltokki.daldaepyo.MainActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.GameDto

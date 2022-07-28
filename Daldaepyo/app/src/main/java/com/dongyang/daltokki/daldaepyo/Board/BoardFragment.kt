@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dongyang.daltokki.daldaepyo.CreateGameActivity
+import com.dongyang.daltokki.daldaepyo.Game.CreateGame.CreateGameActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.FindGameResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI

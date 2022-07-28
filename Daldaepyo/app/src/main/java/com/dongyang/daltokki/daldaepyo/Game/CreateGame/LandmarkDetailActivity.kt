@@ -6,7 +6,6 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Game.CreateGame.OrderActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -33,7 +32,7 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
         btn_create_game.setOnClickListener {
             Toast.makeText(this@LandmarkDetailActivity, "주문한 가게 이름을 검색하세요.", Toast.LENGTH_LONG).show()
-            val intent = Intent(this@LandmarkDetailActivity, OrderActivity::class.java)
+            val intent = Intent(this@LandmarkDetailActivity, OrderActivity_Master::class.java)
             startActivity(intent)
             finish()
         }
