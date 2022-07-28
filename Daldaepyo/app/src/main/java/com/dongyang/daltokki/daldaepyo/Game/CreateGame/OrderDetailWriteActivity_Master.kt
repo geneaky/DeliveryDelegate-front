@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Game
+package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrderDetailWriteActivity : AppCompatActivity() {
+class OrderDetailWriteActivity_Master : AppCompatActivity() {
 
     val api = UserAPI.create()
 
@@ -65,12 +65,12 @@ class OrderDetailWriteActivity : AppCompatActivity() {
                         edit.putString("room_name", room_name)
                         edit.commit()
 
-                    Toast.makeText(this@OrderDetailWriteActivity, "게임방 생성이 완료되었습니다.", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@OrderDetailWriteActivity, MainActivity::class.java)
+                    Toast.makeText(this@OrderDetailWriteActivity_Master, "게임방 생성이 완료되었습니다.", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@OrderDetailWriteActivity_Master, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                     } else {
-                        Toast.makeText(this@OrderDetailWriteActivity, "게임방 생성에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@OrderDetailWriteActivity_Master, "게임방 생성에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
                 }
 

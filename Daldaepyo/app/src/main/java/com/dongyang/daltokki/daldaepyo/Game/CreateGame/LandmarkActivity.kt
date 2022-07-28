@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Game.Landmark
+package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 
 import android.content.Intent
 import android.os.Bundle

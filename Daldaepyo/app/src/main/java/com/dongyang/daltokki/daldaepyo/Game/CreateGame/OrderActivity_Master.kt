@@ -1,4 +1,4 @@
-package com.dongyang.daltokki.daldaepyo.Game
+package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrderActivity : AppCompatActivity() {
+class OrderActivity_Master : AppCompatActivity() {
     val api = UserAPI.create()
 
     override fun onCreate(saveInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class OrderActivity : AppCompatActivity() {
                     val code = response.code()
 
                     if(code == 500) {
-                        Toast.makeText(this@OrderActivity, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@OrderActivity_Master, "검색에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
 
                     val list = mutableListOf<SearchStoreItem>()
@@ -86,7 +86,7 @@ class OrderActivity : AppCompatActivity() {
                             Log.d("title@@", "" + lat)
                             Log.d("title@@", "" + lng)
 
-                            var intent = Intent(this@OrderActivity, OrderDetailActivity::class.java)
+                            var intent = Intent(this@OrderActivity_Master, OrderDetailActivity_Master::class.java)
                             startActivity(intent)
 
                         }

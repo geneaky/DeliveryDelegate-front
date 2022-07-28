@@ -1,12 +1,10 @@
-package com.dongyang.daltokki.daldaepyo.Game.Landmark
+package com.dongyang.daltokki.daldaepyo.Game.CreateGame
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Game.OrderActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -15,27 +13,29 @@ import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import kotlinx.android.synthetic.main.activity_landmark.*
-import kotlinx.android.synthetic.main.activity_location.*
+import kotlinx.android.synthetic.main.activity_order.*
 
-class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
+class OrderDetailActivity_Master : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_landmark)
+        setContentView(R.layout.activity_order)
 
         val fm = supportFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_view2) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                fm.beginTransaction().add(R.id.map_view2, it).commit()
-            }
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.map_view2, it).commit()
+                }
         mapFragment.getMapAsync(this)
 
 
-        btn_create_game.setOnClickListener {
-            Toast.makeText(this@LandmarkDetailActivity, "주문한 가게 이름을 검색하세요.", Toast.LENGTH_LONG).show()
-            val intent = Intent(this@LandmarkDetailActivity, OrderActivity::class.java)
+        btn_order_detail.setOnClickListener {
+
+            Toast.makeText(this@OrderDetailActivity_Master, "주문 상세 정보를 입력하세요.", Toast.LENGTH_LONG).show()
+            val intent = Intent(this@OrderDetailActivity_Master, OrderDetailWriteActivity_Master::class.java)
             startActivity(intent)
             finish()
+
         }
     }
     override fun onMapReady(naverMap: NaverMap) {

@@ -1,0 +1,2 @@
+- BoardAdapter.kt 수정
+: 리스트 아이템 클릭 시 OrderActivitiy로 이동

@@ -32,13 +32,13 @@
         <activity android:name=".StoreDetailActivity"/>
         <activity android:name=".Review.Store.WriteReviewActivity"/>
         <activity android:name=".OcrActivity" />
-        <activity android:name=".Game.Landmark.LandmarkDetailActivity" />
-        <activity android:name=".CreateGameActivity" />
+        <activity android:name=".Game.CreateGame.LandmarkDetailActivity" />
+        <activity android:name=".Game.CreateGame.CreateGameActivity" />
         <activity android:name=".GameActivity" />
-        <activity android:name=".Game.Landmark.LandmarkActivity" />
-        <activity android:name=".Game.OrderActivity" />
-        <activity android:name=".Game.OrderDetailActivity" />
-        <activity android:name=".Game.OrderDetailWriteActivity" />
+        <activity android:name=".Game.CreateGame.LandmarkActivity" />
+        <activity android:name=".Game.CreateGame.OrderActivity_Master" />
+        <activity android:name=".Game.CreateGame.OrderDetailActivity_Master" />
+        <activity android:name=".Game.CreateGame.OrderDetailWriteActivity_Master" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
