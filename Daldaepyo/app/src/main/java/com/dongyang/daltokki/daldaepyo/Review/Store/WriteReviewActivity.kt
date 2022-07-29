@@ -18,6 +18,7 @@ import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
+import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -40,6 +41,8 @@ class WriteReviewActivity : PermissionActivity() {
 
     val REQ_GALLERY = 12
 
+    var img = false
+
 
 
 
@@ -57,12 +60,12 @@ class WriteReviewActivity : PermissionActivity() {
 //            val storePref = getSharedPreferences("store", 0)
 //            val storeid = storePref.getString("storeid", "")!!.toInt()
 
-            if(image==""){
+            if(img==false){
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
+                var store_id : Int = 2
                 var body = binding.edtReview.text.toString()
 
 
@@ -96,7 +99,7 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
+                var store_id : Int = 2
                 var body = binding.edtReview.text.toString()
 
                 val file = File(image)
@@ -111,10 +114,10 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewDto> {
+                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewImageDto> {
                     override fun onResponse(
-                        call: Call<WriteReviewDto>,
-                        response: Response<WriteReviewDto>
+                            call: Call<WriteReviewImageDto>,
+                            response: Response<WriteReviewImageDto>
                     ) {
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
@@ -122,7 +125,7 @@ class WriteReviewActivity : PermissionActivity() {
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                    override fun onFailure(call: Call<WriteReviewImageDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })
@@ -140,6 +143,7 @@ class WriteReviewActivity : PermissionActivity() {
         // 5. 갤러리 버튼이 클릭 되면 갤러리를 연다
         binding.btnLoadImage.setOnClickListener {
             openGallery()
+            img = true
         }
     }
 

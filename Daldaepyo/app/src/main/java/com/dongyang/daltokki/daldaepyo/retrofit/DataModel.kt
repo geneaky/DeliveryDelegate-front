@@ -86,6 +86,11 @@ data class FindGameResponseDto( // 게임방 검색
         @SerializedName("games") val games : List<GameRoomInfoResponseDto>
 )
 
+data class WriteReviewImageDto(
+        @SerializedName ("store_id") var store_id: Int,
+        @SerializedName("body") var body : String
+)
+
 data class WriteReviewDto(
         @SerializedName ("store_id") var store_id: Int,
         @SerializedName("body") var body : String
