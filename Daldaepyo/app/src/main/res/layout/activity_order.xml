@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffe66b"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -17,7 +18,7 @@
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintVertical_bias="0.1"
         android:background="@drawable/textview_rounded"
-        android:text="랜드마크 설정"
+        android:text="주문 가게 확인"
         android:textColor="@color/darkgray"
         android:textSize="30sp"
         android:gravity="center"/>
@@ -37,7 +38,7 @@
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/btn_create_game"
+        android:id="@+id/btn_order_detail"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,7 +48,7 @@
         app:layout_constraintVertical_bias="0.9"
         android:background="@color/tranceparent"
         android:gravity="center"
-        android:text="주문정보 입력하기"
+        android:text="주문상세정보 입력하기"
         android:fontFamily="@font/suncheonr"
         android:textSize="20sp"
         android:textStyle="bold"
