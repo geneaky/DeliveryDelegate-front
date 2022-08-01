@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dongyang.daltokki.daldaepyo.Game.AttendOrderActivity
 import com.dongyang.daltokki.daldaepyo.Game.CreateGame.CreateGameActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.retrofit.FindGameResponseDto
@@ -21,6 +23,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 // 리사이클러뷰: https://machine-woong.tistory.com/164
+// 클릭 이벤트: https://machine-woong.tistory.com/186
+// sharedPreferences: https://niqrid2020.pe.kr/sharedpreferences-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0kotlinandroid/
+// https://weidianhuang.medium.com/android-fragment-not-attached-to-a-context-24d00fac4f3d
 
 class BoardFragment : Fragment() {
 
@@ -58,11 +63,13 @@ class BoardFragment : Fragment() {
                         val date = response?.body()?.games?.get(i)?.createdAt.toString()
                         Board_Adapter.add(BoardItem(title, population, landmark, write, date))
 
-                        recyclerView1 = rootView.findViewById(R.id.recyclerView!!) as RecyclerView
-                        recyclerView1.layoutManager = LinearLayoutManager(requireContext())
-                        recyclerView1.adapter = BoardAdapter(requireContext(), Board_Adapter)
+                        checkIfFragmentAttached {
+                            recyclerView1 = rootView.findViewById(R.id.recyclerView!!) as RecyclerView
+                            recyclerView1.layoutManager = LinearLayoutManager(requireContext())
+                            recyclerView1.adapter = BoardAdapter(requireContext(), Board_Adapter)
 
-                        
+                            recyclerViewClickEvent(requireContext(), room_name)
+                        }
                     }
 
                 } else {
@@ -77,6 +84,30 @@ class BoardFragment : Fragment() {
         return rootView
     }
 
+
+    fun recyclerViewClickEvent(context: Context, room: String) {
+        recyclerView1.addOnItemTouchListener(content_RecyclerView_ClickEvent(context, recyclerView1, object : content_RecyclerView_ClickEvent.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                Toast.makeText(context, 주문한 가게를 검색하세요, Toast.LENGTH_SHORT).show()
+                var sharedPreferences = SharedPreferenceT(requireContext())
+                sharedPreferences.setString("room_name", room)
+
+                val i = Intent(this@BoardFragment.getActivity(), AttendOrderActivity::class.java)
+                startActivity(i)
+
+            }
+
+            override fun onItemLongClick(view: View, position: Int) {
+
+            }
+        }))
+    }
+
+    fun checkIfFragmentAttached(operation: Context.() -> Unit) {
+        if(isAdded && context != null) {
+            operation(requireContext())
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
