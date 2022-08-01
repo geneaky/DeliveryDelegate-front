@@ -34,7 +34,6 @@ class LandmarkDetailActivity : AppCompatActivity(), OnMapReadyCallback {
             Toast.makeText(this@LandmarkDetailActivity, "주문한 가게 이름을 검색하세요.", Toast.LENGTH_LONG).show()
             val intent = Intent(this@LandmarkDetailActivity, OrderActivity_Master::class.java)
             startActivity(intent)
-            finish()
         }
     }
     override fun onMapReady(naverMap: NaverMap) {
