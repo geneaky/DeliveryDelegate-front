@@ -45,9 +45,9 @@ class OrderDetailActivity_Master : AppCompatActivity(), OnMapReadyCallback {
 //        naverMap.cameraPosition = camPos
         // 카메라 이동
         // 좌표 수집 및 현재위치 출력
-        val Gamepref = getSharedPreferences("Gamepref", 0)
-        val latitude : Double = Gamepref.getString("lat", "")!!.toDouble()
-        val longitude : Double  = Gamepref.getString("lng", "")!!.toDouble()
+        val Orderpref = getSharedPreferences("Orderpref", 0)
+        val latitude : Double = Orderpref.getString("lat", "")!!.toDouble()
+        val longitude : Double  = Orderpref.getString("lng", "")!!.toDouble()
         // (토스트 메시지는 테스트 끝나면 지우기)
         Log.d("@@@현재위치: ", "위도 $latitude, 경도 $longitude")
         // 카메라 이동
