@@ -38,7 +38,6 @@ class BoardAdapter(private val context: Context, private val GameList: ArrayList
     override fun onBindViewHolder(holder: BoardAdapter.ItemViewHolder, position: Int) {
         holder.bind(GameList[position], context)
         Log.d("리사이클러뷰가 불러짐", "ㅇㅇㅇ")
-
     }
 
     override fun getItemCount(): Int {
