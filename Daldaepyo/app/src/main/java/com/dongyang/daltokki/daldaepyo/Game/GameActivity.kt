@@ -28,6 +28,7 @@ class GameActivity : AppCompatActivity() {
         val tok = pref.getString("token", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
+        val population = Gamepref.getString("Population", "")?.toInt()!!
         val Orderpref = getSharedPreferences("Orderpref", 0)
         val store_name = Orderpref.getString("store_name", "")!!
         val mapx = Orderpref.getString("lng", "")!!
@@ -41,14 +42,14 @@ class GameActivity : AppCompatActivity() {
 
         if(detail.isNotEmpty()) { // 참석자는 게임 생성 시 sharedprefernec에 detail을 저장함.
 
-            val population = Gamepref.getString("Population", "")?.toInt()!! // null값이 존재할 수도 있어서 이곳에 넣음
-
+            val game_id = Gamepref.getString("game_id", "")?.toInt()!!
+            
             try {
                 // 게임 참석
                 val attend_game = AttendGame()
                 val order = AttendGame_Order()
                 attend_game.token = tok
-                attend_game.game_id = 1 // game_id 가 int가 맞는지 물어보기
+                attend_game.game_id = game_id
                 attend_game.room_name = room_name
                 attend_game.size = population
                 order.store_name = store_name
@@ -60,10 +61,6 @@ class GameActivity : AppCompatActivity() {
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-            // 게임 참석
-            connect.on("attend", Emitter.Listener {
-                Log.d("LOGG", "${it[0]}")
-            })
 
         } else { // 방장은 게임 생성 시 sharedpreference에 detail을 저장하지 않음
             try {
@@ -75,11 +72,20 @@ class GameActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
-            // 게임 방장 생성 후 참가
-            connect.on("attend", Emitter.Listener {
-                Log.d("LOGG", "${it[0]}")
-            })
         }
+        // 게임 참석
+        connect.on("attend", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+            Log.d("LGGGG", "참여")
+        })
+        // 인원 초과
+        connect.on("population", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+            var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+            dialog.setTitle("입장불가")
+            dialog.setMessage("참여 인원을 초과했습니다. 다른 게임을 이용해 주세요.").setPositiveButton("확인", null)
+            dialog.show()
+        })
 
     }
 
@@ -92,7 +98,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        mSocket.emit("game_remove")
+//        mSocket.emit("game_remove")
         val intent = Intent(this@GameActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)

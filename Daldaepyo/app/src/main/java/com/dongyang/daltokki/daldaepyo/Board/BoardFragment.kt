@@ -61,6 +61,9 @@ class BoardFragment : Fragment() {
                         val landmark = response?.body()?.games?.get(i)?.landmark_name.toString()
                         val write = response?.body()?.games?.get(i)?.game_main_text.toString()
                         val date = response?.body()?.games?.get(i)?.createdAt.toString()
+                        val room_name = response?.body()?.games?.get(i)?.socket_room_name.toString()
+                        val game_id = response?.body()?.games?.get(i)?.game_id!!
+
                         Board_Adapter.add(BoardItem(title, population, landmark, write, date))
 
                         checkIfFragmentAttached {
@@ -68,7 +71,7 @@ class BoardFragment : Fragment() {
                             recyclerView1.layoutManager = LinearLayoutManager(requireContext())
                             recyclerView1.adapter = BoardAdapter(requireContext(), Board_Adapter)
 
-                            recyclerViewClickEvent(requireContext(), room_name)
+                            recyclerViewClickEvent(requireContext(), room_name, population, game_id)
                         }
                     }
 
@@ -85,12 +88,14 @@ class BoardFragment : Fragment() {
     }
 
 
-    fun recyclerViewClickEvent(context: Context, room: String) {
+    fun recyclerViewClickEvent(context: Context, room: String,  population: Int, game_id: Int) {
         recyclerView1.addOnItemTouchListener(content_RecyclerView_ClickEvent(context, recyclerView1, object : content_RecyclerView_ClickEvent.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-                Toast.makeText(context, 주문한 가게를 검색하세요, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "주문한 가게를 검색하세요", Toast.LENGTH_SHORT).show()
                 var sharedPreferences = SharedPreferenceT(requireContext())
                 sharedPreferences.setString("room_name", room)
+                sharedPreferences.setInt("population", population)
+                sharedPreferences.setInt("game_id", game_id)
 
                 val i = Intent(this@BoardFragment.getActivity(), AttendOrderActivity::class.java)
                 startActivity(i)

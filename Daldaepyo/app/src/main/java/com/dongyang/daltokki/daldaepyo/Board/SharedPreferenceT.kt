@@ -13,6 +13,9 @@ class SharedPreferenceT(context: Context) {
     public fun setString(key: String, value: String) {
         instances.edit().putString(key, value).apply()
     }
+    public fun setInt(key: String, value: Int) {
+        instances.edit().putInt(key, value).apply()
+    }
     // sharedPreferences를 얻어오는 함수.
     public fun getString(key: String) : String? {
         return instances.getString(key, defaultString)

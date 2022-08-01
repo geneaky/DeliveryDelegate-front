@@ -28,9 +28,10 @@ class AttendOrderDetailWriteActivity : AppCompatActivity() {
         var store_name = Orderpref.getString("title", "").toString()
 
         edt_store_name.setText(store_name) // AttendOrderActivity에서 선택한 가게명을 보여줌
-        var detail = edt_detail.text.toString()
 
         btn_create_game.setOnClickListener {
+
+            var detail = edt_detail.text.toString()
 
             val edit = Orderpref.edit() // 수정모드
             edit.apply()
