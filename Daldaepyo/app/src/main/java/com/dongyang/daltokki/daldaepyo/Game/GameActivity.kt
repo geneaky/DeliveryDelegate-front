@@ -3,6 +3,7 @@ package com.dongyang.daltokki.daldaepyo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
 import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
