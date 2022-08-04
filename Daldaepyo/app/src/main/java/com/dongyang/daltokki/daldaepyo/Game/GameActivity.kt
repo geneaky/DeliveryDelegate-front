@@ -99,7 +99,29 @@ class GameActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-//        mSocket.emit("game_remove")
+
+        val pref = getSharedPreferences("pref", 0)
+        val tok = pref.getString("token", "")!!
+        val Gamepref = getSharedPreferences("Gamepref", 0)
+        val room_name = Gamepref.getString("room_name", "")!!
+
+        mSocket = SocketApplication.get()
+        val connect = mSocket.connect() // 소켓 연결
+
+        val objectmapper = ObjectMapper()
+
+        try {
+            // 게임 나가기(퇴장)
+            val quit_game = QuitGame()
+            quit_game.token = tok
+            quit_game.room_name = room_name
+
+            connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+
         val intent = Intent(this@GameActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
