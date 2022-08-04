@@ -9,5 +9,5 @@ class Attend {
     var game_id by Delegates.notNull<Int>()
     lateinit var room_name : String
     var size by Delegates.notNull<Int>()
-    lateinit var order : AttendGame_Order
+    lateinit var order : AttendOrder
 }
