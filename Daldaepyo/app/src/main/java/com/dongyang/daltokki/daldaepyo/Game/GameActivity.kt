@@ -47,8 +47,8 @@ class GameActivity : AppCompatActivity() {
             
             try {
                 // 게임 참석
-                val attend_game = AttendGame()
-                val order = AttendGame_Order()
+                val attend_game = Attend()
+                val order = AttendOrder()
                 attend_game.token = tok
                 attend_game.game_id = game_id
                 attend_game.room_name = room_name
@@ -66,7 +66,7 @@ class GameActivity : AppCompatActivity() {
         } else { // 방장은 게임 생성 시 sharedpreference에 detail을 저장하지 않음
             try {
                 // 게임 방장 생성 후 참가
-                val message = Message()
+                val message = AttendMaster()
                 message.room_name = room_name
                 connect.emit("attendMaster", objectmapper.writeValueAsString(message))
             } catch (e: JSONException) {
