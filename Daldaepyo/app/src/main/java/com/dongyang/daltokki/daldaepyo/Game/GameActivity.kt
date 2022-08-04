@@ -47,8 +47,8 @@ class GameActivity : AppCompatActivity() {
             
             try {
                 // 게임 참석
-                val attend_game = AttendGame()
-                val order = AttendGame_Order()
+                val attend_game = Attend()
+                val order = AttendOrder()
                 attend_game.token = tok
                 attend_game.game_id = game_id
                 attend_game.room_name = room_name
@@ -66,7 +66,7 @@ class GameActivity : AppCompatActivity() {
         } else { // 방장은 게임 생성 시 sharedpreference에 detail을 저장하지 않음
             try {
                 // 게임 방장 생성 후 참가
-                val message = Message()
+                val message = AttendMaster()
                 message.room_name = room_name
                 connect.emit("attendMaster", objectmapper.writeValueAsString(message))
             } catch (e: JSONException) {
@@ -99,7 +99,41 @@ class GameActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-//        mSocket.emit("game_remove")
+
+        val pref = getSharedPreferences("pref", 0)
+        val tok = pref.getString("token", "")!!
+        val nick = pref.getString("nickname", "")!!
+        val Gamepref = getSharedPreferences("Gamepref", 0)
+        val room_name = Gamepref.getString("room_name", "")!!
+
+        mSocket = SocketApplication.get()
+        val connect = mSocket.connect() // 소켓 연결
+
+        val objectmapper = ObjectMapper()
+
+        try {
+            // 게임 나가기(퇴장)
+            val quit_game = QuitGame()
+            quit_game.token = tok
+            quit_game.nickname = nick
+            quit_game.room_name = room_name
+
+            connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
+        connect.on("quit_game", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+//            Log.d("LOGG", "${it[1]}")
+//            Log.d("LOGG", "${it[2]}")
+            Toast.makeText(this, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
+//            val count = it[0].toString()
+//            Log.d("count", count)
+        })
+
+
         val intent = Intent(this@GameActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
