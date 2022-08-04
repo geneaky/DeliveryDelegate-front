@@ -73,11 +73,13 @@ class LoginActivity : AppCompatActivity() {
                     } else if(code == 200) { // success
                         val token_result = response?.body()?.token?.token.toString()
                         Log.d("token_result@@@", "" + token_result)
+                        val nickname = response?.body()?.user?.nickname.toString()
 
                         val edit = pref.edit() // 수정모드
                         edit.apply()
                         edit.putString("id", id)
                         edit.putString("token", token_result)
+                        edit.putString("nickname", nickname)
                         edit.commit()
 
                         val tok = pref.getString("token", "")
