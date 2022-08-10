@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewConfiguration.get
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewTreeLifecycleOwner.get
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +32,11 @@ class ReviewAdapter(
         private var store: TextView = itemView.findViewById(R.id.tv_review_store)
         private var writer: TextView = itemView.findViewById(R.id.tv_review_writer)
         private var content: TextView = itemView.findViewById(R.id.tv_review_content)
+        private var image : ImageView = itemView.findViewById(R.id.img_review)
 
         fun bind(reviewItem: ReviewItem, context: Context){
-            store.text = reviewItem.store
-            writer.text = reviewItem.writer
+            store.text = reviewItem.store_name
+            writer.text = reviewItem.user_name
             content.text = reviewItem.content
         }
 

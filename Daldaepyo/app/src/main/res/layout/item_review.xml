@@ -7,6 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="10dp"
+    android:layout_marginBottom="25dp"
     android:orientation="vertical">
 
     <TextView
@@ -40,11 +41,17 @@
         android:fontFamily="@font/suncheonr"
         android:textColor="@color/darkgray"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="@color/darkgray"
-        android:layout_marginTop="20dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_review"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
+
+
 
 
 </LinearLayout>

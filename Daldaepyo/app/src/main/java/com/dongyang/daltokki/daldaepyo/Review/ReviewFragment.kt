@@ -3,6 +3,8 @@ package com.dongyang.daltokki.daldaepyo
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -22,10 +24,12 @@ import com.dongyang.daltokki.daldaepyo.databinding.FragmentReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewCountDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
+import com.google.gson.internal.LinkedTreeMap
 import kotlinx.android.synthetic.main.fragment_review.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.RuntimeException
 import java.lang.System.load
 
 class ReviewFragment : Fragment() {
@@ -59,11 +63,12 @@ class ReviewFragment : Fragment() {
 
                 if (code == 200){
                     for ( i in 0 until result_size){
-                        val store = response?.body()?.reviews?.get(i)?.store_name.toString()
-                        val writer = response?.body()?.reviews?.get(i)?.user_name.toString()
+                        val store_name = response?.body()?.reviews?.get(i)?.store_name.toString()
+                        val user_name = response?.body()?.reviews?.get(i)?.user_name.toString()
                         val content = response?.body()?.reviews?.get(i)?.content.toString()
-
-                        Review_Adapter.add(ReviewItem(store, writer, content))
+                        val image = response?.body()!!.reviews as List<Map<*, *>>
+                        getImg(image)
+                        Review_Adapter.add(ReviewItem(store_name, user_name, content, image))
 
                         recyclerView1 = rootView.findViewById(R.id.rv_review!!) as RecyclerView
                         recyclerView1.layoutManager = LinearLayoutManager(requireContext())
@@ -113,5 +118,30 @@ class ReviewFragment : Fragment() {
         }
     }
 
+    private fun getImg(input:List<Map<*,*>>){
+        var data = (input[0])["img"] as LinkedTreeMap<*, *>
+        var array = data["data"] as ArrayList<Double>
+        var bitmap : Bitmap = converBitmap(array)
+    }
+
+    fun exByte(list: ArrayList<Double>):ByteArray{
+        var list2 : MutableList<Byte> = mutableListOf()
+        for ( i in 0..list.size - 1) {
+            list2.add(list[i].toInt().toByte())
+        }
+        var arr = list2.toByteArray()
+        return arr
+    }
+
+    fun converBitmap (input:ArrayList<Double>): Bitmap {
+        var arr = exByte(input)
+
+        try{
+            var bitmap = BitmapFactory.decodeByteArray(arr, 0, arr.size)
+            return bitmap
+        }catch(e:Exception){
+            throw RuntimeException(e)
+        }
+    }
 
 }

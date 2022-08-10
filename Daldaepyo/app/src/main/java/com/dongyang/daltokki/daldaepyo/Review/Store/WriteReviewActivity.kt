@@ -42,6 +42,7 @@ class WriteReviewActivity : PermissionActivity() {
     val REQ_GALLERY = 12
 
     var img = false
+    var store_id = 3
 
 
 
@@ -65,9 +66,7 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 2
                 var body = binding.edtReview.text.toString()
-
 
                 val data = WriteReviewDto(store_id, body)
 
@@ -99,7 +98,6 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 2
                 var body = binding.edtReview.text.toString()
 
                 val file = File(image)

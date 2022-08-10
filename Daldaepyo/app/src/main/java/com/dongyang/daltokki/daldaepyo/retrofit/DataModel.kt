@@ -1,7 +1,9 @@
 package com.dongyang.daltokki.daldaepyo.retrofit
 
+import android.text.format.DateFormat
 import com.dongyang.daltokki.daldaepyo.retofit.LocationInfoResponseDto
 import com.google.gson.annotations.SerializedName
+import org.w3c.dom.Text
 
 data class LoginDto( // 로그인
         @SerializedName("phone_number") val phone_number: String,
@@ -51,10 +53,12 @@ data class ImageResponseDto ( // 영수증 인증(OCR)
         @SerializedName("message") val message : String
 )
 
+
 data class ReviewDto(
-        @SerializedName("user_name") val user_name: String,
-        @SerializedName("store_name") val store_name: String,
-        @SerializedName("content") val content: String
+        @SerializedName("content") val content: String,
+//        @SerializedName("thumb_up") val thumb_up : Int,
+        @SerializedName("user_name") val user_name : String,
+        @SerializedName("store_name") val store_name : String
 )
 
 data class ReviewCountDto(
