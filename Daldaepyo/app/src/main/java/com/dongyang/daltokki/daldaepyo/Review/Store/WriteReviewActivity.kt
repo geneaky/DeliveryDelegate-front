@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.PermissionActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
+import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
@@ -42,7 +43,7 @@ class WriteReviewActivity : PermissionActivity() {
     val REQ_GALLERY = 12
 
     var img = false
-    var store_id = 3
+    var store_id = 1
 
 
 
@@ -77,18 +78,53 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReviewNo(tok,data).enqueue(object:Callback<WriteReviewDto> {
+                api.postWriteReviewNo(tok,data).enqueue(object:Callback<ReviewResponseDto> {
                     override fun onResponse(
-                        call: Call<WriteReviewDto>,
-                        response: Response<WriteReviewDto>
+                        call: Call<ReviewResponseDto>,
+                        response: Response<ReviewResponseDto>
                     ) {
+                        val code = response.code()
+
+                        
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
+
+                        if(code == 200){
+                            val message = response.body()?.message.toString()
+                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                            dialog.setTitle("등록 성공!")
+                            dialog.setMessage(message).setPositiveButton("확인", null)
+                            dialog.show()
+                            return
+                        }
+
+                        if(code == 500){
+                            val message = response.errorBody()?.string()!!
+                            if(message.contains("bad")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                            if(message.contains("too")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                        }
+                        
 
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                    override fun onFailure(call: Call<ReviewResponseDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })
@@ -112,18 +148,54 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewImageDto> {
+                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<ReviewResponseDto> {
                     override fun onResponse(
-                            call: Call<WriteReviewImageDto>,
-                            response: Response<WriteReviewImageDto>
+                            call: Call<ReviewResponseDto>,
+                            response: Response<ReviewResponseDto>
                     ) {
+                        val code = response.code()
+                        val message = response.errorBody()?.string()!!
+
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
+
+                        if(code == 200){
+                            val message = response.body()?.message.toString()
+                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                            dialog.setTitle("등록 성공!")
+                            dialog.setMessage(message).setPositiveButton("확인", null)
+                            dialog.show()
+                            return
+                        }
+
+                        if(code == 500){
+                            val message = response.errorBody()?.string()!!
+                            if(message.contains("bad")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                            if(message.contains("too")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                        }
+
+
 
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewImageDto>, t: Throwable) {
+                    override fun onFailure(call: Call<ReviewResponseDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })

@@ -19,8 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.daltokki.daldaepyo.Review.ReviewItem
 import com.dongyang.daltokki.daldaepyo.Review.Store.WriteReviewActivity
-import com.dongyang.daltokki.daldaepyo.databinding.ActivityLoginBinding
-import com.dongyang.daltokki.daldaepyo.databinding.FragmentReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewCountDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -56,23 +54,24 @@ class ReviewFragment : Fragment() {
 
         api.getReview(tok).enqueue(object : Callback<ReviewCountDto>{
             override fun onResponse(call: Call<ReviewCountDto>, response: Response<ReviewCountDto>) {
-                val result_size = response.body()?.reviews?.size ?: 0
+                val result_size = response.body()?.message?.size ?: 0
                 val result = response.body().toString()
                 Log.d("Log", result)
                 val code = response.code()
 
                 if (code == 200){
                     for ( i in 0 until result_size){
-                        val store_name = response?.body()?.reviews?.get(i)?.store_name.toString()
-                        val user_name = response?.body()?.reviews?.get(i)?.user_name.toString()
-                        val content = response?.body()?.reviews?.get(i)?.content.toString()
-                        val image = response?.body()!!.reviews as List<Map<*, *>>
-                        getImg(image)
-                        Review_Adapter.add(ReviewItem(store_name, user_name, content, image))
+                        val store_name = response?.body()?.message?.get(i)?.store_name.toString()
+                        val user_name = response?.body()?.message?.get(i)?.user_name.toString()
+                        val content = response?.body()?.message?.get(i)?.content.toString()
+                        val image_path = response?.body()?.message?.get(i)?.image_path.toString()
+//                        getImg(image)
+                        Review_Adapter.add(ReviewItem(store_name, user_name, content, image_path))
 
                         recyclerView1 = rootView.findViewById(R.id.rv_review!!) as RecyclerView
                         recyclerView1.layoutManager = LinearLayoutManager(requireContext())
                         recyclerView1.adapter = ReviewAdapter(Review_Adapter, requireContext())
+
                     }
                 }
                 else {

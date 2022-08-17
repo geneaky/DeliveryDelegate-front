@@ -58,11 +58,14 @@ data class ReviewDto(
         @SerializedName("content") val content: String,
 //        @SerializedName("thumb_up") val thumb_up : Int,
         @SerializedName("user_name") val user_name : String,
-        @SerializedName("store_name") val store_name : String
+        @SerializedName("store_name") val store_name : String,
+        @SerializedName("image_path") val image_path : String
 )
 
+
+
 data class ReviewCountDto(
-        @SerializedName("reviews") val reviews: List<ReviewDto>
+        @SerializedName("message") val message: List<ReviewDto>
 )
 
 data class GameDto( // 게임 생성
@@ -90,6 +93,9 @@ data class FindGameResponseDto( // 게임방 검색
         @SerializedName("games") val games : List<GameRoomInfoResponseDto>
 )
 
+data class ReviewResponseDto(
+        @SerializedName("message") val message : String
+)
 data class WriteReviewImageDto(
         @SerializedName ("store_id") var store_id: Int,
         @SerializedName("body") var body : String

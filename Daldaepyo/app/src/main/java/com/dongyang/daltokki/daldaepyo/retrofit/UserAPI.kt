@@ -71,13 +71,13 @@ interface UserAPI {
             @Part ("store_id") store_id : Int,
             @Part ("body") body: String,
             @Part file: MultipartBody.Part
-    ): Call<WriteReviewImageDto> // 리뷰 작성
+    ): Call<ReviewResponseDto> // 리뷰 작성
 
     @POST("/review/post")
     fun postWriteReviewNo(
         @Header ("token") token: String,
         @Body jsonparams: WriteReviewDto
-    ): Call<WriteReviewDto> // 리뷰 작성
+    ): Call<ReviewResponseDto> // 리뷰 작성
 
 
     companion object {

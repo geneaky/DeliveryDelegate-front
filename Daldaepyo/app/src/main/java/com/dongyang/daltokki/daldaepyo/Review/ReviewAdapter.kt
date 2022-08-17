@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewTreeLifecycleOwner.get
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.dongyang.daltokki.daldaepyo.Board.BoardAdapter
 import com.dongyang.daltokki.daldaepyo.Review.ReviewItem
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
@@ -32,12 +33,13 @@ class ReviewAdapter(
         private var store: TextView = itemView.findViewById(R.id.tv_review_store)
         private var writer: TextView = itemView.findViewById(R.id.tv_review_writer)
         private var content: TextView = itemView.findViewById(R.id.tv_review_content)
-        private var image : ImageView = itemView.findViewById(R.id.img_review)
+        private var image_path : ImageView = itemView.findViewById(R.id.img_review)
 
         fun bind(reviewItem: ReviewItem, context: Context){
             store.text = reviewItem.store_name
             writer.text = reviewItem.user_name
             content.text = reviewItem.content
+            Glide.with(itemView).load("http://146.56.132.245:8080/"+reviewItem.image_path).into(image_path)
         }
 
     }
