@@ -32,7 +32,7 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
         var gametype = Gamepref.getString("Gametype", "").toString()
         var gamename = Gamepref.getString("Gamename", "").toString()
         var gametext = Gamepref.getString("Gametext", "").toString()
-        var population = Gamepref.getString("Population", "").toString().toInt()
+        var population = Gamepref.getInt("Population", 0)
         var landmark_name = Gamepref.getString("title", "").toString()
         var landmark_posx = Gamepref.getString("lng", "").toString()
         var landmark_posy = Gamepref.getString("lat", "").toString()

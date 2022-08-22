@@ -66,6 +66,10 @@ dependencies {
     } // socket.io
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.3") // ObjectMapper(GameActivity.kt)
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+
     def lifecycle_version = "2.4.0"
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")

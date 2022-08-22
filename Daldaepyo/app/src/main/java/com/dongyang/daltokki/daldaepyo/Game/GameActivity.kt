@@ -11,6 +11,8 @@ import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.android.synthetic.main.activity_game.*
+import kotlinx.android.synthetic.main.activity_order_detail.*
 import org.json.JSONException
 
 
@@ -26,6 +28,8 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        btn_game_start.visibility = View.GONE // 숨기기
+        show_attend.visibility = View.GONE // 숨기기
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
@@ -43,6 +47,9 @@ class GameActivity : AppCompatActivity() {
         val objectmapper = ObjectMapper()
 
         if(detail.isNotEmpty()) { // 참석자는 게임 생성 시 sharedprefernec에 detail을 저장함.
+
+            btn_game_start.visibility = View.GONE // 숨기기
+            show_attend.visibility = View.VISIBLE // 보여주기
 
             val game_id = Gamepref.getString("game_id", "")?.toInt()!!
             
@@ -65,6 +72,10 @@ class GameActivity : AppCompatActivity() {
             }
 
         } else { // 방장은 게임 생성 시 sharedpreference에 detail을 저장하지 않음
+
+            btn_game_start.visibility = View.VISIBLE // 보여주기
+            show_attend.visibility = View.GONE // 숨기기
+
             try {
                 // 게임 방장 생성 후 참가
                 val message = AttendMaster()
@@ -74,6 +85,12 @@ class GameActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
+        }
+
+        btn_game_start.setOnClickListener { // 게임시작을 클릭하면 주사위가 돈다.
+            val intent = Intent(this, GameStartActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
 
@@ -220,6 +237,21 @@ class GameActivity : AppCompatActivity() {
 //            val count = it[0].toString()
 //            Log.d("count", count)
         })
+
+        // sharedpreference 삭제
+        val Orderpref = getSharedPreferences("Orderpref", 0)
+        val editOrder = Orderpref.edit()
+        editOrder.apply()
+        editOrder.remove("detail")
+        editOrder.remove("store_name")
+        editOrder.remove("mapy")
+        editOrder.remove("mapx")
+        editOrder.commit()
+        val editGame = Gamepref.edit()
+        editGame.apply()
+        editGame.remove("room_name")
+        editGame.remove("population")
+        editGame.commit()
 
 
         val intent = Intent(this@GameActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
