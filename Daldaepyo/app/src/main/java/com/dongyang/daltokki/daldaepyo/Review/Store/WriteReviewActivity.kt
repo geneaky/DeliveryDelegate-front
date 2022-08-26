@@ -92,8 +92,8 @@ class WriteReviewActivity : PermissionActivity() {
                         if(code == 200){
                             val message = response.body()?.message.toString()
                             var dialog = AlertDialog.Builder(this@WriteReviewActivity)
-                            dialog.setTitle("등록 성공!")
-                            dialog.setMessage(message).setPositiveButton("확인", null)
+                            dialog.setTitle("리뷰 등록")
+                            dialog.setMessage("등록 성공하였습니다").setPositiveButton("확인", null)
                             dialog.show()
                             return
                         }
@@ -101,7 +101,6 @@ class WriteReviewActivity : PermissionActivity() {
                         if(code == 500){
                             val message = response.errorBody()?.string()!!
                             if(message.contains("bad")){
-
                                 var dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
@@ -113,7 +112,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                                 var dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
-                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
                                 return
                             }
@@ -154,7 +153,6 @@ class WriteReviewActivity : PermissionActivity() {
                             response: Response<ReviewResponseDto>
                     ) {
                         val code = response.code()
-                        val message = response.errorBody()?.string()!!
 
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
@@ -201,8 +199,6 @@ class WriteReviewActivity : PermissionActivity() {
                 })
 
             }
-
-
 
         }
     }
@@ -303,5 +299,6 @@ class WriteReviewActivity : PermissionActivity() {
 
         return result!!
     }
+
 
 }

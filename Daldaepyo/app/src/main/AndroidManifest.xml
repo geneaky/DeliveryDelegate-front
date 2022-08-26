@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dongyang.daltokki.daldaepyo">
-
+    package="com.dongyang.daltokki.daldaepyo" >
     <!-- 인터넷 연결 허용하는 퍼미션 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- 위치 허용 퍼미션 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 위치 허용 퍼미션 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 대략적인 위치 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 정확한 위치 -->
-
     <!-- 저장소의 데이터 저장 및 확인(갤러리) -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 카메라 허용 퍼미션 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 카메라 허용 퍼미션 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -21,16 +16,27 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Daldaepyo">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".RegisterActivity" android:windowSoftInputMode="adjustNothing"/>
-        <activity android:name=".LoginActivity" android:windowSoftInputMode="adjustNothing"/>
+        android:theme="@style/Theme.Daldaepyo"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Review.ReviewDetailActivity"
+            android:label="@string/title_activity_review_detail"
+            android:theme="@style/Theme.Daldaepyo.NoActionBar" >
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".LocationActivity" />
-        <activity android:name=".SearchStoreActivity" android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".StoreDetailActivity"/>
-        <activity android:name=".Review.Store.WriteReviewActivity"/>
+        <activity
+            android:name=".SearchStoreActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".StoreDetailActivity" />
+        <activity android:name=".Review.Store.WriteReviewActivity" />
         <activity android:name=".OcrActivity" />
         <activity android:name=".Game.CreateGame.LandmarkDetailActivity" />
         <activity android:name=".Game.CreateGame.CreateGameActivity" />
@@ -39,13 +45,14 @@
         <activity android:name=".Game.CreateGame.OrderActivity_Master" />
         <activity android:name=".Game.CreateGame.OrderDetailActivity_Master" />
         <activity android:name=".Game.CreateGame.OrderDetailWriteActivity_Master" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="naver_clientID" />

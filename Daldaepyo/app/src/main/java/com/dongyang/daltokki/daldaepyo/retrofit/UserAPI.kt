@@ -79,6 +79,12 @@ interface UserAPI {
         @Body jsonparams: WriteReviewDto
     ): Call<ReviewResponseDto> // 리뷰 작성
 
+    @POST("/review/thumb")
+    fun postThumbUp(
+            @Header("token") token : String,
+            @Body jsonparams : ThumbUpDto
+    ): Call <ThumbUpDto>
+
 
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"

@@ -56,10 +56,12 @@ data class ImageResponseDto ( // 영수증 인증(OCR)
 
 data class ReviewDto(
         @SerializedName("content") val content: String,
-//        @SerializedName("thumb_up") val thumb_up : Int,
+        @SerializedName("thumb_up") val thumb_up : Int,
         @SerializedName("user_name") val user_name : String,
         @SerializedName("store_name") val store_name : String,
-        @SerializedName("image_path") val image_path : String
+        @SerializedName("image_path") val image_path : String,
+        @SerializedName("review_id") val review_id : Int
+
 )
 
 
@@ -104,5 +106,9 @@ data class WriteReviewImageDto(
 data class WriteReviewDto(
         @SerializedName ("store_id") var store_id: Int,
         @SerializedName("body") var body : String
+)
+
+data class ThumbUpDto(
+        @SerializedName("review_id") var review_id : Int
 )
 
