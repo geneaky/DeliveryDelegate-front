@@ -1,7 +1,9 @@
 package com.dongyang.daltokki.daldaepyo.retrofit
 
+import android.text.format.DateFormat
 import com.dongyang.daltokki.daldaepyo.retofit.LocationInfoResponseDto
 import com.google.gson.annotations.SerializedName
+import org.w3c.dom.Text
 
 data class LoginDto( // 로그인
         @SerializedName("phone_number") val phone_number: String,
@@ -51,11 +53,21 @@ data class ImageResponseDto ( // 영수증 인증(OCR)
         @SerializedName("message") val message : String
 )
 
+
 data class ReviewDto(
-        @SerializedName("review_id") val review_id: Int,
-        @SerializedName("user_id") val user_id : Int,
-        @SerializedName("store_id") val store_id : Int,
-        @SerializedName("content") val content : String
+        @SerializedName("content") val content: String,
+        @SerializedName("thumb_up") val thumb_up : Int,
+        @SerializedName("user_name") val user_name : String,
+        @SerializedName("store_name") val store_name : String,
+        @SerializedName("image_path") val image_path : String,
+        @SerializedName("review_id") val review_id : Int
+
+)
+
+
+
+data class ReviewCountDto(
+        @SerializedName("message") val message: List<ReviewDto>
 )
 
 data class GameDto( // 게임 생성
@@ -83,8 +95,20 @@ data class FindGameResponseDto( // 게임방 검색
         @SerializedName("games") val games : List<GameRoomInfoResponseDto>
 )
 
+data class ReviewResponseDto(
+        @SerializedName("message") val message : String
+)
+data class WriteReviewImageDto(
+        @SerializedName ("store_id") var store_id: Int,
+        @SerializedName("body") var body : String
+)
+
 data class WriteReviewDto(
         @SerializedName ("store_id") var store_id: Int,
         @SerializedName("body") var body : String
+)
+
+data class ThumbUpDto(
+        @SerializedName("review_id") var review_id : Int
 )
 

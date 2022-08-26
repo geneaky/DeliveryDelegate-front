@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.PermissionActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
+import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
+import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -40,6 +42,9 @@ class WriteReviewActivity : PermissionActivity() {
 
     val REQ_GALLERY = 12
 
+    var img = false
+    var store_id = 1
+
 
 
 
@@ -57,14 +62,12 @@ class WriteReviewActivity : PermissionActivity() {
 //            val storePref = getSharedPreferences("store", 0)
 //            val storeid = storePref.getString("storeid", "")!!.toInt()
 
-            if(image==""){
+            if(img==false){
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
                 var body = binding.edtReview.text.toString()
-
 
                 val data = WriteReviewDto(store_id, body)
 
@@ -75,18 +78,52 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReviewNo(tok,data).enqueue(object:Callback<WriteReviewDto> {
+                api.postWriteReviewNo(tok,data).enqueue(object:Callback<ReviewResponseDto> {
                     override fun onResponse(
-                        call: Call<WriteReviewDto>,
-                        response: Response<WriteReviewDto>
+                        call: Call<ReviewResponseDto>,
+                        response: Response<ReviewResponseDto>
                     ) {
+                        val code = response.code()
+
+                        
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
+
+                        if(code == 200){
+                            val message = response.body()?.message.toString()
+                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                            dialog.setTitle("리뷰 등록")
+                            dialog.setMessage("등록 성공하였습니다").setPositiveButton("확인", null)
+                            dialog.show()
+                            return
+                        }
+
+                        if(code == 500){
+                            val message = response.errorBody()?.string()!!
+                            if(message.contains("bad")){
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                            if(message.contains("too")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                        }
+                        
 
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                    override fun onFailure(call: Call<ReviewResponseDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })
@@ -96,7 +133,6 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                var store_id : Int = 3
                 var body = binding.edtReview.text.toString()
 
                 val file = File(image)
@@ -111,25 +147,58 @@ class WriteReviewActivity : PermissionActivity() {
                     return@setOnClickListener
                 }
 
-                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<WriteReviewDto> {
+                api.postWriteReview(tok,store_id, body, data).enqueue(object:Callback<ReviewResponseDto> {
                     override fun onResponse(
-                        call: Call<WriteReviewDto>,
-                        response: Response<WriteReviewDto>
+                            call: Call<ReviewResponseDto>,
+                            response: Response<ReviewResponseDto>
                     ) {
+                        val code = response.code()
+
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
+
+                        if(code == 200){
+                            val message = response.body()?.message.toString()
+                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                            dialog.setTitle("등록 성공!")
+                            dialog.setMessage(message).setPositiveButton("확인", null)
+                            dialog.show()
+                            return
+                        }
+
+                        if(code == 500){
+                            val message = response.errorBody()?.string()!!
+                            if(message.contains("bad")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                            if(message.contains("too")){
+
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                dialog.setTitle("오류")
+                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.show()
+                                return
+                            }
+
+                        }
+
+
 
 //            val reviewBody = WriteReviewDto(review)
 
                     }
-                    override fun onFailure(call: Call<WriteReviewDto>, t: Throwable) {
+                    override fun onFailure(call: Call<ReviewResponseDto>, t: Throwable) {
                         Log.d("실패", t.message.toString())
                     }
                 })
 
             }
-
-
 
         }
     }
@@ -140,6 +209,7 @@ class WriteReviewActivity : PermissionActivity() {
         // 5. 갤러리 버튼이 클릭 되면 갤러리를 연다
         binding.btnLoadImage.setOnClickListener {
             openGallery()
+            img = true
         }
     }
 
@@ -229,5 +299,6 @@ class WriteReviewActivity : PermissionActivity() {
 
         return result!!
     }
+
 
 }

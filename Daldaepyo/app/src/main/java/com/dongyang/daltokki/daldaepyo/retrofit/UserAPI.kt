@@ -4,6 +4,7 @@ import com.dongyang.daltokki.daldaepyo.retofit.LoginInfoResponseDto
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.MultipartBody
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -50,31 +51,39 @@ interface UserAPI {
                   @Part("store_id") store_id: Int,
                   @Part file: MultipartBody.Part): Call<ImageResponseDto> // 이미지 전송
 
-    @GET("/store/:id/reviews")
-    fun Review () : Call<ReviewDto>
+    @GET("/review/list")
+    fun getReview (@Header("token") token: String
+    ): Call<ReviewCountDto>
 
     @POST("/game/register")
     fun postCreateGame(@Header("token") token: String,
                  @Body jsonparams: GameDto): Call<GameResponseDto> // 게임방 생성
 
     @GET("/game/rooms")
-    fun getFindGame(@Header("token") token: String) : Call<FindGameResponseDto> // 게임방 검색
+    fun getFindGame(@Header("token") token: String
+    ) : Call<FindGameResponseDto> // 게임방 검색
 
 
     @Multipart
     @POST("/review/post")
     fun postWriteReview(
             @Header ("token") token: String,
-            @Part ("storeid") storeid : Int,
+            @Part ("store_id") store_id : Int,
             @Part ("body") body: String,
             @Part file: MultipartBody.Part
-    ): Call<WriteReviewDto> // 리뷰 작성
+    ): Call<ReviewResponseDto> // 리뷰 작성
 
     @POST("/review/post")
     fun postWriteReviewNo(
         @Header ("token") token: String,
         @Body jsonparams: WriteReviewDto
-    ): Call<WriteReviewDto> // 리뷰 작성
+    ): Call<ReviewResponseDto> // 리뷰 작성
+
+    @POST("/review/thumb")
+    fun postThumbUp(
+            @Header("token") token : String,
+            @Body jsonparams : ThumbUpDto
+    ): Call <ThumbUpDto>
 
 
     companion object {
