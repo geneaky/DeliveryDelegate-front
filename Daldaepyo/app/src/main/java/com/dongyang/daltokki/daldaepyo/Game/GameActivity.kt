@@ -105,10 +105,29 @@ class GameActivity : AppCompatActivity() {
 
         }
 
-        btn_game_start.setOnClickListener { // 게임시작을 클릭하면 주사위가 돈다.
-            val intent = Intent(this, GameStartActivity::class.java)
-            startActivity(intent)
-            finish()
+        btn_game_start.setOnClickListener { 
+try {
+                val check_ready = CheckReady()
+                check_ready.token = tok
+                check_ready.nickname = nick
+                check_ready.room_name = room_name
+                connect.emit("ready_game", objectmapper.writeValueAsString(check_ready))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            // 팀원들의 게임준비여부 확인(it 때문에 수정 가능성 있음)
+            connect.on("check_ready", Emitter.Listener {
+                Log.d("LOGG", "${it[0]}")
+                if (it[0].toString() == "not ready") {
+                    Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+                if (it[0].toString() == "complete_ready") {
+                    val intent = Intent(this, GameStartActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                    startActivity(intent)
+                    finish()
+                }
+            })
         }
 
 
