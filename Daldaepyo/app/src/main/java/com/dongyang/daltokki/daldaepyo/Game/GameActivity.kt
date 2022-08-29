@@ -31,6 +31,7 @@ class GameActivity : AppCompatActivity() {
         btn_game_start.visibility = View.GONE // 숨기기
         btn_game_ready.visibility = View.GONE // 숨기기
         show_attend.visibility = View.GONE // 숨기기
+        please_ready.visibility = View.GONE // 숨기기
 
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
@@ -53,7 +54,8 @@ class GameActivity : AppCompatActivity() {
 
             btn_game_start.visibility = View.GONE // 숨기기
             btn_game_ready.visibility = View.VISIBLE // 보여주기
-            show_attend.visibility = View.VISIBLE // 보여주기
+            please_ready.visibility = View.VISIBLE // 보여주기
+            show_attend.visibility = View.GONE // 숨기기
 
 //            val game_id = Gamepref.getString("game_id", "")?.toInt()!!
             val game_id : Int = Gamepref.getInt("game_id", 0)            
@@ -83,6 +85,10 @@ class GameActivity : AppCompatActivity() {
                     ready_game.nickname = nick
                     ready_game.room_name = room_name
                     connect.emit("ready_game", objectmapper.writeValueAsString(ready_game))
+                    please_ready.visibility = View.GONE // 숨기기
+                    show_attend.visibility = View.VISIBLE // 보여주기
+                    btn_game_ready.isEnabled = false
+                    btn_game_ready.setBackgroundColor(Color.LTGRAY)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -111,7 +117,7 @@ try {
                 check_ready.token = tok
                 check_ready.nickname = nick
                 check_ready.room_name = room_name
-                connect.emit("ready_game", objectmapper.writeValueAsString(check_ready))
+                connect.emit("check_ready", objectmapper.writeValueAsString(check_ready))
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
