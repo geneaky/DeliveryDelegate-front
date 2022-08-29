@@ -7,6 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 <!--    리사이클러뷰로 누가 들어왔고 누가 나갔는지 할거임  -->
+<!-- 크아처럼 보이는 게 좋을까.. -->
 
 
 
@@ -28,6 +29,23 @@
         android:textColor="@color/blue"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_game_ready"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintVertical_bias="0.75"
+        android:background="@color/tranceparent"
+        android:gravity="center"
+        android:fontFamily="@font/suncheonr"
+        android:text="게임 준비"
+        android:textColor="@color/blue"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/show_attend"
         android:text="방장이 게임을 시작하기 전까지 대기해주세요."
