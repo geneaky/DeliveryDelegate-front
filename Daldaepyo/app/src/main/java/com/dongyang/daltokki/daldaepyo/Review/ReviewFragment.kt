@@ -88,13 +88,14 @@ class ReviewFragment : Fragment() {
 
                         val reviewPrefs : SharedPreferences = context!!.getSharedPreferences("review", Context.MODE_PRIVATE)
                         val revEditor : SharedPreferences.Editor = reviewPrefs.edit()
-                        revEditor.putInt("review", review_id)
-                        revEditor.commit()
 
-                        val thumbPrefs : SharedPreferences = context!!.getSharedPreferences("thumbUp", Context.MODE_PRIVATE)
-                        val thumEditor : SharedPreferences.Editor = thumbPrefs.edit()
-                        thumEditor.putInt("thumbUp", thumb_up)
-                        thumEditor.commit()
+                        revEditor.putInt("review", review_id)
+                        revEditor.putString("rStore_name", store_name)
+                        revEditor.putString("rUser_name", user_name)
+                        revEditor.putString("rContent", content)
+                        revEditor.putString("rImg_path", image_path)
+                        revEditor.putInt("rThumb_up",thumb_up)
+                        revEditor.commit()
 
 
 
