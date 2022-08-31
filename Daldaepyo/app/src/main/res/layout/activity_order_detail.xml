@@ -93,6 +93,24 @@
         app:layout_constraintWidth_percent="0.6"
         app:layout_constraintVertical_bias="0.42"/>
 
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_warning"
+        android:text="게임 생성 후 게임에서 나가면 생성된 방이 삭제됩니다."
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintWidth_percent="0.9"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:fontFamily="@font/suncheonr"
+        android:textColor="@color/red" />
+
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
