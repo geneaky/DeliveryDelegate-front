@@ -2,12 +2,15 @@ package com.dongyang.daltokki.daldaepyo
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
-import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
+import com.dongyang.daltokki.daldaepyo.Game.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -98,6 +101,7 @@ class GameActivity : AppCompatActivity() {
 
             btn_game_start.visibility = View.VISIBLE // 보여주기
             btn_game_ready.visibility = View.GONE // 숨기기
+            please_ready.visibility = View.GONE // 숨기기
             show_attend.visibility = View.GONE // 숨기기
 
             try {
@@ -112,7 +116,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         btn_game_start.setOnClickListener { 
-try {
+            try {
                 val check_ready = CheckReady()
                 check_ready.token = tok
                 check_ready.nickname = nick
@@ -122,7 +126,7 @@ try {
                 e.printStackTrace()
             }
 
-            // 팀원들의 게임준비여부 확인(it 때문에 수정 가능성 있음)
+            // 팀원들의 게임준비여부 확인
             connect.on("check_ready", Emitter.Listener {
                 Log.d("LOGG", "${it[0]}")
                 if (it[0].toString() == "not ready") {
