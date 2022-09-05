@@ -60,6 +60,6 @@ class GameStartActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 5000)
+        }, 3000)
     }
 }
