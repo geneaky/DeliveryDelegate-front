@@ -40,7 +40,7 @@ class GameActivity : AppCompatActivity() {
         val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
-        val population = Gamepref.getString("Population", "")?.toInt()!!
+        val population = Gamepref.getInt("Population", 0)
         val Orderpref = getSharedPreferences("Orderpref", 0)
         val store_name = Orderpref.getString("store_name", "")!!
         val mapx = Orderpref.getString("lng", "")!!
