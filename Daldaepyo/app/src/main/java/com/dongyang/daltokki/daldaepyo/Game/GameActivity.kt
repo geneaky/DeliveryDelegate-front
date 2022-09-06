@@ -29,9 +29,13 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
 
         btn_game_start.visibility = View.GONE // 숨기기
+        btn_game_ready.visibility = View.GONE // 숨기기
         show_attend.visibility = View.GONE // 숨기기
+        please_ready.visibility = View.GONE // 숨기기
+
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
+        val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
         val population = Gamepref.getString("Population", "")?.toInt()!!
@@ -49,10 +53,13 @@ class GameActivity : AppCompatActivity() {
         if(detail.isNotEmpty()) { // 참석자는 게임 생성 시 sharedprefernec에 detail을 저장함.
 
             btn_game_start.visibility = View.GONE // 숨기기
-            show_attend.visibility = View.VISIBLE // 보여주기
+            btn_game_ready.visibility = View.VISIBLE // 보여주기
+            please_ready.visibility = View.VISIBLE // 보여주기
+            show_attend.visibility = View.GONE // 숨기기
 
-            val game_id = Gamepref.getString("game_id", "")?.toInt()!!
-            
+//            val game_id = Gamepref.getString("game_id", "")?.toInt()!!
+            val game_id : Int = Gamepref.getInt("game_id", 0)            
+
             try {
                 // 게임 참석
                 val attend_game = Attend()
@@ -71,9 +78,26 @@ class GameActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
 
+            btn_game_ready.setOnClickListener { // 게임 준비 버튼 클릭
+                try {
+                    val ready_game = Ready()
+                    ready_game.token = tok
+                    ready_game.nickname = nick
+                    ready_game.room_name = room_name
+                    connect.emit("ready_game", objectmapper.writeValueAsString(ready_game))
+                    please_ready.visibility = View.GONE // 숨기기
+                    show_attend.visibility = View.VISIBLE // 보여주기
+                    btn_game_ready.isEnabled = false
+                    btn_game_ready.setBackgroundColor(Color.LTGRAY)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+
         } else { // 방장은 게임 생성 시 sharedpreference에 detail을 저장하지 않음
 
             btn_game_start.visibility = View.VISIBLE // 보여주기
+            btn_game_ready.visibility = View.GONE // 숨기기
             show_attend.visibility = View.GONE // 숨기기
 
             try {
@@ -87,17 +111,36 @@ class GameActivity : AppCompatActivity() {
 
         }
 
-        btn_game_start.setOnClickListener { // 게임시작을 클릭하면 주사위가 돈다.
-            val intent = Intent(this, GameStartActivity::class.java)
-            startActivity(intent)
-            finish()
+        btn_game_start.setOnClickListener { 
+try {
+                val check_ready = CheckReady()
+                check_ready.token = tok
+                check_ready.nickname = nick
+                check_ready.room_name = room_name
+                connect.emit("check_ready", objectmapper.writeValueAsString(check_ready))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            // 팀원들의 게임준비여부 확인(it 때문에 수정 가능성 있음)
+            connect.on("check_ready", Emitter.Listener {
+                Log.d("LOGG", "${it[0]}")
+                if (it[0].toString() == "not ready") {
+                    Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
+                }
+                if (it[0].toString() == "complete_ready") {
+                    val intent = Intent(this, GameStartActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                    startActivity(intent)
+                    finish()
+                }
+            })
         }
 
 
         // 방장이 게임 시작 버튼을 누르면 게임이 시작됨(intent로 넘어감)
         // 만약, 방장이 나가면 방장을 다음에 입장한 사람에게 방장자리를 넘겨주기.. 가능..?
 
-
+/*
 // 대표자 탈주
         btn_delegator_run_away.setOnClickListener {
             val run_away = DelegatorRunAway()
@@ -156,7 +199,7 @@ class GameActivity : AppCompatActivity() {
             remove.ranking = 4 // ranking이 length(size)일 때만 대표자임
             connect.emit("game_remove", objectmapper.writeValueAsString(remove))
         }
-
+*/
 
 
 
@@ -175,6 +218,10 @@ class GameActivity : AppCompatActivity() {
             dialog.setTitle("입장불가")
             dialog.setMessage("참여 인원을 초과했습니다. 다른 게임을 이용해 주세요.").setPositiveButton("확인", null)
             dialog.show()
+        })
+        // 게임 준비 완료
+        connect.on("ready_game", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
         })
         // 대표자 탈주
         connect.on("delegator_run_away", Emitter.Listener {
