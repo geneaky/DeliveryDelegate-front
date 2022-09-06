@@ -25,7 +25,7 @@ class CreateGameActivity : AppCompatActivity() {
             edit.apply()
             edit.putString("Gametype", Gametype)
             edit.putString("Gamename", Gamename)
-            edit.putInt("Population", Population)
+            edit.putString("Population", Population)
             edit.putString("Gametext", Gametext)
             edit.commit()
 

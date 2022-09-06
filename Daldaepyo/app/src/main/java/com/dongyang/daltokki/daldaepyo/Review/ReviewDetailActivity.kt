@@ -21,11 +21,13 @@ class ReviewDetailActivity : AppCompatActivity() {
         val user_name = revPref.getString("rUser_name", "")
         val content = revPref.getString("rContent", "")
         val image_path = revPref.getString("rImg_path", "")
-        val thumb_up = revPref.getInt("thumb_up", 0)
+        val thumb_up = revPref.getInt("rThumb_up", 0).toString()
 
         tv_review_store.setText(store_name)
         tv_review_writer.setText(user_name)
         tv_review_content.setText(content)
-        Glide.with(this).load(image_path).into(img_review)
+        tv_thumbup_count.setText(thumb_up)
+        Glide.with(this).load("http://146.56.132.245:8080/"+image_path).into(findViewById(R.id.img_review))
+
     }
 }
