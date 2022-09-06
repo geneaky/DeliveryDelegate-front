@@ -3,6 +3,7 @@ package com.dongyang.daltokki.daldaepyo.Game
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
@@ -59,6 +60,6 @@ class GameStartActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 5000)
+        }, 3000)
     }
 }

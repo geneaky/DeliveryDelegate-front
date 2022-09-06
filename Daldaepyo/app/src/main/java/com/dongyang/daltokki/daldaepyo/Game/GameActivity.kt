@@ -2,12 +2,15 @@ package com.dongyang.daltokki.daldaepyo
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
-import com.dongyang.daltokki.daldaepyo.Game.SocketApplication
+import com.dongyang.daltokki.daldaepyo.Game.*
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
@@ -30,7 +33,6 @@ class GameActivity : AppCompatActivity() {
 
         btn_game_start.visibility = View.GONE // 숨기기
         btn_game_ready.visibility = View.GONE // 숨기기
-        show_attend.visibility = View.GONE // 숨기기
         please_ready.visibility = View.GONE // 숨기기
 
         val pref = getSharedPreferences("pref", 0)
@@ -38,7 +40,7 @@ class GameActivity : AppCompatActivity() {
         val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
-        val population = Gamepref.getString("Population", "")?.toInt()!!
+        val population = Gamepref.getInt("Population", 0)
         val Orderpref = getSharedPreferences("Orderpref", 0)
         val store_name = Orderpref.getString("store_name", "")!!
         val mapx = Orderpref.getString("lng", "")!!
@@ -55,7 +57,6 @@ class GameActivity : AppCompatActivity() {
             btn_game_start.visibility = View.GONE // 숨기기
             btn_game_ready.visibility = View.VISIBLE // 보여주기
             please_ready.visibility = View.VISIBLE // 보여주기
-            show_attend.visibility = View.GONE // 숨기기
 
 //            val game_id = Gamepref.getString("game_id", "")?.toInt()!!
             val game_id : Int = Gamepref.getInt("game_id", 0)            
@@ -85,8 +86,6 @@ class GameActivity : AppCompatActivity() {
                     ready_game.nickname = nick
                     ready_game.room_name = room_name
                     connect.emit("ready_game", objectmapper.writeValueAsString(ready_game))
-                    please_ready.visibility = View.GONE // 숨기기
-                    show_attend.visibility = View.VISIBLE // 보여주기
                     btn_game_ready.isEnabled = false
                     btn_game_ready.setBackgroundColor(Color.LTGRAY)
                 } catch (e: JSONException) {
@@ -98,7 +97,7 @@ class GameActivity : AppCompatActivity() {
 
             btn_game_start.visibility = View.VISIBLE // 보여주기
             btn_game_ready.visibility = View.GONE // 숨기기
-            show_attend.visibility = View.GONE // 숨기기
+            please_ready.visibility = View.GONE // 숨기기
 
             try {
                 // 게임 방장 생성 후 참가
@@ -112,7 +111,7 @@ class GameActivity : AppCompatActivity() {
         }
 
         btn_game_start.setOnClickListener { 
-try {
+            try {
                 val check_ready = CheckReady()
                 check_ready.token = tok
                 check_ready.nickname = nick
@@ -122,7 +121,7 @@ try {
                 e.printStackTrace()
             }
 
-            // 팀원들의 게임준비여부 확인(it 때문에 수정 가능성 있음)
+            // 팀원들의 게임준비여부 확인
             connect.on("check_ready", Emitter.Listener {
                 Log.d("LOGG", "${it[0]}")
                 if (it[0].toString() == "not ready") {
