@@ -34,7 +34,7 @@ class OrderDetailActivity_Master : AppCompatActivity(), OnMapReadyCallback {
             Toast.makeText(this@OrderDetailActivity_Master, "주문 상세 정보를 입력하세요.", Toast.LENGTH_LONG).show()
             val intent = Intent(this@OrderDetailActivity_Master, OrderDetailWriteActivity_Master::class.java)
             startActivity(intent)
-
+            finish()
         }
     }
     override fun onMapReady(naverMap: NaverMap) {

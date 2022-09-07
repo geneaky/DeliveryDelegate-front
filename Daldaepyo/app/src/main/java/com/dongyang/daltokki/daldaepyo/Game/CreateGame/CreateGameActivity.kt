@@ -31,6 +31,7 @@ class CreateGameActivity : AppCompatActivity() {
 
             val intent = Intent(this@CreateGameActivity, LandmarkActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

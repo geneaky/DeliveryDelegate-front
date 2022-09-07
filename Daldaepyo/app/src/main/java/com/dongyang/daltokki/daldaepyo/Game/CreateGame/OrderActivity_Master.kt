@@ -88,7 +88,7 @@ class OrderActivity_Master : AppCompatActivity() {
 
                             var intent = Intent(this@OrderActivity_Master, OrderDetailActivity_Master::class.java)
                             startActivity(intent)
-
+                            finish()
                         }
 
                     }

@@ -90,7 +90,7 @@ class AttendOrderActivity : AppCompatActivity() {
 
                             var intent = Intent(this@AttendOrderActivity, AttendOrderDetailActivity::class.java)
                             startActivity(intent)
-
+                            finish()
                         }
 
                     }

@@ -67,9 +67,10 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
                         editOrder.remove("detail")
                         editOrder.commit()
 
-                    Toast.makeText(this@OrderDetailWriteActivity_Master, "게임방 생성이 완료되었습니다.", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@OrderDetailWriteActivity_Master, GameActivity::class.java)
-                    startActivity(intent)
+                        Toast.makeText(this@OrderDetailWriteActivity_Master, "게임방 생성이 완료되었습니다.", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@OrderDetailWriteActivity_Master, GameActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(this@OrderDetailWriteActivity_Master, "게임방 생성에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
