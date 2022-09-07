@@ -128,7 +128,7 @@ class GameActivity : AppCompatActivity() {
                     Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
                 }
                 if (it[0].toString() == "complete_ready") {
-                    val intent = Intent(this, GameStartActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                    val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
                     startActivity(intent)
                     finish()
                 }

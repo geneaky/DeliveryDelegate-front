@@ -48,7 +48,8 @@
         <activity android:name=".Game.AttendOrderActivity" />
         <activity android:name=".Game.AttendOrderDetailActivity" />
         <activity android:name=".Game.AttendOrderDetailWriteActivity" />
-        <activity android:name=".Game.GameStartActivity" />
+        <activity android:name=".Game.GameRandomActivity" />
+        <activity android:name=".Game.GameResultActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
