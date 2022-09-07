@@ -1,16 +1,20 @@
 package com.dongyang.daltokki.daldaepyo.Board
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dongyang.daltokki.daldaepyo.Game.AttendOrderActivity
 import com.dongyang.daltokki.daldaepyo.R
 
 class BoardAdapter(private val context: Context, private val GameList: ArrayList<BoardItem>) :
     RecyclerView.Adapter<BoardAdapter.ItemViewHolder>() {
+
+    val preference = this.context.getSharedPreferences("Gamepref", 0)
 
     inner class ItemViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         private val title = itemView.findViewById<TextView>(R.id.tv_board_title)
@@ -25,6 +29,17 @@ class BoardAdapter(private val context: Context, private val GameList: ArrayList
             landmark.text = boardItem.landmark
             write.text = boardItem.write
             date.text = boardItem.date
+
+            itemView.setOnClickListener {
+                Intent(context, AttendOrderActivity::class.java).apply {
+                    val edit = preference.edit()
+                    edit.apply()
+                    edit.putString("room_name", boardItem.socket_room_name)
+                    edit.putInt("Population", boardItem.population)
+                    edit.putInt("game_id", boardItem.game_id)
+                    edit.commit()
+                }.run { context.startActivity(this) }
+            }
         }
     }
 
