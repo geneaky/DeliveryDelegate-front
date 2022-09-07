@@ -128,7 +128,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/tv_game_main_text"
-        android:text="줄글(다시 생각)"
+        android:text="추가설명"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
