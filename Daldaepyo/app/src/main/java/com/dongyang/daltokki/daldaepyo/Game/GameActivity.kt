@@ -213,7 +213,18 @@ class GameActivity : AppCompatActivity() {
         connect.on("check_ready", Emitter.Listener {
             Log.d("LOGG check_ready", "${it[0]}")
             if (it[0].toString() == "not_ready") {
-                Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
+//                if(detail.isNotEmpty()) { // 팀원
+//                    var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+//                    dialog.setTitle("게임시작불가")
+//                    dialog.setMessage("게임 준비를 클릭해주세요.").setPositiveButton("확인", null)
+//                    dialog.show()
+//                } else { // 방장
+//                    var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+//                    dialog.setTitle("게임시작불가")
+//                    dialog.setMessage("모든 사용자의 게임 준비 완료가 필요합니다.").setPositiveButton("확인", null)
+//                    dialog.show()
+//                }
             }
             if (it[0].toString() == "complete_ready") {
                 val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
