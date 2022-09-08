@@ -110,7 +110,7 @@ class GameActivity : AppCompatActivity() {
 
         }
 
-        btn_game_start.setOnClickListener { 
+        btn_game_start.setOnClickListener { // 게임 시작 버튼 클릭
             try {
                 val check_ready = CheckReady()
                 check_ready.token = tok
@@ -120,19 +120,6 @@ class GameActivity : AppCompatActivity() {
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-
-            // 팀원들의 게임준비여부 확인
-            connect.on("check_ready", Emitter.Listener {
-                Log.d("LOGG", "${it[0]}")
-                if (it[0].toString() == "not ready") {
-                    Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
-                }
-                if (it[0].toString() == "complete_ready") {
-                    val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
-                    startActivity(intent)
-                    finish()
-                }
-            })
         }
 
 
@@ -222,6 +209,18 @@ class GameActivity : AppCompatActivity() {
         connect.on("ready_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
         })
+        // 팀원들의 게임준비여부 확인
+        connect.on("check_ready", Emitter.Listener {
+            Log.d("LOGG check_ready", "${it[0]}")
+            if (it[0].toString() == "not_ready") {
+                Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+            if (it[0].toString() == "complete_ready") {
+                val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                startActivity(intent)
+                finish()
+            }
+        })
         // 대표자 탈주
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
@@ -237,6 +236,11 @@ class GameActivity : AppCompatActivity() {
         // 게임 접속 불가(연결 불가)
         connect.on("disconnect", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
+            // sharedpreference 삭제
+            val editOrder = Orderpref.edit()
+            editOrder.apply()
+            editOrder.remove("detail")
+            editOrder.commit()
         })
 
     }
@@ -262,42 +266,57 @@ class GameActivity : AppCompatActivity() {
 
         val objectmapper = ObjectMapper()
 
-        try {
-            // 게임 나가기(퇴장)
-            val quit_game = QuitGame()
-            quit_game.token = tok
-            quit_game.nickname = nick
-            quit_game.room_name = room_name
+        if(detail.isNotEmpty()) { // 참석자(팀원)인 경우
+            try {
+                // 게임 나가기(퇴장)
+                val quit_game = QuitGame()
+                quit_game.token = tok
+                quit_game.nickname = nick
+                quit_game.room_name = room_name
 
-            connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
-        } catch (e: JSONException) {
-            e.printStackTrace()
+                connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+
+                // sharedpreference 삭제
+                val editOrder = Orderpref.edit()
+                editOrder.apply()
+                editOrder.remove("detail")
+                editOrder.remove("store_name")
+                editOrder.remove("mapy")
+                editOrder.remove("mapx")
+                editOrder.commit()
+                val editGame = Gamepref.edit()
+                editGame.apply()
+                editGame.remove("room_name")
+                editGame.remove("population")
+                editGame.commit()
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        } else { // 방장인 경우
+            try {
+                // 게임 나가기(방 삭제)
+                // 방장은 대표자와 같이 1로 설정해두고 방장이 나가면 대표자가 탈주하는 것과 같은 효과를 줌
+                val delegator_run_away = DelegatorRunAway()
+                delegator_run_away.token = tok
+                delegator_run_away.room_name = room_name
+
+                connect.emit("delegator_run_away", objectmapper.writeValueAsString(delegator_run_away))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
         }
+
 
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-//            Log.d("LOGG", "${it[1]}")
-//            Log.d("LOGG", "${it[2]}")
             Toast.makeText(this, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
-//            val count = it[0].toString()
-//            Log.d("count", count)
         })
 
-        // sharedpreference 삭제
-        val Orderpref = getSharedPreferences("Orderpref", 0)
-        val editOrder = Orderpref.edit()
-        editOrder.apply()
-        editOrder.remove("detail")
-        editOrder.remove("store_name")
-        editOrder.remove("mapy")
-        editOrder.remove("mapx")
-        editOrder.commit()
-        val editGame = Gamepref.edit()
-        editGame.apply()
-        editGame.remove("room_name")
-        editGame.remove("population")
-        editGame.commit()
+        // 게임 나가기(방장의 퇴장으로, 게임 삭제)
+        connect.on("delegator_run_away", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+        })
 
 
         val intent = Intent(this@GameActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정

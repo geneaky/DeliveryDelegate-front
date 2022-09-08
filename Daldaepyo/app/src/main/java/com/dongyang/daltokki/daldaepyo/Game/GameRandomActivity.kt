@@ -12,7 +12,7 @@ class GameRandomActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_start)
+        setContentView(R.layout.activity_game_random)
 
         Glide.with(this).load(R.raw.random_dice).into(imageView)
         loadSplashScreen()
