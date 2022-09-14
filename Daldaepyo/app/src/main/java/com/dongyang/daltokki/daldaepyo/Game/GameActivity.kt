@@ -54,6 +54,7 @@ class GameActivity : AppCompatActivity() {
         val connect = mSocket.connect() // 소켓 연결
 
         val objectmapper = ObjectMapper()
+        val handler = Handler(Looper.getMainLooper()) // toast 및 dialog를 스레드에서 사용 가능하게 함
 
         if(detail.isNotEmpty()) { // 참석자는 게임 생성 시 sharedprefernec에 detail을 저장함.
 
@@ -126,73 +127,6 @@ class GameActivity : AppCompatActivity() {
         }
 
 
-        // 방장이 게임 시작 버튼을 누르면 게임이 시작됨(intent로 넘어감)
-        // 만약, 방장이 나가면 방장을 다음에 입장한 사람에게 방장자리를 넘겨주기.. 가능..?
-
-/*
-// 대표자 탈주
-        btn_delegator_run_away.setOnClickListener {
-            val run_away = DelegatorRunAway()
-            run_away.token = tok
-            run_away.room_name = room_name
-            connect.emit("delegator_run_away", objectmapper.writeValueAsString(run_away))
-            
-            
-//            var flag = 0
-//
-//            // 이건 대표자가 결정되면 바로 대표자에게 다이얼로그 보여주기(대표자만!)
-//            var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
-//            dialog.setTitle("대표자 참석여부 확인")
-//            // 확인 눌렀을 때의 이벤트 작성하기
-//            // 일정 시간 내에 보여주기(초 점점 사라지는 거 보여주기 해야 함_나중에)
-//            dialog.setMessage("대표자는 <확인> 버튼을 클릭해 주세요.")
-//            dialog.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, id ->
-//                Toast.makeText(applicationContext, "대표자 확인이 완료됐습니다.", Toast.LENGTH_SHORT).show()
-//            })
-//            dialog.show()
-//            flag = 1
-//
-//            if(flag == 1) { // 대표자가 탈주했음
-//                val run_away = DelegatorRunAway()
-//                run_away.token = tok
-//                run_away.room_name = room_name
-//                connect.emit("delegator_run_away", objectmapper.writeValueAsString(run_away))
-//            }
-            
-        }
-        // 대표자 다시 선정(미완)_잘 작동하지 않음 ..
-        btn_delegator_re_ranking.setOnClickListener {
-            val re_ranking = DelegatorReRanking()
-            re_ranking.token = tok
-            re_ranking.game_id = 1
-            re_ranking.room_name = room_name
-            re_ranking.nickname = "John"
-            re_ranking.ranking = 3
-            connect.emit("delegator_re_ranking", objectmapper.writeValueAsString(re_ranking))
-        }
-        // 대표자 랜드마크 도착(현재 위치와 맞는지 확인하는 것이 필요함)
-        btn_delegator_arrive.setOnClickListener {
-            val arrive = DelegatorArrive()
-            arrive.room_name = room_name
-            connect.emit("delegator_arrive", objectmapper.writeValueAsString(arrive))
-        }
-        // 게임 종료(미완)_ 잘 작동하지 않음
-        btn_game_end.setOnClickListener {
-            connect.emit("game_remove")
-        }
-        // 게임 삭제(대표자만 가능)_(미완)_잘 작동하지 않음
-        // 대표자가 게임을 나갈 때 있어야 하는 기능이 아닐까 싶음
-        btn_game_remove.setOnClickListener {
-            val remove = GameRemove()
-            remove.room_name = room_name
-            remove.ranking = 4 // ranking이 length(size)일 때만 대표자임
-            connect.emit("game_remove", objectmapper.writeValueAsString(remove))
-        }
-*/
-
-
-
-
 
 
         // 게임 참석
@@ -211,7 +145,6 @@ class GameActivity : AppCompatActivity() {
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
             }, 0)
@@ -224,18 +157,19 @@ class GameActivity : AppCompatActivity() {
         connect.on("check_ready", Emitter.Listener {
             Log.d("LOGG check_ready", "${it[0]}")
             if (it[0].toString() == "not_ready") {
-//                Toast.makeText(this@GameActivity, "모든 사용자의 게임 준비 완료가 필요합니다.", Toast.LENGTH_SHORT).show()
-//                if(detail.isNotEmpty()) { // 팀원
-//                    var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
-//                    dialog.setTitle("게임시작불가")
-//                    dialog.setMessage("게임 준비를 클릭해주세요.").setPositiveButton("확인", null)
-//                    dialog.show()
-//                } else { // 방장
-//                    var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
-//                    dialog.setTitle("게임시작불가")
-//                    dialog.setMessage("모든 사용자의 게임 준비 완료가 필요합니다.").setPositiveButton("확인", null)
-//                    dialog.show()
-//                }
+                handler.postDelayed(Runnable {
+                    if(detail.isNotEmpty()) { // 팀원
+                        var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+                        dialog.setTitle("게임시작불가")
+                        dialog.setMessage("게임 준비를 클릭해주세요.").setPositiveButton("확인", null)
+                        dialog.show()
+                    } else { // 방장
+                        var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+                        dialog.setTitle("게임시작불가")
+                        dialog.setMessage("모든 사용자의 게임 준비 완료가 필요합니다.").setPositiveButton("확인", null)
+                        dialog.show()
+                    }
+                }, 0)
             }
             if (it[0].toString() == "complete_ready") {
                 val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
@@ -246,7 +180,6 @@ class GameActivity : AppCompatActivity() {
         // 대표자 탈주
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameActivity, "방장이 퇴장하여 방이 폭파되었습니다.", Toast.LENGTH_SHORT).show()
             }, 0)
@@ -289,6 +222,7 @@ class GameActivity : AppCompatActivity() {
         val connect = mSocket.connect() // 소켓 연결
 
         val objectmapper = ObjectMapper()
+        val handler = Handler(Looper.getMainLooper()) // toast 및 dialog를 스레드에서 사용 가능하게 함
 
         if(detail.isNotEmpty()) { // 참석자(팀원)인 경우
             try {
@@ -334,7 +268,6 @@ class GameActivity : AppCompatActivity() {
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
             }, 0)
@@ -343,7 +276,6 @@ class GameActivity : AppCompatActivity() {
         // 게임 나가기(방장의 퇴장으로, 게임 삭제)
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameActivity, "방장이 퇴장하여 방이 폭파되었습니다.", Toast.LENGTH_SHORT).show()
             }, 0)
