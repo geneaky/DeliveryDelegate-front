@@ -88,7 +88,8 @@ data class OrderDto( // 음식 주문 정보
 )
 data class GameResponseDto( // 게임 생성 응답
         @SerializedName("name") val name: String,
-        @SerializedName("message") val message: String
+        @SerializedName("message") val message: String,
+        @SerializedName("game_id") val game_id: Int
 )
 
 data class FindGameResponseDto( // 게임방 검색

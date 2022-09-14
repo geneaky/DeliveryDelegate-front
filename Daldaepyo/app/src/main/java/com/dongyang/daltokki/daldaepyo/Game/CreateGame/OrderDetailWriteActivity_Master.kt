@@ -43,10 +43,10 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
         var mapy = Gamepref.getString("lat", "").toString()
 
         edt_store_name.setText(store_name)
-        var detail = edt_detail.text.toString()
 
         btn_create_game.setOnClickListener {
 
+            var detail = edt_detail.text.toString()
             val order = OrderDto(store_name, mapx, mapy, detail)
             val data = GameDto(gametype, gamename, gametext, population, landmark_name, landmark_posx, landmark_posy,
                     order) // x: 경도, y: 위도
@@ -58,9 +58,11 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
 
                     if(code == 200) {
                         val room_name = response.body()?.name
+                        val game_id = response.body()?.game_id!!
                         val edit = Gamepref.edit() // 수정모드
                         edit.apply()
                         edit.putString("room_name", room_name)
+                        edit.putInt("game_id", game_id)
                         edit.commit()
                         val editOrder = Orderpref.edit()
                         editOrder.apply()
