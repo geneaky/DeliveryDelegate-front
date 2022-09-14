@@ -22,6 +22,8 @@ import org.json.JSONException
 // socket.io 참조1: https://velog.io/@tera_geniel/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9Ckotlin%EC%99%80-nodejs-socket.io%EB%A1%9C-%ED%86%B5%EC%8B%A0%ED%95%98%EA%B8%B0
 // socket.io 참조2: https://github.com/jinusong/Android-Socket
 // https://dev-juyoung.github.io/2017/09/05/android-socket-io/
+// Toast error: https://velog.io/@ssook1222/%EC%98%A4%EB%8A%98%EC%9D%98-%EC%97%90%EB%9F%AC-java.lang.RuntimeException-Cant-toast-on-a-thread-that-has-not-called-Looper.prepare
+
 
 class GameActivity : AppCompatActivity() {
 
@@ -205,6 +207,14 @@ class GameActivity : AppCompatActivity() {
             dialog.setMessage("참여 인원을 초과했습니다. 다른 게임을 이용해 주세요.").setPositiveButton("확인", null)
             dialog.show()
         })
+        // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
+        connect.on("quit_game", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(Runnable {
+                Toast.makeText(this@GameActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
+            }, 0)
+        })
         // 게임 준비 완료
         connect.on("ready_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
@@ -235,10 +245,10 @@ class GameActivity : AppCompatActivity() {
         // 대표자 탈주
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-        })
-        // 대표자 다시 선정
-        connect.on("delegator_re_ranking", Emitter.Listener {
-            Log.d("LOGG", "${it[0]}")
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(Runnable {
+                Toast.makeText(this@GameActivity, "방장이 퇴장하여 방이 폭파되었습니다.", Toast.LENGTH_SHORT).show()
+            }, 0)
         })
         // 대표자 랜드마크 도착
         connect.on("delegator_arrive", Emitter.Listener {
@@ -323,12 +333,19 @@ class GameActivity : AppCompatActivity() {
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            Toast.makeText(this, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(Runnable {
+                Toast.makeText(this@GameActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
+            }, 0)
         })
 
         // 게임 나가기(방장의 퇴장으로, 게임 삭제)
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
+            val handler = Handler(Looper.getMainLooper())
+            handler.postDelayed(Runnable {
+                Toast.makeText(this@GameActivity, "방장이 퇴장하여 방이 폭파되었습니다.", Toast.LENGTH_SHORT).show()
+            }, 0)
         })
 
 
