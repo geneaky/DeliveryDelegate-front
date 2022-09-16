@@ -1,20 +1,20 @@
 package com.dongyang.daltokki.daldaepyo.Game
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dongyang.daltokki.daldaepyo.Game.EmitObject.DelegatorRunAway
-import com.dongyang.daltokki.daldaepyo.Game.EmitObject.GameResult
-import com.dongyang.daltokki.daldaepyo.Game.EmitObject.OnGame
-import com.dongyang.daltokki.daldaepyo.Game.EmitObject.QuitGame
+import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
 import com.dongyang.daltokki.daldaepyo.MainActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.android.synthetic.main.activity_game_result.*
 import org.json.JSONException
 
 class GameResultActivity : AppCompatActivity() {
@@ -35,6 +35,7 @@ class GameResultActivity : AppCompatActivity() {
         val connect = mSocket.connect() // 소켓 연결
 
         val objectmapper = ObjectMapper()
+        val handler = Handler(Looper.getMainLooper())
 
         try {
             // 게임 시작
@@ -58,12 +59,31 @@ class GameResultActivity : AppCompatActivity() {
         // 게임 결과
         connect.on("game_result", Emitter.Listener {
             Log.d("LOGG game_result", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed(Runnable {
-                // 토스트 창을 띄울 코드를 여기에 적어주자 : )
-                Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
-            }, 0)
-        });
+
+            if(game_result == "대표자가 선정되었습니다") {
+                handler.postDelayed(Runnable {
+                    // 토스트 창을 띄울 코드를 여기에 적어주자 : )
+                    tv_result.text = it[0].toString()
+                    Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
+                }, 0)
+            } else {
+                handler.postDelayed(Runnable {
+                    tv_result.text = it[0].toString()
+                    Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
+
+                    val readValue : List<ShowGameResult> = objectmapper.readValue(game_result)
+                    val order_size = readValue.size!!
+
+                    for(i in 0 until order_size) {
+                        val store_name = readValue.get(i).store_name
+                        val mapx = readValue.get(i).mapx
+                        val mapy = readValue.get(i).mapy
+                        val detail = readValue.get(i).detail
+
+                    }
+                }, 0)
+            }
+        })
 
         // 게임 완료 시 sharedpreference 모두 삭제하기
     }
