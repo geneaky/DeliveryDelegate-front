@@ -32,7 +32,6 @@ class ReviewFragment : Fragment() {
 
     lateinit var adapter: ReviewAdapter
 
-    val Review_Adapter: ArrayList<ReviewItem> = ArrayList()
     lateinit var recyclerView1: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +51,6 @@ class ReviewFragment : Fragment() {
         val preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
         val tok = preferences.getString("token", "").toString()
 
-        val reviewPref = this.requireActivity().getSharedPreferences("review", 0)
-        val review = reviewPref.getInt("review", 0)
-
-        val data = ThumbUpDto(review)
-
         adapter = ReviewAdapter(requireContext())
 
         recyclerView1 = rootView.findViewById(R.id.rv_review!!) as RecyclerView
@@ -73,6 +67,7 @@ class ReviewFragment : Fragment() {
 
                 if (code == 200) {
                     adapter.submitList(result!!)
+
                 } else {
                     Log.d("error", "에러")
                 }
@@ -117,6 +112,15 @@ class ReviewFragment : Fragment() {
                 e.printStackTrace()
             }
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        recyclerView1.layoutManager = LinearLayoutManager(requireContext())
+        adapter = ReviewAdapter(requireContext())
+        recyclerView1.adapter = adapter
 
     }
 

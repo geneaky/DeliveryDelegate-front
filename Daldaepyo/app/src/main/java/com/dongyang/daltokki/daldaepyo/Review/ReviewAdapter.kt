@@ -26,6 +26,8 @@ class ReviewAdapter(
     val preferences = this.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
     val tok = preferences.getString("token", "").toString()
 
+    var thumbUp = false
+
     fun submitList(rList: List<ReviewDto>) {
         this.rList.clear()
         this.rList.addAll(rList)
@@ -48,18 +50,26 @@ class ReviewAdapter(
             content.text = item.content
             thumb_up.text = item.thumb_up.toString()
 
-
-//            itemView.setOnClickListener {
-//                Intent(context, ReviewDetailActivity::class.java).apply{
-//
-//                }.run {
-//                    context.startActivity(this)
-//                }
-//            }
-
             btn_thumbUp.setOnClickListener {
                 Log.d("ReviewAdapter ::", "onClick")
                 like(position + 1)
+                var count = 0
+                count++
+                thumb_up.text = (item.thumb_up + count).toString()
+                notifyDataSetChanged()
+                thumbUp = true
+
+                if(thumbUp != true){
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                    notifyItemChanged(position)
+                }
+                else{
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                    btn_thumbUp.setOnClickListener{
+                        thumbUp = false
+                        notifyItemChanged(position)
+                    }
+                }
             }
 
             Glide.with(itemView)
@@ -75,6 +85,8 @@ class ReviewAdapter(
 
     override fun onBindViewHolder(holder: ReviewAdapter.ItemViewHolder, position: Int) {
         holder.bind(rList[position], position)
+
+
     }
 
     override fun getItemCount(): Int = rList.size
@@ -91,6 +103,7 @@ class ReviewAdapter(
                 Log.d("ReviewAdapter ::", t.message.toString())
             }
         })
+
     }
 }
 
