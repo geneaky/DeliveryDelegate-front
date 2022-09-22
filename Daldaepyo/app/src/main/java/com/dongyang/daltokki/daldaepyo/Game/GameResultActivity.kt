@@ -12,18 +12,23 @@ import com.dongyang.daltokki.daldaepyo.MainActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_game_result.*
 import org.json.JSONException
 
-class GameResultActivity : AppCompatActivity() {
+class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
     lateinit var mSocket: Socket
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_result)
+
+        tv_result.visibility = View.GONE // 숨기기
 
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
@@ -62,30 +67,69 @@ class GameResultActivity : AppCompatActivity() {
 
             if(game_result == "대표자가 선정되었습니다") {
                 handler.postDelayed(Runnable {
-                    // 토스트 창을 띄울 코드를 여기에 적어주자 : )
+                    tv_result.visibility = View.VISIBLE // 보여주기
                     tv_result.text = it[0].toString()
                     Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
                 }, 0)
             } else {
                 handler.postDelayed(Runnable {
-                    tv_result.text = it[0].toString()
+
                     Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
 
-                    val readValue : List<ShowGameResult> = objectmapper.readValue(game_result)
-                    val order_size = readValue.size!!
+                    val OrderList = getSharedPreferences("OrderList", 0)
+                    val editOrder = OrderList.edit()
+                    editOrder.apply()
+                    editOrder.putString("result", game_result)
+                    editOrder.commit()
 
-                    for(i in 0 until order_size) {
-                        val store_name = readValue.get(i).store_name
-                        val mapx = readValue.get(i).mapx
-                        val mapy = readValue.get(i).mapy
-                        val detail = readValue.get(i).detail
-
-                    }
                 }, 0)
+
+                val fm = supportFragmentManager
+                val mapFragment = fm.findFragmentById(R.id.map_view2) as MapFragment?
+                        ?: MapFragment.newInstance().also {
+                            fm.beginTransaction().add(R.id.map_view2, it).commit()
+                        }
+                mapFragment.getMapAsync(this)
             }
         })
 
         // 게임 완료 시 sharedpreference 모두 삭제하기
+    }
+
+    override fun onMapReady(naverMap: NaverMap) {
+
+        val objectmapper = ObjectMapper()
+
+        val OrderList = getSharedPreferences("OrderList", 0)
+        val game_result = OrderList.getString("result", "")!!
+        Log.d("map_game_result", game_result)
+
+        val readSize2: List<ShowGameResult> = objectmapper.readValue(game_result)
+        val order_size = readSize2.size
+        Log.d("order_size", order_size.toString())
+
+        for (i in 0 until order_size!!) {
+            val marker = Marker()
+
+            val store_name = readSize2[i].store_name
+            val mapx: Double = readSize2[i].mapx.toDouble()
+            val mapy: Double = readSize2[i].mapy.toDouble()
+            val detail = readSize2[i].detail
+
+            Log.d("store_name", store_name)
+            Log.d("mapx", mapx.toString())
+            Log.d("mapy", mapy.toString())
+            Log.d("detail", detail)
+
+            var camPos = CameraPosition(LatLng(mapy, mapx), 17.0)
+            naverMap.cameraPosition = camPos
+
+            // 마커찍기
+            marker.position = LatLng(mapy, mapx) // 마커
+            marker.captionText = store_name + "\n" + detail // 마커에 텍스트 찍기
+            marker.map = naverMap
+
+        }
     }
 
     override fun onBackPressed() {
