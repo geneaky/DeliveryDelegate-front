@@ -39,8 +39,8 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
 
         val Orderpref = getSharedPreferences("Orderpref", 0) // Order 정보
         var store_name = Orderpref.getString("title", "").toString()
-        var mapx = Gamepref.getString("lng", "").toString()
-        var mapy = Gamepref.getString("lat", "").toString()
+        var mapx = Orderpref.getString("lng", "").toString()
+        var mapy = Orderpref.getString("lat", "").toString()
 
         edt_store_name.setText(store_name)
 
