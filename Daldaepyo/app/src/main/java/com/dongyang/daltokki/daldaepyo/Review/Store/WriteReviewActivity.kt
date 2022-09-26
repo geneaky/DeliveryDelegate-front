@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.dongyang.daltokki.daldaepyo.PermissionActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.ReviewFragment
+import com.dongyang.daltokki.daldaepyo.User.UserFragment
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -95,7 +96,10 @@ class WriteReviewActivity : PermissionActivity() {
 
                         if(code == 200){
                             val message = response.body()?.message.toString()
-                            finish()
+
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_frame, ReviewFragment())
+                                .commit()
                         }
 
                         if(code == 500){
