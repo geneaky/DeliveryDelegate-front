@@ -59,7 +59,7 @@ interface UserAPI {
     fun postCreateGame(@Header("token") token: String,
                  @Body jsonparams: GameDto): Call<GameResponseDto> // 게임방 생성
 
-    @GET("/game/rooms")
+    @GET("/town/rooms")
     fun getFindGame(@Header("token") token: String
     ) : Call<FindGameResponseDto> // 게임방 검색
 

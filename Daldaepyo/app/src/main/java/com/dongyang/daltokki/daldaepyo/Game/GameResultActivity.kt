@@ -8,6 +8,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
 import com.dongyang.daltokki.daldaepyo.MainActivity
@@ -72,12 +73,18 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.d("LOGG game_result", "${it[0]}")
             var game_result = it[0].toString()
 
+            val OrderList = getSharedPreferences("OrderList", 0)
+            val editOrder = OrderList.edit()
+
             if(game_result == "대표자가 선정되었습니다") {
 
                 handler.postDelayed(Runnable {
 
-                    tv_result1.visibility = View.VISIBLE // 보여주기
+                    tv_result2.visibility = View.VISIBLE // 보여주기
                     take_quit.visibility = View.VISIBLE // 보여주기
+
+                    take_quit.isEnabled = false // 비활성화
+                    take_quit.setBackgroundColor(Color.LTGRAY)
 
                     val landmark_result = LandmarkResult()
                     landmark_result.store_name = Gamepref.getString("title", "")!!
@@ -93,7 +100,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 handler.postDelayed(Runnable {
 
-                    tv_result2.visibility = View.VISIBLE // 보여주기
+                    tv_result1.visibility = View.VISIBLE // 보여주기
                     arrive.visibility = View.VISIBLE // 보여주기
                     quit_game.visibility = View.VISIBLE // 보여주기
 
@@ -138,6 +145,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.d("LOGG delegator_arrive", "${it[0]}")
 
             handler.postDelayed(Runnable {
+
+                take_quit.isEnabled = true // 활성화
+                take_quit.setBackgroundColor(Color.WHITE)
+
                 var dialog = AlertDialog.Builder(this@GameResultActivity, R.style.MyDialogTheme)
                 dialog.setTitle("배달완료")
                 dialog.setMessage("${it[0]}.").setPositiveButton("확인", null)
