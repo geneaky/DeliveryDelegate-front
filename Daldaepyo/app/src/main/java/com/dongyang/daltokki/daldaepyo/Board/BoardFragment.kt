@@ -93,7 +93,7 @@ class BoardFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        btn_create_game.setOnClickListener {
+        btn_board_write.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
                 val i = Intent(this@BoardFragment.getActivity(), CreateGameActivity::class.java)

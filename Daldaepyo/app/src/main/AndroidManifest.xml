@@ -24,7 +24,8 @@
             android:label="@string/title_activity_review_detail"
             android:theme="@style/Theme.Daldaepyo.NoActionBar" >
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustNothing" />

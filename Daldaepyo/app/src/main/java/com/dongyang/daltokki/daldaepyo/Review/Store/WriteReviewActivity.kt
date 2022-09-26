@@ -13,8 +13,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.dongyang.daltokki.daldaepyo.PermissionActivity
 import com.dongyang.daltokki.daldaepyo.R
+import com.dongyang.daltokki.daldaepyo.ReviewFragment
+import com.dongyang.daltokki.daldaepyo.User.UserFragment
 import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -91,11 +96,10 @@ class WriteReviewActivity : PermissionActivity() {
 
                         if(code == 200){
                             val message = response.body()?.message.toString()
-                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
-                            dialog.setTitle("리뷰 등록")
-                            dialog.setMessage("등록 성공하였습니다").setPositiveButton("확인", null)
-                            dialog.show()
-                            return
+
+                            supportFragmentManager.beginTransaction()
+                                .replace(R.id.main_frame, ReviewFragment())
+                                .commit()
                         }
 
                         if(code == 500){
@@ -158,12 +162,8 @@ class WriteReviewActivity : PermissionActivity() {
                         Log.d("log body", response.body().toString())
 
                         if(code == 200){
-                            val message = response.body()?.message.toString()
-                            var dialog = AlertDialog.Builder(this@WriteReviewActivity)
-                            dialog.setTitle("등록 성공!")
-                            dialog.setMessage(message).setPositiveButton("확인", null)
-                            dialog.show()
-                            return
+                            finish()
+
                         }
 
                         if(code == 500){
@@ -298,6 +298,11 @@ class WriteReviewActivity : PermissionActivity() {
         var result = c?.getString(index!!)
 
         return result!!
+    }
+
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager){
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
     }
 
 
