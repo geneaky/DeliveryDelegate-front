@@ -137,10 +137,12 @@ class GameActivity : AppCompatActivity() {
         // 인원 초과
         connect.on("population", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
-            dialog.setTitle("입장불가")
-            dialog.setMessage("참여 인원을 초과했습니다. 다른 게임을 이용해 주세요.").setPositiveButton("확인", null)
-            dialog.show()
+            handler.postDelayed(Runnable {
+                var dialog = AlertDialog.Builder(this@GameActivity, R.style.MyDialogTheme)
+                dialog.setTitle("입장불가")
+                dialog.setMessage("참여 인원을 초과했습니다. 다른 게임을 이용해 주세요.").setPositiveButton("확인", null)
+                dialog.show()
+            }, 0)
         })
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
