@@ -162,7 +162,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/tv_warning2"
-        android:text="인원 수는 5명 이하로 설정 가능합니다."
+        android:text="인원 수는 4명 이하로 설정 가능합니다."
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

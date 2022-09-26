@@ -20,10 +20,10 @@ class CreateGameActivity : AppCompatActivity() {
             var Population = edt_population.text.toString().toInt()
             var Gametext = edt_game_main_text.text.toString() // server: game_main_text
 
-            if(Population > 5) {
+            if(Population > 4) {
                 var dialog = AlertDialog.Builder(this@CreateGameActivity, R.style.MyDialogTheme)
                 dialog.setTitle("인원 수 에러")
-                dialog.setMessage("인원 수는 5명 이하로 설정해 주세요.").setPositiveButton("확인", null)
+                dialog.setMessage("인원 수는 4명 이하로 설정해 주세요.").setPositiveButton("확인", null)
                 dialog.show()
                 return@setOnClickListener
             }

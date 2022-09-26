@@ -203,7 +203,6 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.d("LOGG", "${it[0]}")
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
-                // 토스트 창을 띄울 코드를 여기에 적어주자 : )
                 Toast.makeText(this@GameResultActivity, "대표자로 뽑혔음에도 퇴장을 하여, 패널티가 부여됩니다.", Toast.LENGTH_SHORT).show()
             }, 0)
         })
