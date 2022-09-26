@@ -17,8 +17,8 @@
         android:icon="@drawable/ic_notification"/>
 
     <item
-        android:id="@+id/menu_personal_info"
-        android:title="my"
+        android:id="@+id/menu_user"
+        android:title="user"
         android:icon="@drawable/ic_person"/>
 
 </menu>

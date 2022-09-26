@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
+import com.dongyang.daltokki.daldaepyo.User.UserFragment
 import com.dongyang.daltokki.daldaepyo.retrofit.LatlngDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.naver.maps.geometry.LatLng
@@ -72,6 +74,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                         val intent = Intent(this@LocationActivity, MainActivity::class.java)
                         startActivity(intent)
                         finish()
+
                     } else if(code == 500) {
                         Toast.makeText(this@LocationActivity, "동네 설정에 실패했습니다. 관리자에게 문의해 주세요.", Toast.LENGTH_SHORT).show()
                     }
@@ -87,6 +90,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     val intent = Intent(this@LocationActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
+
                 }
             })
         }
