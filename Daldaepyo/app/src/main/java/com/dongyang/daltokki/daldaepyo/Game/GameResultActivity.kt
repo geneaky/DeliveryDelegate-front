@@ -1,10 +1,12 @@
 package com.dongyang.daltokki.daldaepyo.Game
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
@@ -28,7 +30,11 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_result)
 
-        tv_result.visibility = View.GONE // 숨기기
+        tv_result1.visibility = View.GONE // 숨기기
+        tv_result2.visibility = View.GONE // 숨기기
+        arrive.visibility = View.GONE // 숨기기
+        quit_game.visibility = View.GONE // 숨기기
+        take_quit.visibility = View.GONE // 숨기기
 
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
@@ -64,34 +70,97 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         // 게임 결과
         connect.on("game_result", Emitter.Listener {
             Log.d("LOGG game_result", "${it[0]}")
+            var game_result = it[0].toString()
 
             if(game_result == "대표자가 선정되었습니다") {
+
                 handler.postDelayed(Runnable {
-                    tv_result.visibility = View.VISIBLE // 보여주기
-                    tv_result.text = it[0].toString()
-                    Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
+
+                    tv_result1.visibility = View.VISIBLE // 보여주기
+                    take_quit.visibility = View.VISIBLE // 보여주기
+
+                    val landmark_result = LandmarkResult()
+                    landmark_result.store_name = Gamepref.getString("title", "")!!
+                    landmark_result.mapy = Gamepref.getString("lat", "")!!
+                    landmark_result.mapx = Gamepref.getString("lng", "")!!
+                    landmark_result.detail = ""
+                    val result = arrayListOf(objectmapper.writeValueAsString(landmark_result)).toString()
+                    editOrder.apply()
+                    editOrder.putString("result", result)
+                    editOrder.commit()
+
                 }, 0)
             } else {
                 handler.postDelayed(Runnable {
 
-                    Toast.makeText(this@GameResultActivity, "게임 결과, ${it[0]}", Toast.LENGTH_SHORT).show()
+                    tv_result2.visibility = View.VISIBLE // 보여주기
+                    arrive.visibility = View.VISIBLE // 보여주기
+                    quit_game.visibility = View.VISIBLE // 보여주기
 
-                    val OrderList = getSharedPreferences("OrderList", 0)
-                    val editOrder = OrderList.edit()
+                    quit_game.isEnabled = false // 비활성화
+                    quit_game.setBackgroundColor(Color.LTGRAY)
+
                     editOrder.apply()
                     editOrder.putString("result", game_result)
                     editOrder.commit()
 
                 }, 0)
+            }
+            val fm = supportFragmentManager
+            val mapFragment = fm.findFragmentById(R.id.map_view3) as MapFragment?
+                ?: MapFragment.newInstance().also {
+                    fm.beginTransaction().add(R.id.map_view3, it).commit()
+                }
+            mapFragment.getMapAsync(this)
+        })
 
-                val fm = supportFragmentManager
-                val mapFragment = fm.findFragmentById(R.id.map_view2) as MapFragment?
-                        ?: MapFragment.newInstance().also {
-                            fm.beginTransaction().add(R.id.map_view2, it).commit()
-                        }
-                mapFragment.getMapAsync(this)
+
+        arrive.setOnClickListener {
+
+            handler.postDelayed(Runnable {
+                quit_game.isEnabled = true // 비활성화
+                quit_game.setBackgroundColor(Color.WHITE)
+            }, 0)
+
+
+            try {
+                // 배달 완료
+                val delegator_arrive = DelegatorArrive()
+                delegator_arrive.room_name = room_name
+
+                connect.emit("delegator_arrive", objectmapper.writeValueAsString(delegator_arrive))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+
+        connect.on("delegator_arrive",Emitter.Listener {
+            Log.d("LOGG delegator_arrive", "${it[0]}")
+
+            handler.postDelayed(Runnable {
+                var dialog = AlertDialog.Builder(this@GameResultActivity, R.style.MyDialogTheme)
+                dialog.setTitle("배달완료")
+                dialog.setMessage("${it[0]}.").setPositiveButton("확인", null)
+                dialog.show()
+            }, 0)
+
+            try {
+                // 게임 종료
+                connect.emit("game_end")
+            } catch (e: JSONException) {
+                e.printStackTrace()
             }
         })
+
+        connect.on("game_end", Emitter.Listener {
+            Log.d("LOGG game_end", "${it[0]}")
+
+        })
+
+        take_quit.setOnClickListener {
+
+        }
+
 
         // 게임 완료 시 sharedpreference 모두 삭제하기
     }
