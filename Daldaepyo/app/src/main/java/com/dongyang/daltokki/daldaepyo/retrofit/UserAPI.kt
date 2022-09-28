@@ -85,6 +85,11 @@ interface UserAPI {
             @Body jsonparams : ThumbUpDto
     ): Call <ThumbUpDto>
 
+    @GET("/myPage")
+    fun getUser(
+        @Header("token") token: String
+    ): Call <UserDto>
+
 
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"

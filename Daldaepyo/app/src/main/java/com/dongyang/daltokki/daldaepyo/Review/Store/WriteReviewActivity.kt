@@ -24,7 +24,6 @@ import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
-import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

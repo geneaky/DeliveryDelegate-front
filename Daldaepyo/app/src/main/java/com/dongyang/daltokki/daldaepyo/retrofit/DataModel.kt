@@ -1,5 +1,6 @@
 package com.dongyang.daltokki.daldaepyo.retrofit
 
+import android.provider.ContactsContract
 import android.text.format.DateFormat
 import com.dongyang.daltokki.daldaepyo.retofit.LocationInfoResponseDto
 import com.google.gson.annotations.SerializedName
@@ -61,10 +62,7 @@ data class ReviewDto(
         @SerializedName("store_name") val store_name : String,
         @SerializedName("image_path") val image_path : String,
         @SerializedName("review_id") val review_id : Int
-
 )
-
-
 
 data class ReviewCountDto(
         @SerializedName("message") val message: List<ReviewDto>
@@ -99,10 +97,7 @@ data class FindGameResponseDto( // 게임방 검색
 data class ReviewResponseDto(
         @SerializedName("message") val message : String
 )
-data class WriteReviewImageDto(
-        @SerializedName ("store_id") var store_id: Int,
-        @SerializedName("body") var body : String
-)
+
 
 data class WriteReviewDto(
         @SerializedName ("store_id") var store_id: Int,
@@ -111,5 +106,17 @@ data class WriteReviewDto(
 
 data class ThumbUpDto(
         @SerializedName("review_id") var review_id : Int
+)
+
+data class UserDto(
+        @SerializedName("userInfo")var userInfo : User
+)
+
+data class User(
+        @SerializedName("user_id") var user_id : Int,
+        @SerializedName("phone_number") val phone_number: String,
+        @SerializedName("nickname") val nickname : String,
+        @SerializedName("coupon_count") val coupon_count : Int,
+        @SerializedName("count") val count : Int
 )
 
