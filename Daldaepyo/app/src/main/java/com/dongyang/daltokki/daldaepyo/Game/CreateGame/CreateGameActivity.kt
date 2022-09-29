@@ -31,7 +31,6 @@ class CreateGameActivity : AppCompatActivity() {
             val Gamepref = getSharedPreferences("Gamepref", 0)
             val edit = Gamepref.edit()
             edit.apply()
-            edit.putString("Gametype", Gametype)
             edit.putString("Gamename", Gamename)
             edit.putInt("Population", Population)
             edit.putString("Gametext", Gametext)

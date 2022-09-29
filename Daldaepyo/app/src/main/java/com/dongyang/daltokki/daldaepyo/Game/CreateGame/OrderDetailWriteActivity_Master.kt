@@ -29,7 +29,6 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
         val tok = pref.getString("token", "").toString()
 
         val Gamepref = getSharedPreferences("Gamepref", 0)
-        var gametype = Gamepref.getString("Gametype", "").toString()
         var gamename = Gamepref.getString("Gamename", "").toString()
         var gametext = Gamepref.getString("Gametext", "").toString()
         var population = Gamepref.getInt("Population", 0)
@@ -48,7 +47,7 @@ class OrderDetailWriteActivity_Master : AppCompatActivity() {
 
             var detail = edt_detail.text.toString()
             val order = OrderDto(store_name, mapx, mapy, detail)
-            val data = GameDto(gametype, gamename, gametext, population, landmark_name, landmark_posx, landmark_posy,
+            val data = GameDto(gamename, gametext, population, landmark_name, landmark_posx, landmark_posy,
                     order) // x: 경도, y: 위도
             api.postCreateGame(tok, data).enqueue(object : Callback<GameResponseDto> {
                 override fun onResponse(call: Call<GameResponseDto>, response: Response<GameResponseDto>) {
