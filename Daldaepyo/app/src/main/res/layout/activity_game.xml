@@ -6,8 +6,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    리사이클러뷰로 누가 들어왔고 누가 나갔는지 할거임  -->
-<!-- 크아처럼 보이는 게 좋을까.. -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="참가인원"
+        android:id="@+id/tv_text"
+        android:gravity="center"
+        android:textColor="@color/darkgray"
+        app:layout_constraintBottom_toTopOf="@+id/tv_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="NotSibling" />
+
+    <ListView
+        android:id="@+id/delegator_list_view"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text"
+        app:layout_constraintHeight_percent="0.85"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_percent="1"
+        tools:ignore="NotSibling" />
 
     <TextView
         android:id="@+id/please_ready"
@@ -20,7 +42,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHeight_percent="0.09"
         app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.65"
         android:background="@color/tranceparent"
         android:gravity="center"
         android:textColor="@color/blue"
