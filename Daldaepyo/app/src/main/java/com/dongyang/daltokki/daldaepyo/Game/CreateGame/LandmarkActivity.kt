@@ -38,7 +38,9 @@ class LandmarkActivity : AppCompatActivity() {
                                         response: Response<SearchResponseDto>
                 ) {
 
+                    Log.d("랜드마크 검색", response.body().toString())
                     val result_size = response.body()?.result?.size
+                    Log.d("랜드마크 검색", response.body().toString())
                     val code = response.code()
 
                     if(code == 500) {
