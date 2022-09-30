@@ -50,6 +50,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         val handler = Handler(Looper.getMainLooper())
 
         try {
+            val last_attend = DelegatorArrive()
+            last_attend.room_name = room_name
             // 게임 시작
             val on_game = OnGame()
             on_game.token = tok
@@ -63,6 +65,11 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
+
+        // 재참여
+        connect.on("last_attend", Emitter.Listener {
+            Log.d("LOGG last_attend", "${it[0]}")
+        })
 
         // 게임 시작 결과(랜덤 배치 끝)
         connect.on("on_game", Emitter.Listener {
@@ -131,17 +138,17 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
             try {
-                // 배달 완료
+                // 랜드마크 도착
                 val delegator_arrive = DelegatorArrive()
                 delegator_arrive.room_name = room_name
 
-                connect.emit("delegator_arrive", objectmapper.writeValueAsString(delegator_arrive))
+                connect.emit("arrive", objectmapper.writeValueAsString(delegator_arrive))
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
         }
 
-        connect.on("delegator_arrive",Emitter.Listener {
+        connect.on("arrive", Emitter.Listener {
             Log.d("LOGG delegator_arrive", "${it[0]}")
 
             handler.postDelayed(Runnable {
@@ -154,23 +161,74 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 dialog.setMessage("${it[0]}.").setPositiveButton("확인", null)
                 dialog.show()
             }, 0)
+        })
 
+
+        // 받았으면 나가기(예비대표의 게임방 나가기)
+        take_quit.setOnClickListener {
             try {
-                // 게임 종료
-                connect.emit("game_end")
+                // 게임 나가기(퇴장)
+                val quit_game = QuitGame()
+                quit_game.token = tok
+                quit_game.nickname = nick
+                quit_game.room_name = room_name
+
+                connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-        })
+        }
 
-        connect.on("game_end", Emitter.Listener {
-            Log.d("LOGG game_end", "${it[0]}")
 
-        })
+        // 배달완료(대표의 게임방 나가기)
+        quit_game.setOnClickListener {
 
-        take_quit.setOnClickListener {
+            try {
+                // 게임 나가기(퇴장)
+                val quit_game = QuitGame()
+                quit_game.token = tok
+                quit_game.nickname = nick
+                quit_game.room_name = room_name
+
+                connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
 
         }
+
+        // 게임 나가기(대표가 방을 나갈 때만 방이 폭파됨)
+        connect.on("quit_game", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+            val result = it[0].toString()
+
+            if(result == "방이 폭파되었습니다") {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this@GameResultActivity, "대표가 배달을 완료하여 방이 삭제됩니다.", Toast.LENGTH_SHORT).show()
+
+//                    onBackPressed()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }, 0)
+            } else {
+                handler.postDelayed(Runnable {
+                    Toast.makeText(this@GameResultActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
+                }, 0)
+            }
+        })
+
+        // 대표자의 퇴장
+        connect.on("delegator_run_away", Emitter.Listener {
+            Log.d("LOGG", "${it[0]}")
+            handler.postDelayed(Runnable {
+                Toast.makeText(this@GameResultActivity, "대표자로 뽑혔음에도 퇴장을 하여, 패널티가 부여됩니다.", Toast.LENGTH_SHORT).show()
+            }, 0)
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
 
 
         // 게임 완료 시 sharedpreference 모두 삭제하기
@@ -179,6 +237,9 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(naverMap: NaverMap) {
 
         val objectmapper = ObjectMapper()
+
+        mSocket = SocketApplication.get()
+        val connect = mSocket.connect() // 소켓 연결
 
         val OrderList = getSharedPreferences("OrderList", 0)
         val game_result = OrderList.getString("result", "")!!
@@ -210,6 +271,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             marker.map = naverMap
 
         }
+
+        connect.on("arrive", Emitter.Listener {
+            Log.d("arrive in map", "${it[0]}")
+        })
     }
 
     override fun onBackPressed() {
@@ -226,33 +291,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         val connect = mSocket.connect() // 소켓 연결
 
         val objectmapper = ObjectMapper()
+        val handler = Handler(Looper.getMainLooper())
 
         if(detail.isNotEmpty()) { // 참석자(팀원)인 경우
-            try {
-                // 게임 나가기(퇴장)
-                val quit_game = QuitGame()
-                quit_game.token = tok
-                quit_game.nickname = nick
-                quit_game.room_name = room_name
-
-                connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
-
-                // sharedpreference 삭제
-                val editOrder = Orderpref.edit()
-                editOrder.apply()
-                editOrder.remove("detail")
-                editOrder.remove("store_name")
-                editOrder.remove("mapy")
-                editOrder.remove("mapx")
-                editOrder.commit()
-                val editGame = Gamepref.edit()
-                editGame.apply()
-                editGame.remove("room_name")
-                editGame.remove("population")
-                editGame.commit()
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
+            // super.onBackPressed()
         }
         if (detail.isEmpty()){ // 방장인 경우
             try {
@@ -263,16 +305,41 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 delegator_run_away.room_name = room_name
 
                 connect.emit("delegator_run_away", objectmapper.writeValueAsString(delegator_run_away))
+
+                // 게임 나가기(퇴장)
+                val quit_game = QuitGame()
+                quit_game.token = tok
+                quit_game.nickname = nick
+                quit_game.room_name = room_name
+
+                connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+
+                val intent = Intent(this@GameResultActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+                finish()
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
         }
 
+        // sharedpreference 삭제
+        val editOrder = Orderpref.edit()
+        editOrder.apply()
+        editOrder.remove("detail")
+        editOrder.remove("store_name")
+        editOrder.remove("mapy")
+        editOrder.remove("mapx")
+        editOrder.commit()
+        val editGame = Gamepref.edit()
+        editGame.apply()
+        editGame.remove("room_name")
+        editGame.remove("population")
+        editGame.commit()
 
         // 게임 나가기(마지막 한 명까지 나가면 방이 삭제됨)
         connect.on("quit_game", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameResultActivity, "${it[0]}님이 나갔습니다.", Toast.LENGTH_SHORT).show()
             }, 0)
@@ -281,17 +348,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         // 게임 나가기(대표자의 퇴장으로, 게임 삭제)
         connect.on("delegator_run_away", Emitter.Listener {
             Log.d("LOGG", "${it[0]}")
-            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(Runnable {
                 Toast.makeText(this@GameResultActivity, "대표자로 뽑혔음에도 퇴장을 하여, 패널티가 부여됩니다.", Toast.LENGTH_SHORT).show()
             }, 0)
         })
-
-
-        val intent = Intent(this@GameResultActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-        finish()
 
     }
 
