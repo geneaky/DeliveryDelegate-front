@@ -36,6 +36,9 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         arrive.visibility = View.GONE // 숨기기
         quit_game.visibility = View.GONE // 숨기기
         take_quit.visibility = View.GONE // 숨기기
+        tv_warning3.visibility = View.GONE //숨기기
+        tv_warning4.visibility = View.GONE //숨기기
+        tv_warning5.visibility = View.GONE //숨기기
 
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
@@ -61,6 +64,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             game_result.token = tok
             game_result.game_id = game_id
 
+            connect.emit("last_attend", objectmapper.writeValueAsString(last_attend))
             connect.emit("on_game", objectmapper.writeValueAsString(on_game))
             connect.emit("game_result", objectmapper.writeValueAsString(game_result))
         } catch (e: JSONException) {
@@ -83,6 +87,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val OrderList = getSharedPreferences("OrderList", 0)
             val editOrder = OrderList.edit()
+            val Orderpref = getSharedPreferences("Orderpref", 0)
+            val editOOrder = Orderpref.edit()
 
             if(game_result == "대표자가 선정되었습니다") {
 
@@ -90,6 +96,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     tv_result2.visibility = View.VISIBLE // 보여주기
                     take_quit.visibility = View.VISIBLE // 보여주기
+                    tv_warning3.visibility = View.VISIBLE // 보여주기
+                    tv_warning4.visibility = View.VISIBLE // 보여주기
 
                     take_quit.isEnabled = false // 비활성화
                     take_quit.setBackgroundColor(Color.LTGRAY)
@@ -103,6 +111,9 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     editOrder.apply()
                     editOrder.putString("result", result)
                     editOrder.commit()
+                    editOOrder.apply()
+                    editOOrder.putString("detail", "no backpress")
+                    editOOrder.commit()
 
                 }, 0)
             } else {
@@ -111,6 +122,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     tv_result1.visibility = View.VISIBLE // 보여주기
                     arrive.visibility = View.VISIBLE // 보여주기
                     quit_game.visibility = View.VISIBLE // 보여주기
+                    tv_warning5.visibility = View.VISIBLE // 보여주기
 
                     quit_game.isEnabled = false // 비활성화
                     quit_game.setBackgroundColor(Color.LTGRAY)
@@ -118,6 +130,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     editOrder.apply()
                     editOrder.putString("result", game_result)
                     editOrder.commit()
+
+                    editOOrder.apply()
+                    editOOrder.remove("detail")
+                    editOOrder.commit()
 
                 }, 0)
             }
@@ -207,7 +223,6 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 handler.postDelayed(Runnable {
                     Toast.makeText(this@GameResultActivity, "대표가 배달을 완료하여 방이 삭제됩니다.", Toast.LENGTH_SHORT).show()
 
-//                    onBackPressed()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
