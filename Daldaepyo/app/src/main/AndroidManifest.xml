@@ -38,6 +38,8 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".StoreDetailActivity" />
         <activity android:name=".Review.Store.WriteReviewActivity" />
+        <activity android:name=".User.UserModifyActivity"
+                  android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".OcrActivity" />
         <activity android:name=".Game.CreateGame.LandmarkDetailActivity" />
         <activity android:name=".Game.CreateGame.CreateGameActivity" />
