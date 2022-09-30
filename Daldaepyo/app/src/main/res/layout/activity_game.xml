@@ -31,11 +31,12 @@
         app:layout_constraintWidth_percent="1"
         tools:ignore="NotSibling" />
 
+
     <TextView
         android:id="@+id/please_ready"
         android:text="'게임 준비'를 클릭하고 방장이 게임을 시작하기 전까지 대기해주세요."
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
