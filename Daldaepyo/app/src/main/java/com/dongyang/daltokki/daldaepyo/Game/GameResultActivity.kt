@@ -39,6 +39,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val pref = getSharedPreferences("pref", 0)
         val tok = pref.getString("token", "")!!
+        val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
         val game_id = Gamepref.getInt("game_id", 0)
