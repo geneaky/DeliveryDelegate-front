@@ -273,6 +273,7 @@ class GameActivity : AppCompatActivity() {
         val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
+        val Orderpref = getSharedPreferences("Orderpref", 0)
 
         mSocket = SocketApplication.get()
         val connect = mSocket.connect() // 소켓 연결
