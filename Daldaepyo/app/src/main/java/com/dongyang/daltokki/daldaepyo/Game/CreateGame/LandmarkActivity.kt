@@ -40,7 +40,7 @@ class LandmarkActivity : AppCompatActivity() {
 
                     Log.d("랜드마크 검색", response.body().toString())
                     val result_size = response.body()?.result?.size
-                    Log.d("랜드마크 검색", response.body().toString())
+                    Log.d("랜드마크 검색: size", result_size.toString())
                     val code = response.code()
 
                     if(code == 500) {
