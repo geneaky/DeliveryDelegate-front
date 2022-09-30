@@ -7,5 +7,7 @@ class BoardItem (
     val write: String,
     val date : String,
     val socket_room_name: String,
-    val game_id: Int
+    val game_id: Int,
+    val landmark_posx: String,
+    val landmark_posy: String
 )

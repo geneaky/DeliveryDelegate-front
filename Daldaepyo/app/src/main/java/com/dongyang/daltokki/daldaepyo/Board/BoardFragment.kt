@@ -61,8 +61,10 @@ class BoardFragment : Fragment() {
                         val date = response?.body()?.games?.get(i)?.createdAt.toString()
                         val room_name = response?.body()?.games?.get(i)?.socket_room_name.toString()
                         val game_id = response?.body()?.games?.get(i)?.game_id!!
+                        val landmark_posx = response?.body()?.games?.get(i)?.landmark_posx.toString()
+                        val landmark_posy = response?.body()?.games?.get(i)?.landmark_posy.toString()
 
-                        Board_Adapter.add(BoardItem(title, population, landmark, write, date, room_name, game_id))
+                        Board_Adapter.add(BoardItem(title, population, landmark, write, date, room_name, game_id, landmark_posx, landmark_posy))
 
                         checkIfFragmentAttached {
                             recyclerView1 = rootView.findViewById(R.id.recyclerView!!) as RecyclerView
