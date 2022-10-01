@@ -54,6 +54,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         val handler = Handler(Looper.getMainLooper())
 
         try {
+
+            // 재참여
             val last_attend = DelegatorArrive()
             last_attend.room_name = room_name
             // 게임 시작
@@ -64,9 +66,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             game_result.token = tok
             game_result.game_id = game_id
 
-            connect.emit("last_attend", objectmapper.writeValueAsString(last_attend))
             connect.emit("on_game", objectmapper.writeValueAsString(on_game))
             connect.emit("game_result", objectmapper.writeValueAsString(game_result))
+            connect.emit("last_attend", objectmapper.writeValueAsString(last_attend))
+
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -90,7 +93,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             val Orderpref = getSharedPreferences("Orderpref", 0)
             val editOOrder = Orderpref.edit()
 
-            if(game_result == "대표자가 선정되었습니다") {
+            if(game_result == "대표자가 선정되었습니다") { // 예비대표
 
                 handler.postDelayed(Runnable {
 
@@ -116,7 +119,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     editOOrder.commit()
 
                 }, 0)
-            } else {
+            } else { // 대표
                 handler.postDelayed(Runnable {
 
                     tv_result1.visibility = View.VISIBLE // 보여주기
@@ -153,7 +156,6 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 quit_game.setBackgroundColor(Color.WHITE)
             }, 0)
 
-
             try {
                 // 랜드마크 도착
                 val delegator_arrive = DelegatorArrive()
@@ -174,7 +176,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 take_quit.setBackgroundColor(Color.WHITE)
 
                 var dialog = AlertDialog.Builder(this@GameResultActivity, R.style.MyDialogTheme)
-                dialog.setTitle("배달완료")
+                dialog.setTitle("랜드마크 도착")
                 dialog.setMessage("${it[0]}.").setPositiveButton("확인", null)
                 dialog.show()
             }, 0)
@@ -191,6 +193,9 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 quit_game.room_name = room_name
 
                 connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
