@@ -57,13 +57,6 @@ class GameActivity : AppCompatActivity() {
 
         val handler = Handler(Looper.getMainLooper()) // toast 및 dialog를 스레드에서 사용 가능하게 함
 
-        // 게임 참여 인원 확인
-        val delegator_list_view = DelegatorRunAway()
-        delegator_list_view.token = tok
-        delegator_list_view.room_name = room_name
-        connect.emit("delegator_list", objectmapper.writeValueAsString(delegator_list_view))
-
-
         if(detail.isNotEmpty()) { // 참석자는 게임 생성 시 sharedprefernec에 detail을 저장함.
 
             btn_game_start.visibility = View.GONE // 숨기기
@@ -86,6 +79,14 @@ class GameActivity : AppCompatActivity() {
                 order.detail = detail
                 attend_game.order = order
                 connect.emit("attend", objectmapper.writeValueAsString(attend_game))
+
+                // 게임 참여 인원 확인
+                val delegator_list_view = DelegatorRunAway()
+                delegator_list_view.token = tok
+                delegator_list_view.room_name = room_name
+                connect.emit("delegator_list", objectmapper.writeValueAsString(delegator_list_view))
+
+
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
@@ -115,6 +116,13 @@ class GameActivity : AppCompatActivity() {
                 val message = AttendMaster()
                 message.room_name = room_name
                 connect.emit("attendMaster", objectmapper.writeValueAsString(message))
+
+                // 게임 참여 인원 확인
+                val delegator_list_view = DelegatorRunAway()
+                delegator_list_view.token = tok
+                delegator_list_view.room_name = room_name
+                connect.emit("delegator_list", objectmapper.writeValueAsString(delegator_list_view))
+
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
@@ -183,6 +191,7 @@ class GameActivity : AppCompatActivity() {
             } else {
 
                 try {
+                    // 게임 참여 인원 확인
                     val delegator_list_view = DelegatorRunAway()
                     delegator_list_view.token = tok
                     delegator_list_view.room_name = room_name
