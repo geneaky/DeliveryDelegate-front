@@ -79,6 +79,14 @@ class GameActivity : AppCompatActivity() {
                 order.detail = detail
                 attend_game.order = order
                 connect.emit("attend", objectmapper.writeValueAsString(attend_game))
+
+                // 게임 참여 인원 확인
+                val delegator_list_view = DelegatorRunAway()
+                delegator_list_view.token = tok
+                delegator_list_view.room_name = room_name
+                connect.emit("delegator_list", objectmapper.writeValueAsString(delegator_list_view))
+
+
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
@@ -108,6 +116,13 @@ class GameActivity : AppCompatActivity() {
                 val message = AttendMaster()
                 message.room_name = room_name
                 connect.emit("attendMaster", objectmapper.writeValueAsString(message))
+
+                // 게임 참여 인원 확인
+                val delegator_list_view = DelegatorRunAway()
+                delegator_list_view.token = tok
+                delegator_list_view.room_name = room_name
+                connect.emit("delegator_list", objectmapper.writeValueAsString(delegator_list_view))
+
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
@@ -176,6 +191,7 @@ class GameActivity : AppCompatActivity() {
             } else {
 
                 try {
+                    // 게임 참여 인원 확인
                     val delegator_list_view = DelegatorRunAway()
                     delegator_list_view.token = tok
                     delegator_list_view.room_name = room_name
@@ -273,6 +289,7 @@ class GameActivity : AppCompatActivity() {
         val nick = pref.getString("nickname", "")!!
         val Gamepref = getSharedPreferences("Gamepref", 0)
         val room_name = Gamepref.getString("room_name", "")!!
+        val Orderpref = getSharedPreferences("Orderpref", 0)
 
         mSocket = SocketApplication.get()
         val connect = mSocket.connect() // 소켓 연결

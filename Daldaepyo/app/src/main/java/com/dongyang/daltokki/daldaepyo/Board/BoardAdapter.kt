@@ -37,6 +37,9 @@ class BoardAdapter(private val context: Context, private val GameList: ArrayList
                     edit.putString("room_name", boardItem.socket_room_name)
                     edit.putInt("Population", boardItem.population)
                     edit.putInt("game_id", boardItem.game_id)
+                    edit.putString("title", boardItem.landmark)
+                    edit.putString("lat", boardItem.landmark_posy)
+                    edit.putString("lng", boardItem.landmark_posx)
                     edit.commit()
                 }.run { context.startActivity(this) }
             }

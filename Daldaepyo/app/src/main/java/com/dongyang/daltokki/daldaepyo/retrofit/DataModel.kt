@@ -69,7 +69,6 @@ data class ReviewCountDto(
 )
 
 data class GameDto( // 게임 생성
-        @SerializedName("game_type") val game_type: String,
         @SerializedName("game_name") val game_name: String,
         @SerializedName("game_main_text") val game_main_text: String,
         @SerializedName("population") val population: Int,

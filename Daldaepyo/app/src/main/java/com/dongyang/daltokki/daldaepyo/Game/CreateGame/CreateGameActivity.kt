@@ -15,7 +15,6 @@ class CreateGameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_game)
 
         btn_landmark.setOnClickListener {
-            var Gametype = edt_game_type.text.toString()
             var Gamename = edt_game_name.text.toString()
             var Population = edt_population.text.toString().toInt()
             var Gametext = edt_game_main_text.text.toString() // server: game_main_text
