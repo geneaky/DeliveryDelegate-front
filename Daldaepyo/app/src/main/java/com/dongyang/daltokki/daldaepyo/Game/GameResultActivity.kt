@@ -185,6 +185,9 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // 받았으면 나가기(예비대표의 게임방 나가기)
         take_quit.setOnClickListener {
+
+            val Orderpref = getSharedPreferences("Orderpref", 0)
+
             try {
                 // 게임 나가기(퇴장)
                 val quit_game = QuitGame()
@@ -193,6 +196,21 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 quit_game.room_name = room_name
 
                 connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+
+                // sharedpreference 삭제
+                val editOrder = Orderpref.edit()
+                editOrder.apply()
+                editOrder.remove("detail")
+                editOrder.remove("store_name")
+                editOrder.remove("mapy")
+                editOrder.remove("mapx")
+                editOrder.commit()
+                val editGame = Gamepref.edit()
+                editGame.apply()
+                editGame.remove("room_name")
+                editGame.remove("population")
+                editGame.commit()
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -205,6 +223,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         // 배달완료(대표의 게임방 나가기)
         quit_game.setOnClickListener {
 
+            val Orderpref = getSharedPreferences("Orderpref", 0)
+
             try {
                 // 게임 나가기(퇴장)
                 val quit_game = QuitGame()
@@ -213,6 +233,21 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 quit_game.room_name = room_name
 
                 connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
+
+                // sharedpreference 삭제
+                val editOrder = Orderpref.edit()
+                editOrder.apply()
+                editOrder.remove("detail")
+                editOrder.remove("store_name")
+                editOrder.remove("mapy")
+                editOrder.remove("mapx")
+                editOrder.commit()
+                val editGame = Gamepref.edit()
+                editGame.apply()
+                editGame.remove("room_name")
+                editGame.remove("population")
+                editGame.commit()
+
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
