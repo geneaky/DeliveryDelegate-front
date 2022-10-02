@@ -47,7 +47,6 @@ class WriteReviewActivity : PermissionActivity() {
     val REQ_GALLERY = 12
 
     var img = false
-    var store_id = 3
 
 
 
@@ -63,8 +62,8 @@ class WriteReviewActivity : PermissionActivity() {
 
         binding.btnSendReview.setOnClickListener {
 
-//            val storePref = getSharedPreferences("store", 0)
-//            val storeid = storePref.getString("storeid", "")!!.toInt()
+            val storePref = getSharedPreferences("store", 0)
+            val store_id = storePref.getString("storeid", "")!!.toInt()
 
             if(img==false){
 
