@@ -47,7 +47,7 @@ class WriteReviewActivity : PermissionActivity() {
     val REQ_GALLERY = 12
 
     var img = false
-    var store_id = 1
+    var store_id = 3
 
 
 
@@ -93,12 +93,10 @@ class WriteReviewActivity : PermissionActivity() {
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
 
-                        if(code == 200){
+                        if(code == 200) {
                             val message = response.body()?.message.toString()
 
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.main_frame, ReviewFragment())
-                                .commit()
+                            finish()
                         }
 
                         if(code == 500){

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".User.UserModifyActivity">
+
+<!--    <TextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:id="@+id/tv_user_modify"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintWidth_percent="1"-->
+<!--        app:layout_constraintHeight_percent="0.1"-->
+<!--        app:layout_constraintVertical_bias="0.05"-->
+<!--        android:textColor="@color/darkgray"-->
+<!--        android:gravity="center"-->
+<!--        android:text="내 정보 수정하기"-->
+<!--        android:textSize="20sp"-->
+<!--        android:fontFamily="@font/suncheonr"-->
+<!--        android:textStyle="bold"/>-->
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_user_modify"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.085"
+        android:background="@drawable/tv_rounded"
+        android:textColor="@color/darkgray"
+        android:gravity="center"
+        android:text="내 정보 수정하기"
+        android:textSize="20sp"
+        android:fontFamily="@font/suncheonr"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_user_phone_number"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/suncheonr"
+        android:text="전화번호"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_user_phone"
+        android:singleLine = "true"
+        android:lines = "1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_user_phone_number"
+        android:gravity="center_vertical"
+        android:backgroundTint="@color/darkgray"
+        android:fontFamily="@font/suncheonr"
+        android:textSize="18sp"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.25"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/tv_nickname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.2"
+        android:layout_marginLeft="25dp"
+        android:paddingLeft="7dp"
+        android:gravity="center_vertical"
+        android:text="닉네임"
+        android:fontFamily="@font/suncheonr"
+        android:textSize="18sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/edt_nickname"
+        android:singleLine = "true"
+        android:lines = "1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_nickname"
+        app:layout_constraintHeight_percent="0.07"
+        android:background="@color/tranceparent"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:fontFamily="@font/suncheonr"
+        app:layout_constraintWidth_percent="0.65"
+        app:layout_constraintVertical_bias="0.35"/>
+
+<!--    <Button-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:id="@+id/btn_user_change_pw"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.5"-->
+<!--        android:text="비밀번호 변경하기"-->
+<!--        android:fontFamily="@font/suncheonr"-->
+<!--        android:textSize="18sp"-->
+<!--        android:background="@color/tranceparent"-->
+<!--        android:textColor="@color/deepgray"-->
+<!--        app:layout_constraintWidth_percent="0.4"-->
+<!--        app:layout_constraintHeight_percent="0.1"/>-->
+
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/btn_modifying_user"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.07"
+        android:fontFamily="@font/suncheonr"
+        android:background="@color/tranceparent"
+        android:textSize="18sp"
+        android:text="완료"
+        android:textColor="@color/blue"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
