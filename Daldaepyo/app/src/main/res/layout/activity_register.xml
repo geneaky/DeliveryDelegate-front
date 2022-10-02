@@ -97,7 +97,7 @@
         app:layout_constraintWidth_percent="0.25"
         app:layout_constraintVertical_bias="0.3"
         android:background="@color/tranceparent"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:fontFamily="@font/suncheonr"
         android:gravity="center"
         android:text="중복확인"

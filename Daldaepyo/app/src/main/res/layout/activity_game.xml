@@ -10,20 +10,38 @@
 <!-- 크아처럼 보이는 게 좋을까.. -->
 
     <TextView
-        android:id="@+id/please_ready"
-        android:text="'게임 준비'를 클릭하고 방장이 게임을 시작하기 전까지 대기해주세요."
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHeight_percent="0.09"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.085"
+        android:background="@drawable/tv_rounded"
+        android:textColor="@color/darkgray"
+        android:gravity="center"
+        android:text="게임 대기"
+        android:textSize="20sp"
+        android:fontFamily="@font/suncheonr"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/please_ready"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/tranceparent"
         android:gravity="center"
-        android:textColor="@color/blue"
+        android:lineSpacingExtra="5dp"
+        android:text="'게임 준비'를 클릭하고 \n방장이 게임을 시작하기 전까지\n 대기해주세요."
+        android:textColor="@color/darkgray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        android:textSize="18sp"
         tools:ignore="MissingConstraints" />
 
     <Button
