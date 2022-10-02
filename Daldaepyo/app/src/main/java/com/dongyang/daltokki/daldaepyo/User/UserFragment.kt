@@ -11,8 +11,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.dongyang.daltokki.daldaepyo.LocationActivity
 import com.dongyang.daltokki.daldaepyo.R
-import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
-import com.dongyang.daltokki.daldaepyo.databinding.FragmentUserBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.UserDto
 import kotlinx.android.synthetic.main.fragment_review.*

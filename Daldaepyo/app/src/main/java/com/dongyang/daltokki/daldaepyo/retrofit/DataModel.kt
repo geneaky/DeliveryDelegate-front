@@ -120,3 +120,11 @@ data class User(
         @SerializedName("count") val count : Int
 )
 
+data class ModifyUserDto(
+        @SerializedName("nickname") val nickname: String
+        )
+
+data class UserResponseDto(
+        @SerializedName("message") val message : String
+)
+
