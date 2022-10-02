@@ -56,7 +56,8 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         try {
 
             // 재참여
-            val last_attend = DelegatorArrive()
+            val last_attend = DelegatorRunAway()
+            last_attend.token = tok
             last_attend.room_name = room_name
             // 게임 시작
             val on_game = OnGame()
