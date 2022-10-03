@@ -74,6 +74,7 @@ class StoreDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         Toast.makeText(this@StoreDetailActivity, "영수증 인증이 필요합니다.", Toast.LENGTH_SHORT).show()
                         var intent = Intent(this@StoreDetailActivity, OcrActivity::class.java)
                         startActivity(intent)
+                        finish()
                     }
                     if(code == 404) {
                         api.postStore(tok, data).enqueue(object : Callback<StoreRegisterResponseDto> {

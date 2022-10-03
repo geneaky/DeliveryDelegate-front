@@ -62,13 +62,13 @@ class WriteReviewActivity : PermissionActivity() {
 
         binding.btnSendReview.setOnClickListener {
 
-            val storePref = getSharedPreferences("store", 0)
-            val store_id = storePref.getString("storeid", "")!!.toInt()
-
-            if(img==false){
+            if(!img){
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
+
+                val storePref = getSharedPreferences("store", 0)
+                val store_id = storePref.getString("store_id", "")!!.toInt()
 
                 var body = binding.edtReview.text.toString()
 
@@ -110,7 +110,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                             if(message.contains("too")){
 
-                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                val dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -132,6 +132,9 @@ class WriteReviewActivity : PermissionActivity() {
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
+
+                val storePref = getSharedPreferences("store", 0)
+                val store_id = storePref.getString("store_id", "")!!.toInt()
 
                 var body = binding.edtReview.text.toString()
 
@@ -177,7 +180,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                                 var dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
-                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
                                 return
                             }
@@ -209,44 +212,13 @@ class WriteReviewActivity : PermissionActivity() {
         }
     }
 
-    var realUri: Uri? = null
-    // 3. 카메라에 찍은 사진을 저장하기 위한 Uri를 넘겨준다.
-
     fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
         startActivityForResult(intent, REQ_GALLERY)
     }
 
-    // 원본 이미지를 저장할 Uri를 MediaStore(데이터베이스)에 생성하는 메서드
-    fun createImageUri(filename:String, mimeType:String) : Uri? {
-        val values = ContentValues()
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
-        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
-        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-    }
 
-    // 파일 이름을 생성하는 메서드
-    fun newFileName() : String {
-        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss")
-        val filename = sdf.format(System.currentTimeMillis())
-        return "${filename}.jpg"
-    }
-
-    // 원본 이미지를 불러오는 메서드
-    fun loadBitmap(photoUri: Uri) : Bitmap? {
-        try {
-            return if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1) {
-                val source = ImageDecoder.createSource(contentResolver, photoUri)
-                ImageDecoder.decodeBitmap(source)
-            } else {
-                MediaStore.Images.Media.getBitmap(contentResolver, photoUri)
-            }
-        } catch(e:Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
 
 
     override fun permissionGranted(requestCode: Int) {
@@ -294,11 +266,6 @@ class WriteReviewActivity : PermissionActivity() {
         var result = c?.getString(index!!)
 
         return result!!
-    }
-
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager){
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
     }
 
 
