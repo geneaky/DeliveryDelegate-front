@@ -50,10 +50,12 @@ class UserModifyActivity  : Activity() {
             }
         })
 
-        val nickname = edt_nickname.text.toString()
-        val data = ModifyUserDto(nickname)
 
         btn_modifying_user.setOnClickListener{
+
+            val nickname = edt_nickname.text.toString()
+            val data = ModifyUserDto(nickname)
+
             api.postUser(tok, data).enqueue(object : retrofit2.Callback<UserResponseDto> {
                 override fun onResponse(
                     call: Call<UserResponseDto>,
