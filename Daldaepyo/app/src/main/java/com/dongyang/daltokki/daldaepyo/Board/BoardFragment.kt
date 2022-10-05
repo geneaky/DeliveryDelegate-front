@@ -53,7 +53,7 @@ class BoardFragment : Fragment() {
 
                 if (code == 200) {
 
-                    for (i in 0 until result_size!!) {
+                    for (i in result_size!!-1 downTo 0) {
                         val title = response?.body()?.games?.get(i)?.game_name.toString()
                         val population = response?.body()?.games?.get(i)?.population!!
                         val landmark = response?.body()?.games?.get(i)?.landmark_name.toString()
