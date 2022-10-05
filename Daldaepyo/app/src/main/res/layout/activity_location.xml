@@ -5,22 +5,40 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<!--    <TextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:id="@+id/btn_NowLocation"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.07"-->
+<!--        app:layout_constraintWidth_percent="0.7"-->
+<!--        app:layout_constraintHeight_percent="0.1"-->
+<!--        android:background="@drawable/textview_rounded"-->
+<!--        android:text="현재 위치 불러오기"-->
+<!--        android:gravity="center"-->
+<!--        android:fontFamily="@font/suncheonr"-->
+<!--        android:textColor="@color/darkgray"-->
+<!--        android:textSize="25sp"/>-->
+
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/btn_NowLocation"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="1"
-        app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintVertical_bias="0.07"
-        android:background="@color/tranceparent"
-        android:text="현재 위치 불러오기"
-        android:fontFamily="@font/suncheonr"
+        app:layout_constraintHeight_percent="0.085"
+        android:background="@drawable/tv_rounded"
         android:textColor="@color/darkgray"
-        android:textSize="20sp"/>
+        android:gravity="center"
+        android:text="현재 위치 불러오기"
+        android:textSize="20sp"
+        android:fontFamily="@font/suncheonr"
+        android:textStyle="bold"/>
 
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
@@ -32,7 +50,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_percent="1"
         app:layout_constraintHeight_percent="0.6"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.45"/>
 
     <Button
         android:layout_width="0dp"

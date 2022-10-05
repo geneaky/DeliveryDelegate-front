@@ -32,21 +32,24 @@
         tools:ignore="NotSibling" />
 
 
+
     <TextView
         android:id="@+id/please_ready"
-        android:text="'게임 준비'를 클릭하고 방장이 게임을 시작하기 전까지 대기해주세요."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHeight_percent="0.09"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintVertical_bias="0.65"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/tranceparent"
         android:gravity="center"
-        android:textColor="@color/blue"
+        android:lineSpacingExtra="5dp"
+        android:text="'게임 준비'를 클릭하고 \n방장이 게임을 시작하기 전까지\n 대기해주세요."
+        android:textColor="@color/darkgray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        android:textSize="18sp"
         tools:ignore="MissingConstraints" />
 
     <Button

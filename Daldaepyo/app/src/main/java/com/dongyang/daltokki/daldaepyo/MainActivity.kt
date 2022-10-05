@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
                         changeFragment(BoardFragment())
                     R.id.menu_review ->
                         changeFragment(ReviewFragment())
-                    R.id.menu_notification ->
-                        changeFragment(NotifFragment())
+//                    R.id.menu_notification ->
+//                        changeFragment(NotifFragment())
                     R.id.menu_user ->
                         changeFragment(UserFragment())
                 }

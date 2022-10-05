@@ -38,7 +38,6 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
         quit_game.visibility = View.GONE // 숨기기
         take_quit.visibility = View.GONE // 숨기기
         tv_warning3.visibility = View.GONE //숨기기
-        tv_warning4.visibility = View.GONE //숨기기
         tv_warning5.visibility = View.GONE //숨기기
 
         val pref = getSharedPreferences("pref", 0)
@@ -102,7 +101,6 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     tv_result2.visibility = View.VISIBLE // 보여주기
                     take_quit.visibility = View.VISIBLE // 보여주기
                     tv_warning3.visibility = View.VISIBLE // 보여주기
-                    tv_warning4.visibility = View.VISIBLE // 보여주기
 
                     take_quit.isEnabled = false // 비활성화
                     take_quit.setBackgroundColor(Color.LTGRAY)

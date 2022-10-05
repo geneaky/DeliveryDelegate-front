@@ -24,7 +24,6 @@ import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
-import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewImageDto
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -48,7 +47,6 @@ class WriteReviewActivity : PermissionActivity() {
     val REQ_GALLERY = 12
 
     var img = false
-    var store_id = 1
 
 
 
@@ -64,13 +62,13 @@ class WriteReviewActivity : PermissionActivity() {
 
         binding.btnSendReview.setOnClickListener {
 
-//            val storePref = getSharedPreferences("store", 0)
-//            val storeid = storePref.getString("storeid", "")!!.toInt()
-
-            if(img==false){
+            if(!img){
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
+
+                val storePref = getSharedPreferences("store", 0)
+                val store_id = storePref.getString("store_id", "")!!.toInt()
 
                 var body = binding.edtReview.text.toString()
 
@@ -94,12 +92,10 @@ class WriteReviewActivity : PermissionActivity() {
                         Log.d("log", response.toString())
                         Log.d("log body", response.body().toString())
 
-                        if(code == 200){
+                        if(code == 200) {
                             val message = response.body()?.message.toString()
 
-                            supportFragmentManager.beginTransaction()
-                                .replace(R.id.main_frame, ReviewFragment())
-                                .commit()
+                            finish()
                         }
 
                         if(code == 500){
@@ -114,7 +110,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                             if(message.contains("too")){
 
-                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                val dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -136,6 +132,9 @@ class WriteReviewActivity : PermissionActivity() {
 
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
+
+                val storePref = getSharedPreferences("store", 0)
+                val store_id = storePref.getString("store_id", "")!!.toInt()
 
                 var body = binding.edtReview.text.toString()
 
@@ -181,7 +180,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                                 var dialog = AlertDialog.Builder(this@WriteReviewActivity)
                                 dialog.setTitle("오류")
-                                dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
+                                dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
                                 return
                             }
@@ -213,44 +212,13 @@ class WriteReviewActivity : PermissionActivity() {
         }
     }
 
-    var realUri: Uri? = null
-    // 3. 카메라에 찍은 사진을 저장하기 위한 Uri를 넘겨준다.
-
     fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
         startActivityForResult(intent, REQ_GALLERY)
     }
 
-    // 원본 이미지를 저장할 Uri를 MediaStore(데이터베이스)에 생성하는 메서드
-    fun createImageUri(filename:String, mimeType:String) : Uri? {
-        val values = ContentValues()
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, filename)
-        values.put(MediaStore.Images.Media.MIME_TYPE, mimeType)
-        return contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-    }
 
-    // 파일 이름을 생성하는 메서드
-    fun newFileName() : String {
-        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss")
-        val filename = sdf.format(System.currentTimeMillis())
-        return "${filename}.jpg"
-    }
-
-    // 원본 이미지를 불러오는 메서드
-    fun loadBitmap(photoUri: Uri) : Bitmap? {
-        try {
-            return if(Build.VERSION.SDK_INT > Build.VERSION_CODES.O_MR1) {
-                val source = ImageDecoder.createSource(contentResolver, photoUri)
-                ImageDecoder.decodeBitmap(source)
-            } else {
-                MediaStore.Images.Media.getBitmap(contentResolver, photoUri)
-            }
-        } catch(e:Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
 
 
     override fun permissionGranted(requestCode: Int) {
@@ -298,11 +266,6 @@ class WriteReviewActivity : PermissionActivity() {
         var result = c?.getString(index!!)
 
         return result!!
-    }
-
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager){
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
     }
 
 

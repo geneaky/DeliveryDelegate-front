@@ -87,21 +87,10 @@ class ReviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        btn_searchReview.setOnClickListener {
-            try {
-                // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
-                startActivity(i)
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
         btn_review_write.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), WriteReviewActivity::class.java)
+                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
                 startActivity(i)
                 activity?.supportFragmentManager
                     ?.beginTransaction()
