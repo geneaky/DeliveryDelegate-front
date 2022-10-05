@@ -184,7 +184,8 @@ class GameActivity : AppCompatActivity() {
                 handler.postDelayed(Runnable {
                     Toast.makeText(this@GameActivity, "방장이 퇴장하여 방이 폭파되었습니다.", Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(this, MainActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                     finish()
                 }, 0)
@@ -229,6 +230,7 @@ class GameActivity : AppCompatActivity() {
             }
             if (it[0].toString() == "complete_ready") {
                 val intent = Intent(this, GameRandomActivity::class.java) // 게임시작을 클릭하면 주사위가 돈다.
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             }

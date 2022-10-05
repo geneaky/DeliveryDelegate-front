@@ -92,6 +92,7 @@ class LoginActivity : AppCompatActivity() {
 
 
                         var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
                         finish()
                     }
@@ -106,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener{
             var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }

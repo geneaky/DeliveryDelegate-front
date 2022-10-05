@@ -40,6 +40,7 @@ class AttendOrderDetailWriteActivity : AppCompatActivity() {
 
             Toast.makeText(this@AttendOrderDetailWriteActivity, "게임에 참여합니다.", Toast.LENGTH_LONG).show()
             val intent = Intent(this@AttendOrderDetailWriteActivity, GameActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
 

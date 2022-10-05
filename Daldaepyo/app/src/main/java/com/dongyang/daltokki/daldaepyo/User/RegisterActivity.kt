@@ -114,6 +114,7 @@ class RegisterActivity : AppCompatActivity() {
                         if(code == 200) {
                             Toast.makeText(this@RegisterActivity, "회원가입이 완료되었습니다", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                             startActivity(intent)
                             finish()  // 회원가입등록 창 닫음
                         } else if(code == 500) {

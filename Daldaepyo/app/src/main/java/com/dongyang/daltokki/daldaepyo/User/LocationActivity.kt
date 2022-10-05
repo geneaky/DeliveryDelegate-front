@@ -72,6 +72,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     if(code == 200) {
                         Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@LocationActivity, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
                         finish()
 
@@ -88,6 +89,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     // Response로 받아오는 게 없어서 오류가 뜸
                     Toast.makeText(this@LocationActivity, "동네 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@LocationActivity, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                     finish()
 

@@ -22,6 +22,7 @@ class GameRandomActivity : AppCompatActivity() {
         Handler().postDelayed({
             // You can declare your desire activity here to open after finishing splash screen. Like MainActivity
             val intent = Intent(this, GameResultActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }, 3000)

@@ -212,6 +212,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 editGame.commit()
 
                 val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             } catch (e: JSONException) {
@@ -264,6 +265,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                     Toast.makeText(this@GameResultActivity, "대표가 배달을 완료하여 방이 삭제됩니다.", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                     finish()
                 }, 0)
@@ -282,6 +284,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
             }, 0)
 
             val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         })

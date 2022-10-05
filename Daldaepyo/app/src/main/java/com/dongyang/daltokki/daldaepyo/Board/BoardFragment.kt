@@ -99,6 +99,7 @@ class BoardFragment : Fragment() {
             try {
                 // TODO Auto-generated method stub
                 val i = Intent(this@BoardFragment.getActivity(), CreateGameActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(i)
 
             } catch (e: Exception) {
