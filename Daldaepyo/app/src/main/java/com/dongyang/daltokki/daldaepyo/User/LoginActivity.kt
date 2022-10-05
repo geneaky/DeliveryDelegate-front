@@ -70,6 +70,11 @@ class LoginActivity : AppCompatActivity() {
                         dialog.setMessage("로그인 정보를 확인해 주세요.").setPositiveButton("확인", null)
                         dialog.show()
                         return
+                    } else if(code == 401) { // penalty
+                        var dialog = AlertDialog.Builder(this@LoginActivity, R.style.MyDialogTheme)
+                        dialog.setTitle("로그인 에러")
+                        dialog.setMessage("${result}").setPositiveButton("확인", null)
+                        dialog.show()
                     } else if(code == 200) { // success
                         val token_result = response?.body()?.token?.token.toString()
                         Log.d("token_result@@@", "" + token_result)

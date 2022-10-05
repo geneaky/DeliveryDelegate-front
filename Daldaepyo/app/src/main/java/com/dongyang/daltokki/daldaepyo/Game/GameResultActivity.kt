@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dongyang.daltokki.daldaepyo.Game.EmitObject.*
 import com.dongyang.daltokki.daldaepyo.MainActivity
+import com.dongyang.daltokki.daldaepyo.LoginActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -362,6 +363,10 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
                 delegator_run_away.room_name = room_name
 
                 connect.emit("delegator_run_away", objectmapper.writeValueAsString(delegator_run_away))
+                val edit_pref = pref.edit()
+                edit_pref.apply()
+                edit_pref.remove("token")
+                edit_pref.commit()
 
                 // 게임 나가기(퇴장)
                 val quit_game = QuitGame()
@@ -371,7 +376,7 @@ class GameResultActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 connect.emit("quit_game", objectmapper.writeValueAsString(quit_game))
 
-                val intent = Intent(this@GameResultActivity, MainActivity::class.java) //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+                val intent = Intent(this@GameResultActivity, LoginActivity::class.java) 
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
