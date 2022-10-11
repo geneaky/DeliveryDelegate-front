@@ -73,6 +73,10 @@ class BoardFragment : Fragment() {
                         }
                     }
 
+                } else if(code == 400) {
+
+                    Toast.makeText(activity, "'내 정보'>'내 동네 설정하기'에서 동네 설정을 해주세요.", Toast.LENGTH_LONG).show()
+
                 } else {
                     Log.d("ERRRRR", "검색에러")
                 }
