@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dongyang.daltokki.daldaepyo.Review.ReviewItem
@@ -34,6 +35,8 @@ class ReviewFragment : Fragment() {
 
     lateinit var recyclerView1: RecyclerView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,14 +51,53 @@ class ReviewFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_review, container, false)
 
 
-        val preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val tok = preferences.getString("token", "").toString()
-
         adapter = ReviewAdapter(requireContext())
 
         recyclerView1 = rootView.findViewById(R.id.rv_review!!) as RecyclerView
-        recyclerView1.layoutManager = LinearLayoutManager(requireContext())
+        val lm = LinearLayoutManager(requireContext())
+        recyclerView1.layoutManager = lm
         recyclerView1.adapter = adapter
+
+
+        val decoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+        recyclerView1.addItemDecoration(decoration)
+
+
+        return rootView
+
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        btn_review_write.setOnClickListener {
+            try {
+                // TODO Auto-generated method stub
+                val i = Intent(this@ReviewFragment.getActivity(), WriteReviewActivity::class.java)
+                startActivity(i)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        btn_review_search.setOnClickListener {
+            try {
+                // TODO Auto-generated method stub
+                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
+                startActivity(i)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val preferences = this.requireActivity().getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val tok = preferences.getString("token", "").toString()
 
         api.getReview(tok).enqueue(object : Callback<ReviewCountDto> {
             override fun onResponse(
@@ -79,44 +121,6 @@ class ReviewFragment : Fragment() {
 
         })
 
-        return rootView
-
-
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        btn_review_write.setOnClickListener {
-            try {
-                // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
-                startActivity(i)
-                activity?.supportFragmentManager
-                    ?.beginTransaction()
-                    ?.remove(this)
-                    ?.commit()
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        recyclerView1.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ReviewAdapter(requireContext())
-        recyclerView1.adapter = adapter
-
-    }
-
-    fun refresh(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-    }
-
 
 }

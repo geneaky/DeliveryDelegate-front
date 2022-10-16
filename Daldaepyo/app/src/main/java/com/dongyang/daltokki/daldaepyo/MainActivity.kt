@@ -15,10 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val fragmentBoard by lazy {BoardFragment()}
-    private val fragmentReview by lazy {ReviewFragment()}
-    private val fragmentUser by lazy {UserFragment()}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,22 +33,13 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener{ item ->
                 when(item.itemId){
                     R.id.menu_board ->
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.main_frame, fragmentBoard)
-                            .commit()
+                        changeFragment(BoardFragment())
                     R.id.menu_review ->
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.main_frame, fragmentReview)
-                            .commit()
+                        changeFragment(ReviewFragment())
 //                    R.id.menu_notification ->
 //                        changeFragment(NotifFragment())
                     R.id.menu_user ->
-                        supportFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.main_frame, fragmentUser)
-                            .commit()
+                        changeFragment(UserFragment())
                 }
                 true
             }
