@@ -49,8 +49,6 @@ class WriteReviewActivity : PermissionActivity() {
     var img = false
 
 
-
-
     val binding by lazy { ActivityWriteReviewBinding.inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,8 +65,10 @@ class WriteReviewActivity : PermissionActivity() {
                 val pref = getSharedPreferences("pref", 0)
                 val tok = pref.getString("token", "").toString()
 
-                val storePref = getSharedPreferences("store", 0)
-                val store_id = storePref.getString("store_id", "")!!.toInt()
+//                val storePref = getSharedPreferences("store", 0)
+//                val store_id = storePref.getString("store_id", "")!!.toInt()
+
+                val store_id = 1
 
                 var body = binding.edtReview.text.toString()
 
