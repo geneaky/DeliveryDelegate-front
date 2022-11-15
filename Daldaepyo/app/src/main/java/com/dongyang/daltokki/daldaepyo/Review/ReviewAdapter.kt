@@ -79,9 +79,11 @@ class ReviewAdapter(
             }//btn setOnClickListener
 
 
-            image_path.setOnClickListener {
-
-            }
+//            image_path.setOnClickListener() {
+//                val intent = Intent(context, ImageActivity::class.java)
+//                intent.putExtra("img_path", image_path.toString())
+//                intent.run{context.startActivity(intent)}
+//            }
 
 
             Glide.with(itemView)

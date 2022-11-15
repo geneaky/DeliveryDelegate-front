@@ -26,6 +26,10 @@
         </activity>
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".User.UserReviewActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".Review.Store.ImageActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustNothing" />
