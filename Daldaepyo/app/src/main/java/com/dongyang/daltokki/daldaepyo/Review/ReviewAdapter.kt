@@ -1,20 +1,14 @@
 package com.dongyang.daltokki.daldaepyo
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dongyang.daltokki.daldaepyo.Review.ReviewItem
-import com.dongyang.daltokki.daldaepyo.Review.Store.ImageActivity
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ThumbUpDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
