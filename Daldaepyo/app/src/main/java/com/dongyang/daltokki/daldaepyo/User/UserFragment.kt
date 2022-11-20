@@ -92,7 +92,7 @@ class UserFragment : Fragment() {
         tv_user_review_count.setOnClickListener{
             try {
                 // TODO Auto-generated method stub
-                val i = Intent(this@UserFragment.getActivity(), AskActivity::class.java)
+                val i = Intent(this@UserFragment.getActivity(), UserReviewActivity::class.java)
                 startActivity(i)
 
             } catch (e: Exception) {

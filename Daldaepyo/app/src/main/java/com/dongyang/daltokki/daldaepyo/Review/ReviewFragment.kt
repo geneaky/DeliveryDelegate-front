@@ -37,11 +37,6 @@ class ReviewFragment : Fragment() {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,8 +59,6 @@ class ReviewFragment : Fragment() {
 
 
         return rootView
-
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -74,7 +67,7 @@ class ReviewFragment : Fragment() {
         btn_review_write.setOnClickListener {
             try {
                 // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), WriteReviewActivity::class.java)
+                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
                 startActivity(i)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -109,7 +102,6 @@ class ReviewFragment : Fragment() {
 
                 if (code == 200) {
                     adapter.submitList(result!!)
-
                 } else {
                     Log.d("error", "에러")
                 }

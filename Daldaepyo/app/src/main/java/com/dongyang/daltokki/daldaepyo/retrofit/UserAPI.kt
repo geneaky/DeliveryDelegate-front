@@ -96,6 +96,18 @@ interface UserAPI {
         @Body jsonparams: ModifyUserDto
     ): Call <UserResponseDto>
 
+    @GET("/myPage/reviews")
+    fun getUserReview(
+        @Header("token") token : String
+    ) : Call<UserReviewResponseDto>
+
+    @POST("/review/remove/{id}")
+    fun postDeleteReview(
+        @Header ("token") token : String,
+        @Path ("id") id : Int
+    ): Call<ReviewDeleteDto>
+
+
 
     companion object {
         private const val base_url = "http://146.56.132.245:8080/"

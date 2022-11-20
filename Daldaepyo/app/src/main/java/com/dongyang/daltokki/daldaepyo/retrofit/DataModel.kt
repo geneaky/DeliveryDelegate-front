@@ -127,3 +127,18 @@ data class UserResponseDto(
         @SerializedName("message") val message : String
 )
 
+data class UserReviewResponseDto(
+        @SerializedName("message") val message : List<UserReviewDto>
+)
+
+data class UserReviewDto(
+        @SerializedName("user_name") val user_name : String,
+        @SerializedName("store_name") val store_name : String,
+        @SerializedName("content") val content : String,
+        @SerializedName("image_path") val image_path: String,
+        @SerializedName("review_id") val review_id: Int
+)
+
+data class ReviewDeleteDto(
+        @SerializedName("review_id") var review_id : Int
+)
