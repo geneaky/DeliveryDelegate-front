@@ -23,7 +23,7 @@ import retrofit2.Response
 class UserReviewActivity : AppCompatActivity() {
 
     val api = UserAPI.create()
-
+    
     lateinit var mAdapter : UserReviewAdapter
     lateinit var rv : RecyclerView
 
