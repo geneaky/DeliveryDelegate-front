@@ -54,23 +54,20 @@ class ReviewAdapter(
             btn_thumbUp.setOnClickListener {
                 Log.d("ReviewAdapter ::", "onClick")
                 like(review_id)
-                var count = 0
-                count++
-                thumb_up.text = (item.thumb_up + count).toString()
-                notifyDataSetChanged()
-                thumbUp = true
 
                 if(thumbUp != true){
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
-                    notifyItemChanged(position)
+
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                    thumbUp = true
+                    thumb_up.text = (item.thumb_up + 1).toString()
                 }
                 else{
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                    btn_thumbUp.setOnClickListener{
-                        thumbUp = false
-                        notifyItemChanged(position)
-                    }
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                    thumbUp = false
+
+                    thumb_up.text = (item.thumb_up).toString()
                 }
+
 
             }//btn setOnClickListener
 
