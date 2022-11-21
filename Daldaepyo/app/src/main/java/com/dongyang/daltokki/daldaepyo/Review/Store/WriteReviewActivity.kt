@@ -10,12 +10,14 @@ import android.net.Uri
 import android.os.*
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.dongyang.daltokki.daldaepyo.MainActivity
 import com.dongyang.daltokki.daldaepyo.PermissionActivity
 import com.dongyang.daltokki.daldaepyo.R
 import com.dongyang.daltokki.daldaepyo.ReviewFragment
@@ -24,6 +26,7 @@ import com.dongyang.daltokki.daldaepyo.databinding.ActivityWriteReviewBinding
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewResponseDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
 import com.dongyang.daltokki.daldaepyo.retrofit.WriteReviewDto
+import kotlinx.android.synthetic.main.fragment_review.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -100,7 +103,7 @@ class WriteReviewActivity : PermissionActivity() {
                         if(code == 500){
                             val message = response.errorBody()?.string()!!
                             if(message.contains("bad")){
-                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -109,7 +112,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                             if(message.contains("too")){
 
-                                val dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                val dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -126,6 +129,7 @@ class WriteReviewActivity : PermissionActivity() {
                         Log.d("실패", t.message.toString())
                     }
                 })
+
 //
             } else{
 
@@ -168,7 +172,7 @@ class WriteReviewActivity : PermissionActivity() {
                             val message = response.errorBody()?.string()!!
                             if(message.contains("bad")){
 
-                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("욕하지 마세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -177,7 +181,7 @@ class WriteReviewActivity : PermissionActivity() {
 
                             if(message.contains("too")){
 
-                                var dialog = AlertDialog.Builder(this@WriteReviewActivity)
+                                var dialog = AlertDialog.Builder(this@WriteReviewActivity, R.style.MyDialogTheme)
                                 dialog.setTitle("오류")
                                 dialog.setMessage("10글자 이상 입력해주세요").setPositiveButton("확인", null)
                                 dialog.show()
@@ -195,6 +199,7 @@ class WriteReviewActivity : PermissionActivity() {
                         Log.d("실패", t.message.toString())
                     }
                 })
+
 
             }
 
