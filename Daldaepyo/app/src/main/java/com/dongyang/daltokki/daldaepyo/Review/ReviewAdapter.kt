@@ -49,12 +49,22 @@ class ReviewAdapter(
             content.text = item.content
             thumb_up.text = item.thumb_up.toString()
 
+            val review_id = item.review_id
+            val is_Liked = item.is_Liked
+
+            if(is_Liked == true){
+                btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+            }
+            else{
+                btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+            }
+
             btn_thumbUp.setOnClickListener {
                 Log.d("ReviewAdapter ::", "onClick")
-                like(position + 1)
-                var count = 0
-                count++
-                thumb_up.text = (item.thumb_up + count).toString()
+                like(review_id)
+//                var count = 0
+//                count++
+                thumb_up.text = (item.thumb_up + 1).toString()
                 notifyDataSetChanged()
                 thumbUp = true
 
@@ -115,4 +125,3 @@ class ReviewAdapter(
 
     }
 }
-
