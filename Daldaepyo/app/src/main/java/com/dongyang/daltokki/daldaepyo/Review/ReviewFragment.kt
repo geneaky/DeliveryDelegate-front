@@ -74,16 +74,6 @@ class ReviewFragment : Fragment() {
             }
         }
 
-        btn_review_search.setOnClickListener {
-            try {
-                // TODO Auto-generated method stub
-                val i = Intent(this@ReviewFragment.getActivity(), SearchStoreActivity::class.java)
-                startActivity(i)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
     }
 
     override fun onResume() {

@@ -112,8 +112,8 @@ class ReviewAdapter(
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    fun like(position: Int) {
-        val data = ThumbUpDto((position))
+    fun like(review_id: Int) {
+        val data = ThumbUpDto((review_id))
         UserAPI.create().postThumbUp(tok, data).enqueue(object : Callback<ThumbUpDto> {
             override fun onResponse(call: retrofit2.Call<ThumbUpDto>, response: Response<ThumbUpDto>) {
                 Log.d("ReviewAdapter ::", "Success")

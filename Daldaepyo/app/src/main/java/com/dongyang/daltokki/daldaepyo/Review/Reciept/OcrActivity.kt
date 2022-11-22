@@ -80,6 +80,7 @@ class OcrActivity: PermissionActivity() {
                                     // TODO Auto-generated method stub
                                     val i = Intent(this@OcrActivity, WriteReviewActivity::class.java)
                                     startActivity(i)
+                                    finish()
 
                                 } catch (e: Exception) {
                                     e.printStackTrace()

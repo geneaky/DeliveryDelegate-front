@@ -25,6 +25,7 @@ class SearchStoreActivity :AppCompatActivity() {
 
     val api = UserAPI.create()
 
+
     override fun onCreate(saveInstanceState: Bundle?) {
         super.onCreate(saveInstanceState)
         setContentView(R.layout.activity_search_board)
