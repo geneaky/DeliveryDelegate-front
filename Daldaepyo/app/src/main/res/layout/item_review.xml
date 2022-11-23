@@ -45,7 +45,7 @@
             app:layout_constraintWidth_percent="0.4" />
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_thumbup"
             android:layout_width="25dp"
             android:layout_height="25dp"
