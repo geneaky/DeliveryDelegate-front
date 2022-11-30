@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.dongyang.daltokki.daldaepyo.ReviewAdapter.Companion.selectCheckBoxPosition
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
 import com.dongyang.daltokki.daldaepyo.retrofit.ThumbUpDto
 import com.dongyang.daltokki.daldaepyo.retrofit.UserAPI
@@ -25,7 +24,6 @@ class ReviewAdapter(
     val preferences = this.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
     val tok = preferences.getString("token", "").toString()
 
-    var thumbUp = false
 
     fun submitList(rList: List<ReviewDto>) {
         this.rList.clear()
@@ -52,32 +50,33 @@ class ReviewAdapter(
             val review_id = item.review_id
             val is_Liked = item.is_Liked
 
+            var thumbUp = false
+
             if(is_Liked == true){
                 btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                thumbUp = true
+            }
+
+
+            btn_thumbUp.setOnClickListener{
+                like(review_id)
+
+                if(thumbUp == true){
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                    thumb_up.text = (item.thumb_up - 1 ).toString()
+                    thumbUp = false
+
+                } else if(thumbUp == false){
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                    thumb_up.text = (item.thumb_up + 1 ).toString()
+                    thumbUp = true
+                }
+
             }
 
 
 
-            btn_thumbUp.setOnClickListener {
-                Log.d("ReviewAdapter ::", "onClick")
 
-
-                like(review_id)
-
-                if(is_Liked != true){
-
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                    thumbUp = true
-                    thumb_up.text = (item.thumb_up + 1).toString()
-                }
-                else{
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
-                    thumbUp = false
-                    thumb_up.text = (item.thumb_up - 1).toString()
-                }
-
-
-            }//btn setOnClickListener
 
 
 //            image_path.setOnClickListener() {
