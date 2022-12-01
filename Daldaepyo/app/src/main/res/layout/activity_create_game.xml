@@ -23,38 +23,6 @@
         android:fontFamily="@font/suncheonr"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/tv_game_type"
-        android:text="게임타입"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.2"
-        android:fontFamily="@font/suncheonr"
-        android:paddingLeft="7dp"
-        android:gravity="center_vertical"
-        android:textSize="15sp"
-        android:textColor="@color/darkgray" />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/edt_game_type"
-        android:singleLine = "true"
-        android:lines = "1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/tv_game_type"
-        android:backgroundTint="@color/deepgray"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintVertical_bias="0.25"/>
 
     <TextView
         android:layout_width="0dp"
@@ -66,7 +34,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintVertical_bias="0.3"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
         android:paddingLeft="7dp"
@@ -87,7 +55,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintVertical_bias="0.35"/>
+        app:layout_constraintVertical_bias="0.3"/>
 
     <TextView
         android:layout_width="0dp"
@@ -98,7 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
@@ -121,7 +89,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintVertical_bias="0.45"/>
+        app:layout_constraintVertical_bias="0.4"/>
 
     <TextView
         android:layout_width="0dp"
@@ -132,7 +100,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.2"
@@ -155,7 +123,7 @@
         android:backgroundTint="@color/deepgray"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.65"
-        app:layout_constraintVertical_bias="0.55"/>
+        app:layout_constraintVertical_bias="0.5"/>
 
     <TextView
         android:layout_width="0dp"
@@ -166,7 +134,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintVertical_bias="0.75"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintWidth_percent="0.9"
         android:paddingLeft="7dp"
@@ -185,7 +153,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintVertical_bias="0.68"
+        app:layout_constraintVertical_bias="0.65"
         android:background="@color/tranceparent"
         android:gravity="center"
         android:fontFamily="@font/suncheonr"
