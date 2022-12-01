@@ -5,8 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dongyang.daltokki.daldaepyo.retrofit.ReviewDto
@@ -25,7 +24,6 @@ class ReviewAdapter(
     val preferences = this.context.getSharedPreferences("pref", Context.MODE_PRIVATE)
     val tok = preferences.getString("token", "").toString()
 
-    var thumbUp = false
 
     fun submitList(rList: List<ReviewDto>) {
         this.rList.clear()
@@ -40,7 +38,7 @@ class ReviewAdapter(
         private var content: TextView = itemView.findViewById(R.id.tv_review_content)
         var image_path: ImageView = itemView.findViewById(R.id.img_review)
         var thumb_up: TextView = itemView.findViewById(R.id.tv_thumbup_count)
-        var btn_thumbUp: ImageView = itemView.findViewById(R.id.btn_thumbup)
+        var btn_thumbUp: ImageButton = itemView.findViewById(R.id.btn_thumbup)
 
 
         fun bind(item: ReviewDto, position: Int) {
@@ -50,26 +48,35 @@ class ReviewAdapter(
             thumb_up.text = item.thumb_up.toString()
 
             val review_id = item.review_id
+            val is_Liked = item.is_Liked
 
-            btn_thumbUp.setOnClickListener {
-                Log.d("ReviewAdapter ::", "onClick")
+            var thumbUp = false
+
+            if(is_Liked == true){
+                btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                thumbUp = true
+            }
+
+
+            btn_thumbUp.setOnClickListener{
                 like(review_id)
 
-                if(thumbUp != true){
-
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                    thumbUp = true
-                    thumb_up.text = (item.thumb_up + 1).toString()
-                }
-                else{
+                if(thumbUp == true){
                     btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                    thumb_up.text = (item.thumb_up - 1 ).toString()
                     thumbUp = false
 
-                    thumb_up.text = (item.thumb_up).toString()
+                } else if(thumbUp == false){
+                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                    thumb_up.text = (item.thumb_up + 1 ).toString()
+                    thumbUp = true
                 }
 
+            }
 
-            }//btn setOnClickListener
+
+
+
 
 
 //            image_path.setOnClickListener() {
@@ -93,6 +100,21 @@ class ReviewAdapter(
 
     override fun onBindViewHolder(holder: ReviewAdapter.ItemViewHolder, position: Int) {
         holder.bind(rList[position], position)
+//        val seqCheckBox = holder.itemView.findViewById<CheckBox>(R.id.btn_thumbup)
+//        seqCheckBox.setOnCheckedChangeListener(null)
+//        seqCheckBox.isChecked = selectCheckBoxPosition.containsValue(position)
+//        seqCheckBox.setOnClickListener{
+//            val seq = seqCheckBox.tag.toString().toBoolean()
+//            if(seqCheckBox.isChecked){
+//                selectCheckBoxPosition[seq] = position
+//            }
+//            else{
+//                selectCheckBoxPosition.remove(seq)
+//            }
+//        }
+
+
+
 
 
     }
@@ -113,5 +135,9 @@ class ReviewAdapter(
         })
 
     }
-}
 
+    companion object{
+        lateinit var selectCheckBoxPosition: HashMap<Boolean, Int>
+        private set
+    }
+}

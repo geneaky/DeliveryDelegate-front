@@ -61,7 +61,8 @@ data class ReviewDto(
         @SerializedName("user_name") val user_name : String,
         @SerializedName("store_name") val store_name : String,
         @SerializedName("image_path") val image_path : String,
-        @SerializedName("review_id") val review_id : Int
+        @SerializedName("review_id") val review_id : Int,
+        @SerializedName("is_Liked") val is_Liked : Boolean
 )
 
 data class ReviewCountDto(

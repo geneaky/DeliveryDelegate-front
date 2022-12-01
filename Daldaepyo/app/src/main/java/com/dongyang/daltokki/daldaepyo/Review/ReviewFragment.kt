@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -92,7 +93,10 @@ class ReviewFragment : Fragment() {
 
                 if (code == 200) {
                     adapter.submitList(result!!)
-                } else {
+                }else if(code == 400){
+                    Toast.makeText(activity, "'내 정보'>'내 동네 설정하기'에서 동네 설정을 해주세요.", Toast.LENGTH_LONG).show()
+                }
+                else {
                     Log.d("error", "에러")
                 }
             }

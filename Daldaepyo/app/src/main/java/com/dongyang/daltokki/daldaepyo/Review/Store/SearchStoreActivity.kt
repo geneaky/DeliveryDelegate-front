@@ -77,6 +77,8 @@ class SearchStoreActivity :AppCompatActivity() {
                             val lat = latLng.latitude.toString() // 위도만 빼주기
                             val lng = latLng.longitude.toString() // 경도만 빼주기
 
+                            Log.d("latLng", latLng.toString())
+
                             var edit = storePref.edit() // 수정모드
                             edit.apply()
                             edit.putString("title", title)
