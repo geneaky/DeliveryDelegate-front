@@ -47,58 +47,37 @@ class ReviewAdapter(
             content.text = item.content
             thumb_up.text = item.thumb_up.toString()
 
-            var text = item.thumb_up.toString().toInt()
-
-
-
             val review_id = item.review_id
             val is_Liked = item.is_Liked
 
-            var thumbUp = false
-
             if(is_Liked == true){
                 btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                thumbUp = true
             }
-
-
-            btn_thumbUp.setOnClickListener{
-                like(review_id)
-
-
-                val review_id = item.review_id
-                val is_Liked = item.is_Liked
-
-                if(is_Liked == true){
-                    btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                }
-
-                var c_count = 0
+            
+            var c_count = 0
 
                 
-                btn_thumbUp.setOnClickListener{
-                    like(review_id)
-                    c_count += 1
-                    if(is_Liked == true){ // 초기상태 : 눌린상태
-                        if (c_count % 2 == 0 ){ // 복귀
-                            btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                            thumb_up.text = (item.thumb_up).toString()
-                        } else { // 좋아요 취소
-                            btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
-                            thumb_up.text = (item.thumb_up - 1 ).toString()
-                        }
-                    } else { // 초기상태 : 안 눌린상태
-                        if (c_count % 2 == 0 ){ // 복귀
-                            btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
-                            thumb_up.text = (item.thumb_up).toString()
-                        } else { // 좋아요 누름
-                            btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
-                            thumb_up.text = (item.thumb_up + 1 ).toString()
-                        }
+            btn_thumbUp.setOnClickListener{
+                like(review_id)
+                c_count += 1
+                if(is_Liked == true){ // 초기상태 : 눌린상태
+                    if (c_count % 2 == 0 ){ // 복귀
+                        btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                        thumb_up.text = (item.thumb_up).toString()
+                    } else { // 좋아요 취소
+                        btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                        thumb_up.text = (item.thumb_up - 1 ).toString()
                     }
-
-
+                } else { // 초기상태 : 안 눌린상태
+                    if (c_count % 2 == 0 ){ // 복귀
+                        btn_thumbUp.setImageResource(R.drawable.ic_dal_line)
+                        thumb_up.text = (item.thumb_up).toString()
+                    } else { // 좋아요 누름
+                        btn_thumbUp.setImageResource(R.drawable.ic_dal_fill)
+                        thumb_up.text = (item.thumb_up + 1 ).toString()
+                    }
                 }
+
 
             }
 
