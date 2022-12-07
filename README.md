@@ -28,7 +28,8 @@ https://www.erdcloud.com/d/hyRv9XbeEQ3WyTNv6
  `Android Studio` `Kotlin`
  
 **Library**
- `okhttp` `retrofit`  ...  and so on,.......
+ `okhttp` `retrofit` `objectmapper` `naver map` `socket.io`
+ `glide` `recyclerview`
  
 
 
